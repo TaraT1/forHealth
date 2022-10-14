@@ -1,18 +1,18 @@
 const express = require("express"); //web app framework
 const app = express();
-
 const mongoose = require("mongoose"); //db
 const passport = require("passport"); //auth
 const session = require("express-session");
-//const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
-//routes
-const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
-const commentRoutes = require("./routes/comments");
+
+// //routes
+// const mainRoutes = require("./routes/main");
+// const postRoutes = require("./routes/posts");
+// const commentRoutes = require("./routes/comments");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -40,7 +40,7 @@ app.use(logger("dev"));
 //Use forms for put / delete
 app.use(methodOverride("_method"));
 
-Setup Sessions - stored in MongoDB
+//Setup Sessions - stored in MongoDB
 app.use(
   session({
     secret: "keyboard cat",
