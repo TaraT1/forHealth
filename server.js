@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose"); //db
 const passport = require("passport"); //auth
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
@@ -45,7 +45,9 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: MongoStore.create({ 
+      mongoURL: process.env.DB_STRING,
+    }),
   })
 );
 
