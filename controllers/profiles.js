@@ -18,8 +18,14 @@ module.exports = {
 
       await Profile.create({
         name: req.body.name,
-        caption: req.body.caption,
+        genderAssignedAtBirth: req.body.genderAssignedAtBirth,
+        birthDate: req.body.birthDate,
+        geneticBackground: req.body.geneticBackground,
+        eHealthRecords: req.body.eHealthRecords,
+        journal: req.body.journal,
+        image: req.body.image,
         user: req.user.id,
+        createdAt: req.body.createdAt,
       });
       console.log("Profile has been added!");
       res.redirect("/profile");
@@ -27,13 +33,11 @@ module.exports = {
       console.log(err);
     }
   },
-  likePost: async (req, res) => {
+  //** ToDo Needs woik
+  updateProfile: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
+      await Profile.findOneAndUpdate(
         { _id: req.params.id },
-        {
-          $inc: { likes: 1 },
-        }
       );
       console.log("Likes +1");
       res.redirect(`/post/${req.params.id}`);
@@ -41,10 +45,10 @@ module.exports = {
       console.log(err);
     }
   },
-  deletePost: async (req, res) => {
+  deleteProfile: async (req, res) => {
     try {
-      // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      // Find profile by id
+      let profile = await Profile.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db

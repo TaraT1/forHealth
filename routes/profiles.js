@@ -9,8 +9,8 @@ router.get("/:id", ensureAuth, profilesController.getProfile);
 
 router.post("/createProfile", upload.single("file"), profilesController.createProfile);
 
-// router.put("/editProfile/:id", profilesController.editProfile);
+//router.put("/editProfile/:id", profilesController.editProfile);
 
-// router.delete("/deleteProfile/:id", profilesController.deleteProfile);
+//router.delete("/deleteProfile/:id", profilesController.deleteProfile);
 
 module.exports = router;
