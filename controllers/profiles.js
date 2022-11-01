@@ -33,14 +33,13 @@ module.exports = {
       console.log(err);
     }
   },
-  //** ToDo Needs woik
   updateProfile: async (req, res) => {
     try {
       await Profile.findOneAndUpdate(
         { _id: req.params.id },
       );
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      res.redirect(`/profile/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -52,8 +51,8 @@ module.exports = {
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted Post");
+      await Profile.remove({ _id: req.params.id });
+      console.log("Deleted Profile");
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");

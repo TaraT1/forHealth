@@ -15,11 +15,19 @@ const ProfileSchema = new mongoose.Schema({
   },
   geneticBackground: {
     type: String,
-    required: true,
+    required: false,
+  },
+  eHealthRecords: {
+    type: String,
+    require: false,
+  },
+  journal: {
+    type: String,
+    require: false,
   },
   image: {
     type: String,
-    require: true,
+    require: false,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
