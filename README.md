@@ -38,3 +38,6 @@ API_SECRET =
 `npm start`
 
 - To run, activate database, then `npm start` in terminal
+
+## Dev
+nodemon
