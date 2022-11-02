@@ -5,7 +5,7 @@ const profilesController = require("../controllers/profiles");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Profile Routes - simplified for now
-router.get("/:id", ensureAuth, profilesController.getProfile);
+router.get("/", ensureAuth, profilesController.getProfiles);
 
 router.post("/createProfile", upload.single("file"), profilesController.createProfile);
 

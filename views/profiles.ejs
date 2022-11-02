@@ -1,0 +1,84 @@
+<%- include('partials/header') -%>
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+          <div class="mt-5">
+            <h2>Create a new Health Profile</h2>
+            <form action="/post/createProfile" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name">
+              </div>
+              <div class="mb-3">
+                <label for="genderAssignedAtBirth" class="form-label">Gender assigned at birth</label>
+                <textarea class="form-control" id="genderAssignedAtBirth" name="genderAssignedAtBirth"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="birthDate" class="form-label">birthDate</label>
+                <textarea class="form-control" id="birthDate" name="birthDate"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="geneticBackground" class="form-label">Genetic Background</label>
+                <textarea class="form-control" id="geneticBackground" name="genenticBackground"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="eHealthRecords" class="form-label">eHealth Records</label>
+                <textarea class="form-control" id="eHealthRecords" name="eHealthRecords"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="eHealthRecords" class="form-label">eHealth Records</label>
+                <textarea class="form-control" id="eHealthRecords" name="eHealthRecords"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" class="form-control" id="imageUpload" name="file">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <!-- profile list elsewhere? -->
+      <div class="col-6">
+        <h2>Health Profiles</h2>
+        <ul>
+          <% getProfiles.forEach(profile => {%>
+          <li>
+            <div>
+              <%= profile.%>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+        
+        
+
+
+
+
+
+
+
+      <div>
+        <!--orig  -->
+        <ul class="row list-unstyled">
+        <% for(var i=0; i<profiles.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <a href="/profile/<%= profiles[i]._id%>">
+              <h3><%= profiles[i].name%></h3>
+            </a>
+          </li>
+        <% } %>
+        </ul>
+      </div>  
+      </div>   
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') -%>

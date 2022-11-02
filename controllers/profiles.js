@@ -3,10 +3,10 @@ const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
 
 module.exports = {
-  getProfile: async (req, res) => {
+  getProfiles: async (req, res) => {
     try {
       const profiles = await Profile.find({ user: req.user.id });
-      res.render("profile.ejs", { profiles: profiles, user: req.user });
+      res.render("profiles.ejs", { profiles: profiles, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -28,7 +28,7 @@ module.exports = {
         createdAt: req.body.createdAt,
       });
       console.log("Profile has been added!");
-      res.redirect("/profile");
+      res.redirect("/profiles");
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +39,7 @@ module.exports = {
         { _id: req.params.id },
       );
       console.log("Likes +1");
-      res.redirect(`/profile/${req.params.id}`);
+      res.redirect(`/profiles/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
@@ -53,9 +53,9 @@ module.exports = {
       // Delete post from db
       await Profile.remove({ _id: req.params.id });
       console.log("Deleted Profile");
-      res.redirect("/profile");
+      res.redirect("/profiles");
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/profiles");
     }
   },
 };
