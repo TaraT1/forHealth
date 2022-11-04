@@ -1,11 +1,11 @@
-const cloudinary = require("../middleware/cloudinary");
+//const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
 
 module.exports = {
   getProfiles: async (req, res) => {
     try {
-      const profiles = await Profile.find();
+      const profiles = await Profile.find({});
       // const profiles = await Profile.find({ user: req.user.id });
       res.render("profiles.ejs", { profiles: profiles });
       // res.render("profiles.ejs", { profiles: profiles, user: req.user });
@@ -16,7 +16,7 @@ module.exports = {
   createProfile: async (req, res) => {
     try {
       // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+      //const result = await cloudinary.uploader.upload(req.file.path);
 
       await Profile.create({
         name: req.body.name,
@@ -51,7 +51,7 @@ module.exports = {
       // Find profile by id
       let profile = await Profile.findById({ _id: req.params.id });
       // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      //await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Profile.remove({ _id: req.params.id });
       console.log("Deleted Profile");
