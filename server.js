@@ -1,7 +1,7 @@
 const express = require("express"); //web app framework
 const app = express();
 const mongoose = require("mongoose"); //db
-const passport = require("passport"); //auth
+//const passport = require("passport"); //auth
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const methodOverride = require("method-override");
@@ -18,7 +18,7 @@ require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
 // Passport config
-require("./config/passport")(passport);
+//require("./config/passport")(passport);
 
 //Connect To Database
 connectDB();
@@ -52,8 +52,8 @@ app.use(
 );
 
 // Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 //Use flash messages for errors, info, etc...
 app.use(flash());
