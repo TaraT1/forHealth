@@ -5,8 +5,10 @@ const Profile = require("../models/Profile");
 module.exports = {
   getProfiles: async (req, res) => {
     try {
-      const profiles = await Profile.find({ user: req.user.id });
-      res.render("profiles.ejs", { profiles: profiles, user: req.user });
+      const profiles = await Profile.find();
+      // const profiles = await Profile.find({ user: req.user.id });
+      res.render("profiles.ejs", { profiles: profiles });
+      // res.render("profiles.ejs", { profiles: profiles, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -24,7 +26,7 @@ module.exports = {
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
         image: req.body.image,
-        user: req.user.id,
+        // user: req.user.id,
         createdAt: req.body.createdAt,
       });
       console.log("Profile has been added!");
@@ -57,7 +59,7 @@ module.exports = {
     } catch (err) {
       res.redirect("/profiles");
     }
-  },
+  }
 };
 
 

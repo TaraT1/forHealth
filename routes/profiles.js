@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
 const profilesController = require("../controllers/profiles");
-const { ensureAuth } = require("../middleware/auth");
+//const { ensureAuth } = require("../middleware/auth");
 
 //Profile Routes - simplified for now
-router.get("/", ensureAuth, profilesController.getProfiles);
+router.get("/", profilesController.getProfiles);
+// router.get("/", ensureAuth, profilesController.getProfiles);
 
 router.post("/createProfile", upload.single("file"), profilesController.createProfile);
 
