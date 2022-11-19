@@ -19,8 +19,8 @@
                 <textarea class="form-control" id="genderAssignedAtBirth" name="genderAssignedAtBirth"></textarea>
               </div>
               <div class="mb-3">
-                <label for="birthDate" class="form-label">birthDate</label>
-                <textarea class="form-control" id="birthDate" name="birthDate"></textarea>
+                <label for="birthDate" class="form-label">Enter your birthday</label>
+                <input type="date" class="form-control" id="birthDate" name="birthDate">
               </div>
               <div class="mb-3">
                 <label for="geneticBackground" class="form-label">Genetic Background</label>
@@ -40,7 +40,7 @@
           <div class="col-6">
             <h2>Health Profiles</h2>
             <ul class="row list-unstyled">
-            <% for( var i=0; i<profiles.length; i++ ) { %>
+            <% for( var i=0; i < profiles.length; i++ ) { %>
               <li class="col-6 justify-content-between mt-5">
                 <a href="/profile/<%= profiles[i]._id%>">
                   <h3><%= profiles[i].name%></h3>
