@@ -8,7 +8,7 @@ const profilesController = require("../controllers/profiles");
 router.get("/", profilesController.getProfiles);
 // router.get("/", ensureAuth, profilesController.getProfiles);
 
-router.post("/createProfile", upload.single("file"), profilesController.createProfile);
+router.post("/createProfile", profilesController.createProfile);
 
 //router.put("/editProfile/:id", profilesController.editProfile);
 

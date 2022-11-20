@@ -3,6 +3,16 @@ const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
 
 module.exports = {
+  getProfile: async (req, res) => {
+    try {
+      // const profile = await Profile.findById({_id: req.params.id});
+      const profile = await Profile.findById(req.params.id);
+      res.redirect("/profiles/"+req.params.id);
+      // res.render("profiles.ejs", { profile: profile });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getProfiles: async (req, res) => {
     try {
       const profiles = await Profile.find({});
@@ -24,11 +34,13 @@ module.exports = {
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
         image: req.body.image,
+        _id: req.params.id,
         // user: req.user.id,
         createdAt: req.body.createdAt,
       });
       console.log("Profile has been added!");
-      res.redirect("/profiles");
+      // res.redirect("/profiles");
+      res.redirect(`/profiles/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
