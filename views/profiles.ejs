@@ -50,6 +50,12 @@
                 </a>
               </li>
             <% } %>
+            <h3>Profiles.forEach</h3>
+            <% profiles.forEach( el => { %>
+              <li class="profiles" data-id="<%el._id%>">
+                <%= el.profiles %>
+              </li>
+            <% }) %>
             </ul>
           </div>  
       </div>

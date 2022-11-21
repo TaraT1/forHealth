@@ -3,19 +3,22 @@ const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
 
 module.exports = {
+
   getProfile: async (req, res) => {
     try {
       // const profile = await Profile.findById({_id: req.params.id});
-      const profile = await Profile.findById(req.params.id);
-      res.redirect("/profiles/"+req.params.id);
-      // res.render("profiles.ejs", { profile: profile });
+      const profile = await Profile.findById(req.params.id).lean();
+      const profiles = await Profile.find();
+      // const profile = await Profile.find({user: req.user.id}).lean() (traversy)
+      // res.redirect("/profiles/"+req.params.id);
+      res.render("profile.ejs", { profile: profile, profiles: profiles });
     } catch (err) {
       console.log(err);
     }
   },
   getProfiles: async (req, res) => {
     try {
-      const profiles = await Profile.find({});
+      const profiles = await Profile.find();
       res.render("profiles.ejs", { profiles: profiles });
     } catch (err) {
       console.log(err);
