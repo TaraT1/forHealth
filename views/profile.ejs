@@ -8,11 +8,15 @@
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
           <section class="container mt-5">
-            <h2>Health Profile for <%= profile.name%> </h2>
+            <h2>Health Profile for <%= profile.name %> </h2>
             <ul class="list-unstyled">
               <li> <%= profile.birthDate %> </li>
-              <li> <%= profile.genderAssignedAtBirth %> </li>
+              <li> <%= profile.sex %> </li>
+              <li> <%= profile.genderId %> </li>
+              <li> <%= profile.geneticBackground %> </li>
               <li> <%= profile.eHealthRecords %> </li>
+              <li> <%= profile.journal %> </li>
+              <li> <%= profile.todo %> </li>
             </ul>
           </section>
             
@@ -23,7 +27,7 @@
             <% for( var i=0; i < profiles.length; i++ ) { %>
               <li class="col-6 justify-content-between mt-5">
                 <a href="/profiles/<%= profiles[i]._id%>">
-                  <h3><%= profiles[i].name%></h3>
+                  <h3><%= profiles[i].name %></h3>
                 </a>
               </li>
             <% } %>

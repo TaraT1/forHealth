@@ -31,8 +31,9 @@ module.exports = {
 
       await Profile.create({
         name: req.body.name,
-        genderAssignedAtBirth: req.body.genderAssignedAtBirth,
         birthDate: req.body.birthDate,
+        sex: req.body.sex,
+        genderId: req.body.genderId,
         geneticBackground: req.body.geneticBackground,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,

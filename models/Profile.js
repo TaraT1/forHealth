@@ -5,12 +5,16 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  genderAssignedAtBirth: {
+  birthDate: {
+    type: Date,
+    required: true,
+  },
+  sex: {
     type: String,
     required: true,
   },
-  birthDate: {
-    type: Date,
+  genderId: {
+    type: String,
     required: true,
   },
   geneticBackground: {
@@ -22,6 +26,10 @@ const ProfileSchema = new mongoose.Schema({
     require: false,
   },
   journal: {
+    type: String,
+    require: false,
+  },
+  todo: {
     type: String,
     require: false,
   },
