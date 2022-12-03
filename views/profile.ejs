@@ -21,18 +21,21 @@
           </section>
             
 
-          <section class="col-6 mt-5">
-            <h2>Health Profiles</h2>
-            <ul class="row list-unstyled">
-            <% for( var i=0; i < profiles.length; i++ ) { %>
-              <li class="col-6 justify-content-between mt-5">
-                <a href="/profiles/<%= profiles[i]._id%>">
-                  <h3><%= profiles[i].name %></h3>
-                </a>
-              </li>
-            <% } %>
-            </ul>
-          </section>  
+          <section class="container mt-3">
+            <div class="row">
+              <div class="col">
+                <h2>Health Profiles</h2>
+                  <% for( let i=0; i < profiles.length; i++) {%>
+                    <div class="card">
+                        <a href="/profiles/<%= profiles[i]._id%>">
+                          <h5 class="card-title"><%= profiles[i].name%></h5>
+                        </a>
+                    </div>
+                  <% } %>
+              </div>
+            </div>
+          </section>
+
       </div>
     </div>   
   </div>   
