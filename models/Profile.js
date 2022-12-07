@@ -15,7 +15,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   genderId: {
     type: String,
-    required: true,
+    required: false,
   },
   geneticBackground: {
     type: String,
@@ -43,6 +43,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
+    required: true,
     default: Date.now,
   },
 });

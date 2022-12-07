@@ -6,7 +6,7 @@ const Profile = require("../models/Profile");
 //const { ensureAuth } = require("../middleware/auth");
 
 //Profile Routes
-//Get single profile - 
+//Get single profile from id (+search)
 //Traversy, +ensureAuth
 router.get("/:id", profilesController.getProfile);
 
@@ -15,7 +15,8 @@ router.get("/", profilesController.getProfiles);
 
 router.post("/createProfile", profilesController.createProfile);
 
-//router.put("/editProfile/:id", profilesController.editProfile);
+router.put("/editProfile/:id", profilesController.updateProfile);
+//patch or put?
 
 //router.delete("/deleteProfile/:id", profilesController.deleteProfile);
 

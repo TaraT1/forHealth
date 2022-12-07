@@ -31,7 +31,7 @@ module.exports = {
 
       await Profile.create({
         name: req.body.name,
-        birthDate: req.body.birthDate,
+        birthDate: new Date(req.body.birthDate),
         sex: req.body.sex,
         genderId: req.body.genderId,
         geneticBackground: req.body.geneticBackground,
@@ -54,7 +54,6 @@ module.exports = {
       await Profile.findOneAndUpdate(
         { _id: req.params.id },
       );
-      console.log("Likes +1");
       res.redirect(`/profiles/${req.params.id}`);
     } catch (err) {
       console.log(err);

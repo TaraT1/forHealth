@@ -9,7 +9,7 @@
           </div>
             
           <section class="container mt-5">
-            <h2>Health Profile for <%= profile.name %> </h2>
+            <h2>Health Profile for <%= profile.name %> (profile.ejs) </h2>
             <table class="table">
               <thead></thead>
               <tbody>
@@ -18,8 +18,8 @@
                   <td><%= profile.name %> </td>
                 </tr>
                 <tr>
-                  <td>Birthdate</td>
-                  <td><%= profile.birthDate %></td>
+                  <td>Birthdate (yyyy-mm-dd)</td>
+                  <td><%= profile.birthDate.toISOString().split('T')[0] %></td>
                 </tr>
                 <tr>
                   <td>Sex</td> 
