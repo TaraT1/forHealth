@@ -4,6 +4,7 @@ const Profile = require("../models/Profile");
 
 module.exports = {
 
+  //get one profile
   getProfile: async (req, res) => {
     try {
       // const profile = await Profile.findById({_id: req.params.id});
@@ -16,6 +17,7 @@ module.exports = {
       console.log(err);
     }
   },
+  //get all profiles
   getProfiles: async (req, res) => {
     try {
       const profiles = await Profile.find();
@@ -49,16 +51,28 @@ module.exports = {
       console.log(err);
     }
   },
+  
+  
   updateProfile: async (req, res) => {
+    let profile
+    
     try {
-      await Profile.findOneAndUpdate(
-        { _id: req.params.id },
-      );
-      res.redirect(`/profiles/${req.params.id}`);
+      profile = await Profile.findById(req.params.id)
+      profile.name = req.body.name
+      profile.birthDate = new Date(req.body.birthDate)
+      profile.sex = req.body.sex
+      profile.genderId = req.body.genderId
+      profile.geneticBackground = req.body.geneticBackground
+      profile.eHealthRecords = req.body.eHealthRecords
+      profile.journal = req.body.journal
+
+      await profile.save()
+      res.redirect(`/profiles/${req.params.id}`)
     } catch (err) {
       console.log(err);
     }
   },
+
   deleteProfile: async (req, res) => {
     try {
       // Find profile by id

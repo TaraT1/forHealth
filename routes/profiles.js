@@ -16,7 +16,6 @@ router.get("/", profilesController.getProfiles);
 router.post("/createProfile", profilesController.createProfile);
 
 router.put("/editProfile/:id", profilesController.updateProfile);
-//patch or put?
 
 //router.delete("/deleteProfile/:id", profilesController.deleteProfile);
 

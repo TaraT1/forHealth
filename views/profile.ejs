@@ -48,6 +48,14 @@
 
               </tbody>
             </table>
+            
+            <div>
+              <a href="/profiles/<%= profile._id %>">Edit</a>
+              <form method="POST" action="<%= %>?_method=DELETE">
+                <button type="submit">Delete</button>  
+              </form>
+            </div>
+
 
           </section>
 
