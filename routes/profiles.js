@@ -11,7 +11,7 @@ router.get("/", profilesController.getProfiles);
 
 // router.get("/", ensureAuth, profilesController.getProfiles);
 
-//new profile route
+//new profile route to render form
 router.get("/new", profilesController.renderNewPage);
 //create profile route
 router.post("/", profilesController.createProfile);
