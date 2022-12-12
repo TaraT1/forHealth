@@ -1,0 +1,30 @@
+<%- include('../partials/header') -%> 
+<section class="container">
+  <div class="row mt-5">
+    <div class="col-6">
+          <div>
+              <p><strong>User Name</strong></p>
+              <p><strong>Email</strong></p>
+              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+          </div>
+
+          <section class="container mt-3">
+            <div class="row">
+              <div class="col">
+                <h2>Health Profiles</h2>
+                  <% for( let i=0; i < profiles.length; i++) {%>
+                    <div class="card">
+                        <a href="/profiles/<%= profiles[i]._id%>">
+                          <h5 class="card-title"><%= profiles[i].name%></h5>
+                        </a>
+                    </div>
+                  <% } %>
+              </div>
+            </div>
+          </section>
+
+    </div>
+  </div>   
+</section>
+
+<%- include('../partials/footer.ejs') -%>

@@ -1,0 +1,6 @@
+<h2>Edit Profile</h2>
+<form action="/profiles/<%= profile.id %>?_method=PUT" method="POST">
+  <%- include(profiles/'_form_fields') %>
+  <a href="/profiles">Cancel</a>
+  <button type="submit">Update</button>
+</form>
