@@ -4,34 +4,29 @@ const Profile = require("../models/Profile");
 
 module.exports = {
 
-  //get one profile
-  getProfile: async (req, res) => {
-    try {
-      // const profile = await Profile.findById({_id: req.params.id});
-      const profile = await Profile.findById(req.params.id).lean();
-      const profiles = await Profile.find();
-      // const profile = await Profile.find({user: req.user.id}).lean() (traversy)
-      // res.redirect("/profiles/"+req.params.id);
-      res.render("profile.ejs", { profile: profile, profiles: profiles });
-    } catch (err) {
-      console.log(err);
-    }
-  },
   //get all profiles
   getProfiles: async (req, res) => {
+    let profiles
     try {
-      const profiles = await Profile.find();
-      res.render("profiles.ejs", { profiles: profiles });
+      profiles = await Profile.find();
+      res.render("profiles/profiles", { profiles: profiles });
     } catch (err) {
       console.log(err);
     }
   },
+
+  //New profile (display form)
+  renderNewPage:  (req, res) => {
+    res.render("profiles/new", {profile: new Profile () })
+  },
+
   createProfile: async (req, res) => {
+    let profile
     try {
       // Upload image to cloudinary
       //const result = await cloudinary.uploader.upload(req.file.path);
 
-      await Profile.create({
+      profile = await Profile.create({
         name: req.body.name,
         birthDate: new Date(req.body.birthDate),
         sex: req.body.sex,
@@ -49,10 +44,35 @@ module.exports = {
       res.redirect(`/profiles/${req.params.id}`);
     } catch (err) {
       console.log(err);
+      res.render("profiles/new", {
+        profile: profile,
+        errorMessage: "Error creating profile"
+      })
     }
   },
   
+  //get one profile
+  getProfile: async (req, res) => {
+    let profile, profiles
+    try {
+      // const profile = await Profile.findById({_id: req.params.id});
+      profile = await Profile.findById(req.params.id).lean();
+      profiles = await Profile.find();
+      // const profile = await Profile.find({user: req.user.id}).lean() (traversy)
+      // res.redirect("/profiles/"+req.params.id);
+      res.render("profiles/profile", { profile: profile, profiles: profiles });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   
+  //edit
+  //get
+  
+  editProfile: async (req, res) => {
+
+  },
+
   updateProfile: async (req, res) => {
     let profile
     

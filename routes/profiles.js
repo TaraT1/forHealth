@@ -6,17 +6,24 @@ const Profile = require("../models/Profile");
 //const { ensureAuth } = require("../middleware/auth");
 
 //Profile Routes
-//Get single profile from id (+search)
-//Traversy, +ensureAuth
-router.get("/:id", profilesController.getProfile);
-
+//All profiles
 router.get("/", profilesController.getProfiles);
+
 // router.get("/", ensureAuth, profilesController.getProfiles);
 
-router.post("/createProfile", profilesController.createProfile);
+//new profile route
+router.get("/new", profilesController.renderNewPage);
+//create profile route
+router.post("/", profilesController.createProfile);
 
-router.put("/editProfile/:id", profilesController.updateProfile);
+//Get sgl profile
+router.get("/:id", profilesController.getProfile);
 
-//router.delete("/deleteProfile/:id", profilesController.deleteProfile);
+//Edit profile
+router.get("/:id/edit", profilesController.editProfile);
+
+router.put("/:id", profilesController.updateProfile);
+
+router.delete("/:id", profilesController.deleteProfile);
 
 module.exports = router;
