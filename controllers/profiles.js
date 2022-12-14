@@ -46,7 +46,7 @@ module.exports = {
       console.log(err);
       res.render("profiles/new", {
         profile: profile,
-        errorMessage: "Error creating profile"
+        errorMessage: "Error creating Profile"
       })
     }
   },

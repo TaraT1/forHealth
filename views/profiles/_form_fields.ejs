@@ -9,13 +9,10 @@
 </div>
 
 <div>
-<label for="sex" class="sex">What is your sex (gender assigned at birth)?</label>
-    <select class="form-select" id="sex">
-      <option value="sex" selected>Please select:</option>
-      <option value="female">female</option>
-      <option value="male">male</option>
-      <option selected label="<%= sex %>" value="<%= sex %>">
-
+<label for="genderAssignedAtBirth" class="genderAssignedAtBirth">What is your sex (gender assigned at birth)?</label>
+    <select class="form-select" id="genderAssignedAtBirth">
+      <option value="female" <%= profile.genderAssignedAtBirth == "female" ? "selected" : "" %>>female</option>
+      <option value="male" <%= profile.genderAssignedAtBirth == "male" ? "selected" : "" %>>male</option>
     </select>
 </div>
 
