@@ -29,7 +29,7 @@ module.exports = {
       profile = await Profile.create({
         name: req.body.name,
         birthDate: new Date(req.body.birthDate),
-        sex: req.body.sex,
+        genderAssignedAtBirth: req.body.genderAssignedAtBirth,
         genderId: req.body.genderId,
         geneticBackground: req.body.geneticBackground,
         eHealthRecords: req.body.eHealthRecords,
@@ -41,14 +41,18 @@ module.exports = {
       });
       console.log("Profile has been added!");
       // res.redirect("/profiles");
-      res.redirect(`/profiles/${req.params.id}`);
+      // res.redirect(`/profiles/${req.params.id}`);
+      res.redirect(`/profiles/${profile._id}`);
     } catch (err) {
       console.log(err);
-      res.render("profiles/new", {
-        profile: profile,
-        errorMessage: "Error creating Profile"
-      })
+      renderNewPage(res, profile, true)
+      errorMessage: "Error creating Profile"
     }
+    //   res.render("profiles/new", {
+    //     profile: profile,
+    //     errorMessage: "Error creating Profile"
+    //   })
+    // }
   },
   
   //get one profile
