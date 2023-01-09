@@ -1,12 +1,11 @@
+
 <!-- This is rendering notes, not adding -->
-<div class="form-group">
-    <div id="notes-container"> <div class="row mt-3 mb-3">        
-        <div class="col">
-            <h3>Notes</h3>
-        </div>
-        <div class="col text-end">
-            <button type="button" id="add-note" class="btn btn-primary btn-small">Add Note</button>
-        </div>
+
+    <div class="form-group">
+        <label for="notes">Notes</label>
+        <div id="notes-container">
+        <h3>Add note to Health Info</h3>
+
         <% healthInfo.notes.forEach(function(note, index) { %>
             <div class="note-item mb-2">
                 <label for="noteTitle-<%= index %>" class="form-label">Note Title </label>
@@ -15,50 +14,24 @@
                     name="notes[<%= index %>][noteTitle]"
                     id="noteTitle-<%= index %>" 
                     class="form-control" 
-                    value="<%= note.noteTitle %>"
+                    placeholder="Enter note title"
+                    value="<%= notes.noteTitle %>"
                 />
-            </div>
-            <div class="note-item mb-2">
+
                 <label for="noteDescription-<%= index %>" class="form-label">Note Description</label>
                 <textarea
                     name="notes[<%= index %>][noteDescription]"
                     id="noteDescription-<%= index %>" 
                     class="form-control"
-                    value="<%= note.noteDescription %>"
+                    rows="4"
+                    placeholder="Enter note description"
+                    value="<%= notes.noteDescription %>"
                 ></textarea>
             </div>
         <% }) %>
-    </div>
-    </div>
 </div>
-
-<div>
-    <h2>Add note to Health Info</h2>
-</div>
-<form action="/healthInfo/<%= healthInfo._id %>/notes" method="POST">
-    <div class="form-group">
-        <label for="noteTitle">Note Title</label>
-        <input
-            type="text"
-            name="noteTitle"
-            id="noteTitle"
-            class="form-control"
-            placeholder="Enter note title"
-        />
-    </div>
-    
-    <div class="form-group">
-        <label for="noteDescription">Note Description</label>
-        <textarea
-            name="noteDescription"
-            id="noteDescription"
-            class="form-control"
-            rows="4"
-            placeholder="Enter note description"
-        ></textarea>
-    </div>
-
     <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
+    </div>
 
 <div>
     <label for="recommendation" class="form-label">Recommendations for Care </label>

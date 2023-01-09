@@ -39,12 +39,20 @@ module.exports = {
   createHealthInfo: async (req, res) => {
     try {
       req.body.user = req.user.id;
-      req.body.notes = req.body.notes || []
+      
+      const newNote = {
+        noteTitle: req.body.noteTitle,
+        noteDescription: req.body.noteDescription,
+      }
+
+      healthInfo.notes.push(newNote) //push new note into notes array
+
+      // req.body.notes = req.body.notes || []
       // req.body.providers = Array.isArray(req.body.providers)
       //   ? req.body.providers
       //   : [req.body.providers];
 
-      await HealthInfo.create(req.body);
+      await HealthInfo.save();
 
       console.log(">>>> New health info! Whomp");
       res.redirect("/healthInfo");
@@ -84,11 +92,12 @@ module.exports = {
     try {
         const healthInfo = await HealthInfo.findOne({ 
           _id: req.params.id, 
-          user: req.user.id 
-        }
-          // .populate("profile", "name")
+          user: req.user.id, })
+          .populate("profile")
+
+        const profiles = await Profile.find({ user: req.user.id })
           // .populate("providers")
-      )
+      
         
         req.body.providers = Array.isArray(req.body.providers)
             ? req.body.providers 
@@ -102,8 +111,8 @@ module.exports = {
             new: true, 
             runValidators: true,
             })
-            .populate("profile", "name")
-            .populate("providers")
+            // .populate("profile", "name")
+            // .populate("providers")
 
         console.log(">>>> Whomp! update health info: ", healthInfo)
         res.redirect('/healthInfo')
