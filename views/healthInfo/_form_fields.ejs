@@ -6,29 +6,27 @@
         <div id="notes-container">
         <h3>Add note to Health Info</h3>
 
-        <% healthInfo.notes.forEach(function(note, index) { %>
             <div class="note-item mb-2">
-                <label for="noteTitle-<%= index %>" class="form-label">Note Title </label>
+                <label for="noteTitle>" class="form-label">Note Title </label>
                 <input 
                     type="text" 
-                    name="notes[<%= index %>][noteTitle]"
-                    id="noteTitle-<%= index %>" 
+                    name="noteTitle"
+                    id="noteTitle" 
                     class="form-control" 
                     placeholder="Enter note title"
                     value="<%= notes.noteTitle %>"
                 />
 
-                <label for="noteDescription-<%= index %>" class="form-label">Note Description</label>
+                <label for="noteDescription" class="form-label">Note Description</label>
                 <textarea
-                    name="notes[<%= index %>][noteDescription]"
-                    id="noteDescription-<%= index %>" 
+                    name="noteDescription"
+                    id="noteDescription"
                     class="form-control"
                     rows="4"
                     placeholder="Enter note description"
                     value="<%= notes.noteDescription %>"
                 ></textarea>
             </div>
-        <% }) %>
 </div>
     <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
     </div>
