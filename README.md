@@ -14,8 +14,13 @@ It starts with adult self
 
 Future functionality: 
 - shared family /intimates information
-- export for providers
-- 
+- export for medical providers
+- or ?
+
+Security
+- secure login
+- ability to share info across accounts
+- role based access control
 
 
 
@@ -37,7 +42,9 @@ API_SECRET =
 # Run
 `npm start`
 
-- To run, activate database, then `npm start` in terminal
+- To run, activate database. (mongodb.com Ensure current ip address has access rights)
+
+For production  `npm start` in terminal
 
 ## Dev
-nodemon
+For dev, `npm run dev`
