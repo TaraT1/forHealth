@@ -7,7 +7,7 @@ const profilesController = require("../controllers/profiles");
 
 //Main Routes
 router.get("/", homeController.getIndex);
-router.get("/profiles/profiles", profilesController.getProfiles);
+router.get("/profiles", profilesController.getProfiles);
 // router.get("/profiles", ensureAuth, profilesController.getProfiles);
 
 //Routes for user login/signup
