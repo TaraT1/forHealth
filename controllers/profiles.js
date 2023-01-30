@@ -9,7 +9,8 @@ module.exports = {
     let profiles
     try {
       profiles = await Profile.find();
-      res.render("profiles/profiles", { profiles: profiles });
+      // res.render("profiles/", { profiles: profiles });
+      res.render("profiles/profiles.ejs", { profiles: profiles });
     } catch (err) {
       console.log(err);
     }
@@ -17,7 +18,7 @@ module.exports = {
 
   //New profile (display form)
   renderNewPage:  (req, res) => {
-    res.render("profiles/new", {profile: new Profile () })
+    res.render("profiles/new.ejs", {profile: new Profile () })
   },
 
   createProfile: async (req, res) => {
