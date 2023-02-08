@@ -6,28 +6,33 @@ module.exports = {
 
   //get all profiles
   getProfiles: async (req, res) => {
-    let profiles
+    
     try {
-      profiles = await Profile.find();
-      // res.render("profiles/", { profiles: profiles });
-      res.render("profiles/profiles.ejs", { profiles: profiles });
-    } catch (err) {
+      const profiles = await Profile.find({});
+      //orig const profiles = await Profile.find();
+      res.render("profiles/profiles", { profiles: profiles });
+    } 
+    catch (err) {
       console.log(err);
     }
   },
 
-  //New profile (display form)
+  //** New profile (display form)
+  // renderNewPage: (req, res) => {
+  //   (res, new Profile())
+  // },
+
   renderNewPage:  (req, res) => {
-    res.render("profiles/new.ejs", {profile: new Profile () })
+    res.render("profiles/new", {profile: new Profile () })
+    // res.render("profiles/new.ejs", {profile: new Profile () })
   },
 
   createProfile: async (req, res) => {
-    let profile
-    try {
+    // try {
       // Upload image to cloudinary
       //const result = await cloudinary.uploader.upload(req.file.path);
 
-      profile = await Profile.create({
+      const profile = new Profile({
         name: req.body.name,
         birthDate: new Date(req.body.birthDate),
         genderAssignedAtBirth: req.body.genderAssignedAtBirth,
@@ -36,38 +41,39 @@ module.exports = {
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
         image: req.body.image,
-        _id: req.params.id,
+        // _id: req.params.id,
         // user: req.user.id,
-        createdAt: req.body.createdAt,
+        // createdAt: req.body.createdAt,
       });
-      console.log("Profile has been added!");
-      // res.redirect("/profiles");
+      try {
+        const newProfile = await profile.save()
+        res.redirect(`profiles/${newProfile._id}`)
+
       // res.redirect(`/profiles/${req.params.id}`);
-      res.redirect(`/profiles/${profile._id}`);
-    } catch (err) {
-      console.log(err);
-      renderNewPage(res, profile, true)
-      errorMessage: "Error creating Profile"
+      // res.redirect(`/profiles/${profile._id}`);
+    } catch {
+      console.log(profile);
+      res.render("profiles/new", {//renderNewPage
+        profile: profile,
+        errorMessage: "Error creating Profile"
+      })
     }
-    //   res.render("profiles/new", {
-    //     profile: profile,
-    //     errorMessage: "Error creating Profile"
-    //   })
-    // }
   },
   
   //get one profile
   getProfile: async (req, res) => {
-    let profile, profiles
     try {
       // const profile = await Profile.findById({_id: req.params.id});
-      profile = await Profile.findById(req.params.id).lean();
-      profiles = await Profile.find();
+      const profile = await Profile.findById(req.params.id).lean();
+      const profiles = await Profile.find();
       // const profile = await Profile.find({user: req.user.id}).lean() (traversy)
       // res.redirect("/profiles/"+req.params.id);
       res.render("profiles/profile", { profile: profile, profiles: profiles });
+      console.log(profile);
+      
     } catch (err) {
       console.log(err);
+      res.redirect('/')
     }
   },
   
@@ -79,10 +85,9 @@ module.exports = {
   },
 
   updateProfile: async (req, res) => {
-    let profile
     
     try {
-      profile = await Profile.findById(req.params.id)
+      const profile = await Profile.findById(req.params.id)
       profile.name = req.body.name
       profile.birthDate = new Date(req.body.birthDate)
       profile.sex = req.body.sex
@@ -101,7 +106,7 @@ module.exports = {
   deleteProfile: async (req, res) => {
     try {
       // Find profile by id
-      let profile = await Profile.findById({ _id: req.params.id });
+      const profile = await Profile.findById({ _id: req.params.id });
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db

@@ -15,6 +15,7 @@ router.get("/", profilesController.getProfiles);
 router.get("/new", profilesController.renderNewPage);
 //create profile route
 router.post("/", profilesController.createProfile);
+//orig: router.post("/createProfile", profilesController.createProfile);
 
 //Get sgl profile
 router.get("/:id", profilesController.getProfile);
