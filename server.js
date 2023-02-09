@@ -23,8 +23,9 @@ const PORT = process.env.PORT;
 //Connect To Database
 connectDB();
 
-//Using EJS for views
+//Using EJS for views; setting views dir as default
 app.set("view engine", "ejs");
+app.set("views", __dirname + "/views")
 
 //Static Folder
 app.use(express.static("public"));

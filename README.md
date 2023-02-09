@@ -48,3 +48,24 @@ For production  `npm start` in terminal
 
 ## Dev
 For dev, `npm run dev`
+
+## cURL"
+```javascript
+curl -d {"name": "testName", "birthDate": "2023-01-01", "genderAssignedAtBirth": "female"} -H "Content-Type: application/json" -X POST http://localhost:2121/profiles/new ```
+
+{
+"name": "",
+"birthDate": "",
+"genderAssignedAtBirth": "",
+"genderId": "",
+"geneticBackground": "",
+"eHealthRecords": "",
+"journal:" "",
+"todo": "",
+"image": "",
+"user": "",
+"createdAt": "",
+}
+
+```
+- not working "Unexpected end of JSON input"
