@@ -1,5 +1,6 @@
 const express = require("express"); //web app framework
 const app = express();
+const expressLayouts = require("express-ejs-layouts")
 const mongoose = require("mongoose"); //db
 //const passport = require("passport"); //auth
 const session = require("express-session");
