@@ -28,6 +28,10 @@ connectDB();
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views")
 
+//Setting layout folder for std html layout
+app.set("layout", "layouts/layout")
+app.use(expressLayouts)
+
 //Static Folder
 app.use(express.static("public"));
 
