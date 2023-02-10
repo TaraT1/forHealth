@@ -22,8 +22,9 @@ module.exports = {
   //   (res, new Profile())
   // },
 
-  renderNewPage:  (req, res) => {
-    res.render("profiles/new", {profile: new Profile () })
+  renderNewPage: async (req, res) => {
+    (res, new Profile())
+    // res.render("profiles/new", {profile: new Profile () })
     // res.render("profiles/new.ejs", {profile: new Profile () })
   },
 
