@@ -39,6 +39,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// app.use(express.urlenconded({limit: '10mb', extended: false}))
+
 //Logging
 app.use(logger("dev"));
 
