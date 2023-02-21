@@ -9,7 +9,6 @@ module.exports = {
     
     try {
       const profiles = await Profile.find({});
-      //orig const profiles = await Profile.find();
       res.render("profiles/profiles", { profiles: profiles });
     } 
     catch (err) {
@@ -17,19 +16,15 @@ module.exports = {
     }
   },
 
-  //** New profile (display form)
-  // renderNewPage: (req, res) => {
-  //   (res, new Profile())
-  // },
-
+  //** ~get - New profile (display form)
+  
   renderNewPage:  (req, res) => {
     res.render("profiles/new", {profile: new Profile () })
-    // res.render("profiles/new.ejs", {profile: new Profile () })
   },
 
+  //Post Profile Route
   createProfile: async (req, res) => {
-    // try {
-      // Upload image to cloudinary
+      // try... Upload image to cloudinary
       //const result = await cloudinary.uploader.upload(req.file.path);
 
       const profile = new Profile({
@@ -41,24 +36,23 @@ module.exports = {
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
         image: req.body.image,
-        // _id: req.params.id,
+        _id: req.params.id
         // user: req.user.id,
         // createdAt: req.body.createdAt,
-      });
+      })
       try {
         const newProfile = await profile.save()
+        console.log("New profile! Whomp")
         res.redirect(`profiles/${newProfile._id}`)
-
-      // res.redirect(`/profiles/${req.params.id}`);
-      // res.redirect(`/profiles/${profile._id}`);
-    } catch {
-      console.log(profile);
-      res.render("profiles/new", {//renderNewPage
-        profile: profile,
-        errorMessage: "Error creating Profile"
-      })
-    }
-  },
+        } catch (err) {
+          console.log(err)
+          res.render('profiles/new', {
+            profile: profile,
+            errorMessage: "Error Creating Profile"
+          })
+          }
+    },
+ 
   
   //get one profile
   getProfile: async (req, res) => {
@@ -117,7 +111,19 @@ module.exports = {
       res.redirect("/profiles");
     }
   }
-};
+
+
+  // async function renderNewProfile(res, profile, hasError = false) {
+  //   renderFormPage(res, profile, 'new', hasError)
+  // }
+
+  // async function renderFormPage(res, profile, form, hasError = false) {
+  //   const profiles = await Profile.find({})
+  //   const params = {
+
+  //   }
+  // }
+}
 
 
 
