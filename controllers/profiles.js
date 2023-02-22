@@ -17,7 +17,6 @@ module.exports = {
   },
 
   //** ~get - New profile (display form)
-  
   renderNewPage:  (req, res) => {
     res.render("profiles/new", {profile: new Profile () })
   },
