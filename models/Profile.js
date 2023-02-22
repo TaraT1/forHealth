@@ -11,7 +11,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   genderAssignedAtBirth: {
     type: String,
-    required: true,
+    required: false,
   },
   genderId: {
     type: String,
