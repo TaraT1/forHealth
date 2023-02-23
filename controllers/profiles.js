@@ -10,6 +10,7 @@ module.exports = {
     try {
       const profiles = await Profile.find({});
       res.render("profiles/profiles", { profiles: profiles });
+      console.log("Profiles found")
     } 
     catch (err) {
       console.log(err);
@@ -36,13 +37,28 @@ module.exports = {
         journal: req.body.journal,
         image: req.body.image,
         _id: req.params.id
-        // user: req.user.id,
-        // createdAt: req.body.createdAt,
       })
-      try {
-        const newProfile = await profile.save()
-        console.log("New profile! Whomp")
-        res.redirect(`profiles/${newProfile._id}`)
+
+      // try {
+      //   await Profile.create({
+      //   name: req.body.name,
+      //   birthDate: new Date(req.body.birthDate),
+      //   genderAssignedAtBirth: req.body.genderAssignedAtBirth,
+      //   genderId: req.body.genderId,
+      //   geneticBackground: req.body.geneticBackground,
+      //   eHealthRecords: req.body.eHealthRecords,
+      //   journal: req.body.journal,
+      //   image: req.body.image,
+      //   _id: req.params.id
+      //   // user: req.user.id,
+      //   // createdAt: req.body.createdAt,
+      // });
+        
+        try {
+          const newProfile = await profile.save()
+          console.log("New profile! Whomp")
+          res.redirect(`profiles/${newProfile.id}`)
+          // res.redirect("/profile")
         } catch (err) {
           console.log(err)
           res.render('profiles/new', {
@@ -110,8 +126,7 @@ module.exports = {
       res.redirect("/profiles");
     }
   }
-
-
+}
   // async function renderNewProfile(res, profile, hasError = false) {
   //   renderFormPage(res, profile, 'new', hasError)
   // }
@@ -122,7 +137,7 @@ module.exports = {
 
   //   }
   // }
-}
+
 
 
 
