@@ -35,38 +35,26 @@ module.exports = {
         geneticBackground: req.body.geneticBackground,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
-        image: req.body.image,
-        _id: req.params.id
+        image: req.body.image
       })
 
-      // try {
-      //   await Profile.create({
-      //   name: req.body.name,
-      //   birthDate: new Date(req.body.birthDate),
-      //   genderAssignedAtBirth: req.body.genderAssignedAtBirth,
-      //   genderId: req.body.genderId,
-      //   geneticBackground: req.body.geneticBackground,
-      //   eHealthRecords: req.body.eHealthRecords,
-      //   journal: req.body.journal,
-      //   image: req.body.image,
-      //   _id: req.params.id
-      //   // user: req.user.id,
-      //   // createdAt: req.body.createdAt,
-      // });
         
         try {
           const newProfile = await profile.save()
           console.log("New profile! Whomp")
-          res.redirect(`profiles/${newProfile.id}`)
-          // res.redirect("/profile")
+          res.redirect(`profiles/${newProfile.req.params.id}`)      
+          // res.redirect("/profiles")
         } catch (err) {
           console.log(err)
+          if (err){
+            let locals = {errorMessage: "Error Creating Profile"}
           res.render('profiles/new', {
             profile: profile,
-            errorMessage: "Error Creating Profile"
-          })
+            locals: locals
+          }) 
           }
-    },
+        }
+      },
  
   
   //get one profile
@@ -89,7 +77,8 @@ module.exports = {
   //edit
   //get
   
-  editProfile: async (req, res) => {
+  // editProfile: async (req, res) => {
+  editProfile: (req, res) => {
 
   },
 

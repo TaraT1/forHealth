@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
 const profilesController = require("../controllers/profiles");
-// const Profile = require("../models/Profile");
 //const { ensureAuth } = require("../middleware/auth");
 
 //Profile Routes
