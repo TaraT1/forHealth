@@ -1,4 +1,4 @@
-//const cloudinary = require("../middleware/cloudinary");
+const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
 
@@ -25,7 +25,7 @@ module.exports = {
   //Post Profile Route
   createProfile: async (req, res) => {
       // try... Upload image to cloudinary
-      //const result = await cloudinary.uploader.upload(req.file.path);
+      // const result = await cloudinary.uploader.upload(req.file.path);
 
       const profile = new Profile({
         name: req.body.name,
@@ -38,11 +38,10 @@ module.exports = {
         image: req.body.image
       })
 
-        
         try {
           const newProfile = await profile.save()
           console.log("New profile! Whomp")
-          res.redirect(`profiles/${newProfile.req.params.id}`)      
+          res.redirect(`profiles/${newProfile.id}`)      
           // res.redirect("/profiles")
         } catch (err) {
           console.log(err)

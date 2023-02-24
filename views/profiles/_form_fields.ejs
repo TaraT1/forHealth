@@ -10,7 +10,8 @@
 
 <div>
 <label for="genderAssignedAtBirth" class="genderAssignedAtBirth">What is your sex (gender assigned at birth)?</label>
-    <select class="form-select" id="genderAssignedAtBirth">
+    <select class="form-select" id="genderAssignedAtBirth" name="genderAssignedAtBirth">
+      <option value="" <%= profile.genderAssignedAtBirth == "choose" ? "selected" : "" %>></option>
       <option value="female" <%= profile.genderAssignedAtBirth == "female" ? "selected" : "" %>>female</option>
       <option value="male" <%= profile.genderAssignedAtBirth == "male" ? "selected" : "" %>>male</option>
     </select>
