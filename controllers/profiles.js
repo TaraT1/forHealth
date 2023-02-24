@@ -1,4 +1,4 @@
-//const cloudinary = require("../middleware/cloudinary");
+const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
 
@@ -9,29 +9,23 @@ module.exports = {
     
     try {
       const profiles = await Profile.find({});
-      //orig const profiles = await Profile.find();
       res.render("profiles/profiles", { profiles: profiles });
+      console.log("Profiles found")
     } 
     catch (err) {
       console.log(err);
     }
   },
 
-  //** New profile (display form)
-  // renderNewPage: (req, res) => {
-  //   (res, new Profile())
-  // },
-
-  renderNewPage: async (req, res) => {
-    (res, new Profile())
-    // res.render("profiles/new", {profile: new Profile () })
-    // res.render("profiles/new.ejs", {profile: new Profile () })
+  //** ~get - New profile (display form)
+  renderNewPage:  (req, res) => {
+    res.render("profiles/new", {profile: new Profile () })
   },
 
+  //Post Profile Route
   createProfile: async (req, res) => {
-    // try {
-      // Upload image to cloudinary
-      //const result = await cloudinary.uploader.upload(req.file.path);
+      // try... Upload image to cloudinary
+      // const result = await cloudinary.uploader.upload(req.file.path);
 
       const profile = new Profile({
         name: req.body.name,
@@ -41,25 +35,26 @@ module.exports = {
         geneticBackground: req.body.geneticBackground,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
-        image: req.body.image,
-        // _id: req.params.id,
-        // user: req.user.id,
-        // createdAt: req.body.createdAt,
-      });
-      try {
-        const newProfile = await profile.save()
-        res.redirect(`profiles/${newProfile._id}`)
-
-      // res.redirect(`/profiles/${req.params.id}`);
-      // res.redirect(`/profiles/${profile._id}`);
-    } catch {
-      console.log(profile);
-      res.render("profiles/new", {//renderNewPage
-        profile: profile,
-        errorMessage: "Error creating Profile"
+        image: req.body.image
       })
-    }
-  },
+
+        try {
+          const newProfile = await profile.save()
+          console.log("New profile! Whomp")
+          res.redirect(`profiles/${newProfile.id}`)      
+          // res.redirect("/profiles")
+        } catch (err) {
+          console.log(err)
+          if (err){
+            let locals = {errorMessage: "Error Creating Profile"}
+          res.render('profiles/new', {
+            profile: profile,
+            locals: locals
+          }) 
+          }
+        }
+      },
+ 
   
   //get one profile
   getProfile: async (req, res) => {
@@ -81,7 +76,8 @@ module.exports = {
   //edit
   //get
   
-  editProfile: async (req, res) => {
+  // editProfile: async (req, res) => {
+  editProfile: (req, res) => {
 
   },
 
@@ -118,7 +114,18 @@ module.exports = {
       res.redirect("/profiles");
     }
   }
-};
+}
+  // async function renderNewProfile(res, profile, hasError = false) {
+  //   renderFormPage(res, profile, 'new', hasError)
+  // }
+
+  // async function renderFormPage(res, profile, form, hasError = false) {
+  //   const profiles = await Profile.find({})
+  //   const params = {
+
+  //   }
+  // }
+
 
 
 
