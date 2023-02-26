@@ -39,11 +39,13 @@ module.exports = {
         notes: req.body.notes,
         profile: req.body.profile
       })
+      
 
         try {
           const newProvider = await provider.save()
+          const profiles = await Profile.find({});
           console.log("New provider! Whomp")
-          res.redirect(`providers/${newProvider.id}`)      
+          res.redirect(`providers/${newProvider.id}`, {profiles: profiles})      
           // res.redirect("/providers")
         } catch (err) {
           console.log(err)
@@ -93,7 +95,7 @@ module.exports = {
       provider.media = req.body.media
       provider.notes = req.body.notes
 
-      await profile.save()
+      await provider.save()
       res.redirect(`/providers/${req.params.id}`)
     } catch (err) {
       console.log(err);
@@ -103,7 +105,7 @@ module.exports = {
   deleteProvider: async (req, res) => {
     try {
       // Find profile by id
-      const profile = await Provider.findById({ _id: req.params.id });
+      const provider = await Provider.findById({ _id: req.params.id });
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
