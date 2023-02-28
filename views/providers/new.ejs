@@ -35,18 +35,7 @@
                     <label for="notes" class="form-label">Notes</label>
                     <textarea class="form-control" id="notes" name="notes" value="<%= provider.notes %>"> </textarea>
                 </div>
-                <div>
-                    <label for="profile" class="form-label">Profile</label>
-                    <select name="profile">
-                    <% profiles.forEach(profile => { %>
-                        <% if (profile.id === provider.profile) { %>
-                        <option selected label="<%= profile.name %>" value="<%= profile.id %>">
-                        <% } else { %>
-                        <option label="<%= profile.name %>" value="<%= profile.id %>">
-                        <% } %>
-                    <% }) %>
-                    </select>
-                </div>
+
                 <a href="/providers">Cancel</a>
                 <button type="submit">Create</button>
             </form>

@@ -23,7 +23,7 @@ module.exports = {
     res.render("providers/new", {provider: new Provider () })
   },
 
-  //Post Profile Route
+  //Post Provider Route
   createProvider: async (req, res) => {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
@@ -43,9 +43,15 @@ module.exports = {
 
         try {
           const newProvider = await provider.save()
-          const profiles = await Profile.find({});
+          const providers = await Provider.find({});
+          const profiles = await Profile.find({})
           console.log("New provider! Whomp")
-          res.redirect(`providers/${newProvider.id}`, {profiles: profiles})      
+          let params = {
+            providers: providers, 
+            profiles: profiles
+          }
+          // res.redirect(`providers/${newProvider.id}` )      
+          res.render(`providers/${newProvider.id}`, params )      
           // res.redirect("/providers")
         } catch (err) {
           console.log(err)
@@ -60,7 +66,7 @@ module.exports = {
       },
  
   
-  //get one profile
+  //get one provider 
   getProvider: async (req, res) => {
     try {
       const provider = await Provider.findById(req.params.id).lean();
