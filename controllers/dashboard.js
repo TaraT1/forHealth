@@ -19,19 +19,20 @@ module.exports = {
 
     try {
       // const notes = Note.aggregate([
-      const profiles = Profile.aggregate([
-      { $sort: { updatedAt: -1 } },
-      { $match: {user: mongoose.Types.ObjectId(req.user.id) } },
-      // {
-      //   $project: {
-      //     title: { $substr: ['$title', 0, 30 ] },
-      //     body: { $substr: ['$body', 0, 100 ] },
-      //   },
-      // }
-    ])
-    .skip(perPage * page - perPage)
-    .limit(perPage)
-    .exec();
+      const profiles = Profile.find({ user: req.user.id })
+      // .aggregate([
+      //   { $sort: { updatedAt: -1 } },
+      //   { $match: {user: mongoose.Types.ObjectId(req.user.id) } },
+      //   // {
+      //   //   $project: {
+      //   //     title: { $substr: ['$title', 0, 30 ] },
+      //   //     body: { $substr: ['$body', 0, 100 ] },
+      //   //   },
+      //   // }
+      // ])
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec();
 
     // const count = await Note.count();
     const count = await Profile.count();
