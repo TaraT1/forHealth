@@ -43,6 +43,7 @@ API_SECRET =
 `npm start`
 
 - To run, activate database. (mongodb.com Ensure current ip address has access rights)
+    - Add ip address in mongo with Network Access
 
 For production  `npm start` in terminal
 
