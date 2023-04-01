@@ -97,6 +97,12 @@ module.exports = {
       res.redirect(`/profiles/${req.params.id}`)
     } catch (err) {
       console.log(err);
+      if (profile != null) {
+        renderEditProfile(res, profile, true)
+      }
+      else {
+        redirect('/')
+      }
     }
   },
 
