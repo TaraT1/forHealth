@@ -1,3 +1,4 @@
+const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
 // const Comment = require("../models/Comment");
@@ -125,9 +126,29 @@ module.exports = {
   //   renderFormPage(res, profile, 'new', hasError)
   // }
 
+  // async function renderEditProfile(res, profile, hasError = false) {
+  //   try {
+  //     const profiles = await Profile.find({})
+  //     const params = {
+  //       ...
+  //     }
+  //     if (hasError) {
+  //       if (form === 'edit') {
+  //         params.errorMessage = 'Sorry, error updating profile'
+  //       } else {
+  //         params.errorMessage = 'Sorry, error creating profile'
+  //       }
+  //     }
+  //     res.render (`profiles/${form}`, params)
+  //   } catch {
+  //     res.redirect(`profiles`)
+  //   }
+  // }
+
   // async function renderFormPage(res, profile, form, hasError = false) {
   //   const profiles = await Profile.find({})
   //   const params = {
+    // ...
 
   //   }
   // }
