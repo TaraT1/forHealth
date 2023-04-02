@@ -75,12 +75,40 @@ module.exports = {
   },
   
   //edit
-  //get
+  //get profile to edit
+  editProfile: async (req, res) => {
+  // editProfile: (req, res) => {
+    try {
+      const profile = await Profile.findById(req.params.id)
+      renderEditProfile(res, profile)
+    } catch {
+      res.redirect('/')
+    }
+  }
   
-  // editProfile: async (req, res) => {
-  editProfile: (req, res) => {
+  //Render form refactor, error handling
+  renderFormPage async (res, profile, form, hasError = false)  {
+    try {
+      const profiles = await Profile.find({})
+      const params = {
+        profiles: profiles
+      }
+      if (hasError) {
+        if (form === 'edit') {
+          params.errorMessage = 'Error Updating Profile'
+        } else {
+          params.errorMessage = 'Error Creating Profile'
+        }
+      }
+      res.render(`profiles/${form}`, params)
+    } catch {
+      res.redirect('/profiles')
+    }
+  }
 
-  },
+  async function renderEditProfile(res, profile, hasError = false)  {
+    renderFormPage(res, profile, 'edit', hasError)
+  }
 
   updateProfile: async (req, res) => {
     
