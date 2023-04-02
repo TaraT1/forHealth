@@ -18,8 +18,8 @@ module.exports = {
     }
   },
 
-  //** ~get - New profile (display form)
-  renderNewPage:  (req, res) => {
+  //** ~get - New profile (display form) (previously renderNewPage)
+  renderNewProfile:  (req, res) => {
     res.render("profiles/new", {profile: new Profile () })
   },
 
