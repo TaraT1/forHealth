@@ -84,10 +84,10 @@ module.exports = {
     } catch {
       res.redirect('/')
     }
-  }
+  },
   
   //Render form refactor, error handling
-  renderFormPage async (res, profile, form, hasError = false)  {
+  renderFormPage: async (res, profile, form, hasError = false)  => {
     try {
       const profiles = await Profile.find({})
       const params = {
@@ -104,12 +104,13 @@ module.exports = {
     } catch {
       res.redirect('/profiles')
     }
-  }
+  },
 
-  async function renderEditProfile(res, profile, hasError = false)  {
+  renderEditProfile: async (res, profile, hasError = false)  => {
     renderFormPage(res, profile, 'edit', hasError)
-  }
+  },
 
+  //Update
   updateProfile: async (req, res) => {
     
     try {
@@ -135,6 +136,7 @@ module.exports = {
     }
   },
 
+  //Delete
   deleteProfile: async (req, res) => {
     try {
       // Find profile by id
