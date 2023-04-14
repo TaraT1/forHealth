@@ -65,7 +65,10 @@ module.exports = {
       const profiles = await Profile.find();
       // const profile = await Profile.find({user: req.user.id}).lean() (traversy)
       // res.redirect("/profiles/"+req.params.id);
-      res.render("profiles/profile", { profile: profile, profiles: profiles });
+      res.render('profiles/profile', { 
+        profile: profile, 
+        profiles: profiles 
+      });
       console.log(profile);
       
     } catch (err) {
