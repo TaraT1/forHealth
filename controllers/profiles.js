@@ -73,7 +73,7 @@ module.exports = {
       
     } catch (err) {
       console.log(err);
-      res.redirect('/')
+      res.redirect('/profiles')
     }
   },
   
@@ -82,11 +82,16 @@ module.exports = {
   editProfile: async (req, res) => {
   // editProfile: (req, res) => {
     try {
+      // const profile = await Profile.findById({_id: req.params.id});
       const profile = await Profile.findById(req.params.id)
-      renderEditProfile(res, profile)
+      renderEditProfile(res, profile.id)
     } catch {
-      res.redirect('/')
+      res.redirect('/profiles/:id')
     }
+  },
+
+  renderEditProfile: async (res, profile, hasError = false)  => {
+    renderFormPage(res, profile, 'edit', hasError)
   },
   
   //Render form refactor, error handling
@@ -94,6 +99,7 @@ module.exports = {
     try {
       const profiles = await Profile.find({})
       const params = {
+        profile: profile,
         profiles: profiles
       }
       if (hasError) {
@@ -109,15 +115,13 @@ module.exports = {
     }
   },
 
-  renderEditProfile: async (res, profile, hasError = false)  => {
-    renderFormPage(res, profile, 'edit', hasError)
-  },
 
   //Update
   updateProfile: async (req, res) => {
     
+    let profile
     try {
-      const profile = await Profile.findById(req.params.id)
+      profile = await Profile.findById(req.params.id)
       profile.name = req.body.name
       profile.birthDate = new Date(req.body.birthDate)
       profile.sex = req.body.sex
@@ -127,7 +131,8 @@ module.exports = {
       profile.journal = req.body.journal
 
       await profile.save()
-      res.redirect(`/profiles/${req.params.id}`)
+      // res.redirect(`/profiles/${req.params.id}`)
+      res.redirect(`/profiles/${profile.id}`)
     } catch (err) {
       console.log(err);
       if (profile != null) {
