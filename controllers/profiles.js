@@ -23,7 +23,7 @@ module.exports = {
     res.render("profiles/new", {profile: new Profile () })
   },
 
-  //Post Profile Route
+  //POST Profile 
   createProfile: async (req, res) => {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
@@ -46,6 +46,7 @@ module.exports = {
           // res.redirect("/profiles")
         } catch (err) {
           console.log(err)
+          //+renderNewProfile(res, book, true) (Delete the rest of func)
           if (err){
             let locals = {errorMessage: "Error Creating Profile"}
           res.render('profiles/new', {
@@ -57,13 +58,12 @@ module.exports = {
       },
  
   
+  //edit Update: get/show, view/edit, update
   //get one profile
   getProfile: async (req, res) => {
     try {
-      // const profile = await Profile.findById({_id: req.params.id});
       const profile = await Profile.findById(req.params.id).lean();
       const profiles = await Profile.find();
-      // const profile = await Profile.find({user: req.user.id}).lean() (traversy)
       // res.redirect("/profiles/"+req.params.id);
       res.render('profiles/profile', { 
         profile: profile, 
@@ -71,54 +71,54 @@ module.exports = {
       });
       console.log(profile);
       
-    } catch (err) {
-      console.log(err);
+    } catch  {
       res.redirect('/profiles')
     }
   },
   
-  //edit
-  //get profile to edit
+  //get profile to edit 
   editProfile: async (req, res) => {
-  // editProfile: (req, res) => {
     try {
-      // const profile = await Profile.findById({_id: req.params.id});
-      const profile = await Profile.findById(req.params.id)
-      renderEditProfile(res, profile.id)
-    } catch {
-      res.redirect('/profiles/:id')
-    }
-  },
-
-  renderEditProfile: async (res, profile, hasError = false)  => {
-    renderFormPage(res, profile, 'edit', hasError)
-  },
-  
-  //Render form refactor, error handling
-  renderFormPage: async (res, profile, form, hasError = false)  => {
-    try {
-      const profiles = await Profile.find({})
-      const params = {
-        profile: profile,
-        profiles: profiles
-      }
-      if (hasError) {
-        if (form === 'edit') {
-          params.errorMessage = 'Error Updating Profile'
-        } else {
-          params.errorMessage = 'Error Creating Profile'
-        }
-      }
-      res.render(`profiles/${form}`, params)
+      const profile = await Profile.findById(req.params.id).lean()
+      res.render('profiles/edit', { profile: profile })
     } catch {
       res.redirect('/profiles')
     }
-  },
+  }, 
+  
+  //     renderEditProfile(res, profile)
+  //   } catch {
+  //     res.redirect('/profiles/:id')
+  //   }
+  // },
 
+  // renderEditProfile: async (res, profile, hasError = false)  => {
+  //   renderFormPage(res, profile, 'edit', hasError)
+  // },
+  
+  // ***Render form refactor, error handling
+  // renderFormPage: async (res, profile, form, hasError = false)  => {
+  //   try {
+  //     const profiles = await Profile.find({})
+  //     const params = {
+  //       profile: profile,
+  //       profiles: profiles
+  //     }
+  //     if (hasError) {
+  //       if (form === 'edit') {
+  //         params.errorMessage = 'Error Updating Profile'
+  //       } else {
+  //         params.errorMessage = 'Error Creating Profile'
+  //       }
+  //     }
+  //     res.render(`profiles/${form}`, params)
+  //   } catch {
+  //     res.redirect('/profiles')
+  //   }
+  // },
 
   //Update
   updateProfile: async (req, res) => {
-    
     let profile
     try {
       profile = await Profile.findById(req.params.id)
@@ -131,15 +131,14 @@ module.exports = {
       profile.journal = req.body.journal
 
       await profile.save()
-      // res.redirect(`/profiles/${req.params.id}`)
       res.redirect(`/profiles/${profile.id}`)
-    } catch (err) {
-      console.log(err);
-      if (profile != null) {
-        renderEditProfile(res, profile, true)
-      }
-      else {
-        redirect('/')
+    } catch {
+      if (profile == null) {
+        res.redirect('/')
+      } else {
+        res.render('profiles/edit', {
+          profile: profile
+        })
       }
     }
   },
