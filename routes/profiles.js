@@ -17,7 +17,7 @@ router.get("/new", profilesController.renderNewProfile);
 //Create profile route
 router.post("/", upload.single("file"), profilesController.createProfile);
 
-//*Update Profile
+//*Update Profile (get/show, view/edit, update)
 //Show profile
 router.get("/:id", profilesController.getProfile);
 
