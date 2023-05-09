@@ -5,7 +5,9 @@
 
 <div>
 <label for="birthDate" class="form-label">Enter your birthday</label>
-  <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().split('T')[0] %>">
+  <%# Problems with parsing date: Invalid time value%>
+  <%# cf notes for wds code input type="date" name="birthDate"  value="ang%profile.birthDate%"ang %>
+  <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate %>">
 </div>
 
 <div>
