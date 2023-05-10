@@ -44,10 +44,10 @@
             </table>
             
             <div>
-              <a href="/profiles/<%= profile._id %>">View</a>
-              <a href="/profiles/<%= profile._id %>/edit">Edit</a>
+              <a href="/profiles/<%= profile.id %>">View</a>
+              <a href="/profiles/<%= profile.id %>/edit">Edit</a>
 
-              <form method="POST" action="/profiles/<%= profile._id %>?_method=DELETE">
+              <form method="POST" action="/profiles/<%= profile.id %>?_method=DELETE">
                 <button type="submit">Delete</button>  
               </form>
             </div>
@@ -59,7 +59,7 @@
                 <h2>Health Profiles</h2>
                   <% for(let i=0; i < profiles.length; i++) {%>
                     <div class="card">
-                      <a href="/profiles/<%= profiles[i]._id%>" class="card-link">
+                      <a href="/profiles/<%= profiles[i].id %>" class="card-link">
                           <h5 class="card-title"><%= profiles[i].name%></h5>
                         </a>
                     </div>
