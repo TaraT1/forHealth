@@ -62,7 +62,7 @@ module.exports = {
   //get one profile
   getProfile: async (req, res) => {
     try {
-      const profile = await Profile.findById(req.params.id).lean();
+      const profile = await Profile.findById({_id: req.params.id});
       const profiles = await Profile.find();
       // res.redirect("/profiles/"+req.params.id);
       res.render('profiles/profile', { 
@@ -71,7 +71,8 @@ module.exports = {
       });
       console.log(profile);
       
-    } catch  {
+    } catch (err) {
+      console.log(err)
       res.redirect('/profiles')
     }
   },
@@ -79,24 +80,19 @@ module.exports = {
   //get profile to edit 
   editProfile: async (req, res) => {
     try {
-      const profile = await Profile.findById(req.params.id).lean()
+      const profile = await Profile.findById({_id: req.params.id})
       res.render('profiles/edit', { profile: profile })
     } catch {
       res.redirect('/profiles/:id')
     }
   }, 
   
-  //     renderEditProfile(res, profile)
-  //   } catch {
-  //     res.redirect('/profiles/:id')
-  //   }
-  // },
 
   // renderEditProfile: async (res, profile, hasError = false)  => {
   //   renderFormPage(res, profile, 'edit', hasError)
   // },
   
-  // ***Render form refactor, error handling
+  // ***Render form refactor for creating and updating form, error handling
   // renderFormPage: async (res, profile, form, hasError = false)  => {
   //   try {
   //     const profiles = await Profile.find({})
@@ -121,22 +117,24 @@ module.exports = {
   updateProfile: async (req, res) => {
     let profile
     try {
-      profile = await Profile.findById(req.params.id).lean()
+      profile = await Profile.findById({ _id: req.params.id})
       profile.name = req.body.name
-      profile.birthDate = new Date(req.body.birthDate)
+      profile.birthDate = Date(req.body.birthDate)
       profile.sex = req.body.sex
       profile.genderId = req.body.genderId
       profile.geneticBackground = req.body.geneticBackground
       profile.eHealthRecords = req.body.eHealthRecords
       profile.journal = req.body.journal
-
       await profile.save()
+      // res.redirect(`/profiles/${req.params.id}`)
       res.redirect(`/profiles/${profile.id}`)
-    } catch {
+    } catch (err){
       //Profile would be null if it doesn't exist
+      console.log(err)
       if (profile == null) {
         res.redirect('/')
       } else {
+        console.log(err)
         res.render('profiles/edit', {
           profile: profile,
           errorMessage: 'Error updating Profile' 
