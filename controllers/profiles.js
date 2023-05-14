@@ -80,7 +80,8 @@ module.exports = {
   //get profile to edit 
   editProfile: async (req, res) => {
     try {
-      const profile = await Profile.findById({_id: req.params.id})
+      // const profile = await Profile.findById({_id: req.params.id})
+      const profile = await Profile.findById(req.params.id)
       res.render('profiles/edit', { profile: profile })
     } catch {
       res.redirect('/profiles/:id')
@@ -127,12 +128,14 @@ module.exports = {
       profile.journal = req.body.journal
       await profile.save()
       // res.redirect(`/profiles/${req.params.id}`)
-      res.redirect(`/profiles/${profile.id}`)
+      res.redirect(`/profiles/${profile.id}`)//difference???
+      console.log("Updated Profile. Whomp!")
     } catch (err){
       //Profile would be null if it doesn't exist
       console.log(err)
       if (profile == null) {
-        res.redirect('/')
+        // res.redirect('/')
+        res.redirect(`/profiles/${req.params.id}`)
       } else {
         console.log(err)
         res.render('profiles/edit', {
@@ -143,7 +146,7 @@ module.exports = {
     }
   },
 
-  //Delete
+  //Delete WORKS***
   deleteProfile: async (req, res) => {
     try {
       // Find profile by id
@@ -151,7 +154,7 @@ module.exports = {
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
-      await Profile.remove({ _id: req.params.id });
+      await Profile.deleteOne({ _id: req.params.id });
       console.log("Deleted Profile");
       res.redirect("/profiles");
     } catch (err) {
