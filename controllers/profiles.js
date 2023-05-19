@@ -5,7 +5,8 @@ const Profile = require("../models/Profile");
 
 module.exports = {
 
-  //get all profiles
+  //get all profiles **WORKS
+  //router.get("/", profilesController.getProfiles);
   getProfiles: async (req, res) => {
     
     try {
@@ -19,11 +20,13 @@ module.exports = {
   },
 
   //** ~get - New profile (display form) (previously renderNewPage)
+  // router.get("/new", profilesController.renderNewProfile);
   renderNewProfile:  (req, res) => {
     res.render("profiles/new", {profile: new Profile () })
   },
 
-  //POST Profile 
+  //POST Profile ***WORKS
+  //router.post("/", upload.single("file"), profilesController.createProfile);
   createProfile: async (req, res) => {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
@@ -59,7 +62,8 @@ module.exports = {
  
   
   //edit Update: get/show, view/edit, update
-  //get one profile
+  //Show profile
+  //router.get("/:id", profilesController.getProfile);
   getProfile: async (req, res) => {
     try {
       const profile = await Profile.findById({_id: req.params.id});
@@ -78,6 +82,7 @@ module.exports = {
   },
   
   //get profile to edit 
+  //router.get("/:id/edit", profilesController.editProfile);
   editProfile: async (req, res) => {
     try {
       // const profile = await Profile.findById({_id: req.params.id})
@@ -114,39 +119,50 @@ module.exports = {
   //   }
   // },
 
-  //Update
+  //Update 
+  //router.put("/:id", profilesController.updateProfile);
   updateProfile: async (req, res) => {
-    let profile
     try {
-      profile = await Profile.findById({ _id: req.params.id})
-      profile.name = req.body.name
-      profile.birthDate = Date(req.body.birthDate)
-      profile.sex = req.body.sex
-      profile.genderId = req.body.genderId
-      profile.geneticBackground = req.body.geneticBackground
-      profile.eHealthRecords = req.body.eHealthRecords
-      profile.journal = req.body.journal
-      await profile.save()
-      // res.redirect(`/profiles/${req.params.id}`)
-      res.redirect(`/profiles/${profile.id}`)//difference???
+      const {id} = req.params
+      const profile = await Profile.findByIdAndUpdate(id, req.body)
+      if(!profile){
+        console.log('Error: can\'t find profile')
+      }
+      
+      res.redirect(`/profiles/${profile.id}`)
       console.log("Updated Profile. Whomp!")
     } catch (err){
-      //Profile would be null if it doesn't exist
       console.log(err)
-      if (profile == null) {
-        // res.redirect('/')
-        res.redirect(`/profiles/${req.params.id}`)
-      } else {
-        console.log(err)
-        res.render('profiles/edit', {
-          profile: profile,
-          errorMessage: 'Error updating Profile' 
-        })
       }
-    }
   },
+    //previous update using .findById() and .save()
+    // try {
+    //   profile = await Profile.findById({ _id: req.params.id})
+    //   profile.name = req.body.name
+    //   profile.birthDate = Date(req.body.birthDate)
+    //   profile.sex = req.body.sex
+    //   profile.genderId = req.body.genderId
+    //   profile.geneticBackground = req.body.geneticBackground
+    //   profile.eHealthRecords = req.body.eHealthRecords
+    //   profile.journal = req.body.journal
+    //   await profile.save()
+    //   // res.redirect(`/profiles/${req.params.id}`)
+    //   res.redirect(`/profiles/${profile.id}`)//difference???
+    //   console.log("Updated Profile. Whomp!")
+    // } catch (err){
+    //   //Profile would be null if it doesn't exist
+    //   console.log(err)
+    //   if (profile == null) {
+    //     res.redirect('/')
+    //   } else {
+    //     res.render('profiles/edit', {
+    //       profile: profile,
+    //       errorMessage: 'Error updating Profile' 
+    //     })
+
 
   //Delete WORKS***
+  //router.delete("/:id", profilesController.deleteProfile);
   deleteProfile: async (req, res) => {
     try {
       // Find profile by id
@@ -159,6 +175,7 @@ module.exports = {
       res.redirect("/profiles");
     } catch (err) {
       res.redirect(`/profiles/${profile.id}`);
+      console.log(err)
     }
   }
 }
