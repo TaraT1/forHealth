@@ -4,47 +4,13 @@
           <p>profiles/profile</p> 
           <section class="container mt-5">
             <h2>Health Profile for <%= profile.name %> </h2>
-            <table class="table">
-              <thead></thead>
-              <tbody>
-                <tr>
-                  <td>Name</td>
-                  <td><%= profile.name %> </td>
-                </tr>
-                <tr>
-                  <td>Birthdate (yyyy-mm-dd)</td>
-                  <td><%= profile.birthDate.toISOString().split('T')[0] %></td>
-                </tr>
-                <tr>
-                  <td>Sex</td> 
-                  <td><%= profile.sex %> </td>
-                </tr>
-                <tr>
-                  <td>Gender Identity</td>
-                  <td><%= profile.genderId %></td>
-                </tr>
-                <tr>
-                  <td>Genetic Background</td>
-                  <td><%= profile.geneticBackground %></td>
-                </tr>
-                <tr>
-                  <td>eHealth Records</td>
-                  <td><%= profile.eHealthRecords %></td>
-                </tr>
-                <tr>
-                  <td>Journal</td>
-                  <td><%= profile.journal %></td>
-                </tr>
-                <tr>
-                  <td>To do</td>
-                  <td><%= profile.todo %></td>
-                </tr>
 
-              </tbody>
-            </table>
+            <%- include('_form_fields')  %>
             
             <div>
-              <a href="/profiles/<%= profile.id %>">View</a>
+              <%/*%> 
+              <a href="/profiles/<%= profile.id %>">View</a> 
+              <%*/%>
               <a href="/profiles/<%= profile.id %>/edit">Edit</a>
 
               <form method="POST" action="/profiles/<%= profile.id %>?_method=DELETE">
