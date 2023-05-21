@@ -1,6 +1,7 @@
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
+const { trusted } = require("mongoose");
 // const Comment = require("../models/Comment");
 
 module.exports = {
@@ -89,7 +90,7 @@ module.exports = {
       const profile = await Profile.findById(req.params.id)
       res.render('profiles/edit', { profile: profile })
     } catch {
-      res.redirect('/profiles/:id')
+      res.redirect('/profiles')
     }
   }, 
   
@@ -122,20 +123,39 @@ module.exports = {
   //Update 
   //router.put("/:id", profilesController.updateProfile);
   updateProfile: async (req, res) => {
+    let profile 
     try {
-      const {id} = req.params
-      const profile = await Profile.findByIdAndUpdate(id, req.body)
-      if(!profile){
-        console.log('Error: can\'t find profile')
-      }
-      
-      res.redirect(`/profiles/${profile.id}`)
-      console.log("Updated Profile. Whomp!")
+      profile = await Profile.findOneAndUpdate(
+        { _id: req.params.id},
+          req.body.name,
+          Date(req.body.birthDate),
+          req.body.sex,
+          req.body.genderId,
+          req.body.geneticBackground,
+          req.body.eHealthRecords,
+          req.body.journal, {
+          new: true
+          })
+
+          res.redirect('/profiles')
     } catch (err){
-      console.log(err)
-      }
+        console.log(err)
+    }
   },
+
+
+      // ** testing findByIdAndUpdate
+      // const {id} = req.params
+      // const profile = await Profile.findByIdAndUpdate(id, req.body)
+      // const profile = await Profile.findByIdAndUpdate(id, req.body, {
+      //   new: true
+      // }) 
+      // if(!profile){
+      //   console.log('Error: can\'t find profile')
+      // }
+
     //previous update using .findById() and .save()
+    //let profile
     // try {
     //   profile = await Profile.findById({ _id: req.params.id})
     //   profile.name = req.body.name

@@ -1,11 +1,11 @@
 const express = require("express"); //web app framework
 const app = express();
 const expressLayouts = require("express-ejs-layouts")
+const methodOverride = require("method-override");
 const mongoose = require("mongoose"); //db
 //const passport = require("passport"); //auth
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
@@ -23,6 +23,14 @@ const PORT = process.env.PORT;
 // Passport config
 //require("./config/passport")(passport);
 
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlenconded({limit: '10mb', extended: false}))
+app.use(express.json());
+
+//Method Override - Use forms for put / delete
+app.use(methodOverride("_method"));
+
 //Connect To Database
 connectDB();
 
@@ -37,11 +45,6 @@ app.use(expressLayouts)
 //Static Folder
 app.use(express.static("public"));
 
-//Body Parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// app.use(express.urlenconded({limit: '10mb', extended: false}))
 
 // cross-origin resource sharing
 app.use(cors())
@@ -49,8 +52,6 @@ app.use(cors())
 //Logging
 app.use(logger("dev"));
 
-//Method Override - Use forms for put / delete
-app.use(methodOverride("_method"));
 
 //Setup Sessions - stored in MongoDB
 app.use(
