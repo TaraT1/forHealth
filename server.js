@@ -77,6 +77,11 @@ app.use("/", mainRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 
+//Handle 404
+app.get('*', function(req, res) {
+  res.status(404).send('Error 404: Page not found')
+})
+
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log(`Now serving on port ${PORT} in ${process.env.NODE_ENV} mode`);
