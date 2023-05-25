@@ -1,3 +1,4 @@
+const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
