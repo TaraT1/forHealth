@@ -1,3 +1,6 @@
+const { render } = require("ejs");
+const Profile = require("../models/Profile");
+const Provider = require("../models/Provider");
 
 module.exports = {
   getDashboard: (req, res) => {
