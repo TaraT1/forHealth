@@ -1,3 +1,5 @@
+const { render } = require("ejs");
+
 //Get landing page
 module.exports = {
   getIndex: (req, res) => {

@@ -1,6 +1,7 @@
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
+const Provider = require("../models/Provider");
 const { trusted } = require("mongoose");
 // const Comment = require("../models/Comment");
 
