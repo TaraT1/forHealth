@@ -11,7 +11,7 @@ router.get("/", homeController.getIndex);
 // router.get("/profiles", profilesController.getProfiles);
 // router.get("/profiles", ensureAuth, profilesController.getProfiles);
 // router.get("/providers", providersController.getProviders);
-router.get("/", dashboardController.getDashboard);
+router.get("/dashboard", dashboardController.getDashboard);
 
 
 //Routes for user login/signup

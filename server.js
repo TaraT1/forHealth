@@ -13,6 +13,7 @@ const cors = require('cors')
 
 //routes
 const mainRoutes = require("./routes/main");
+const dashboardRoutes = require("./routes/dashboard");
 const profileRoutes = require("./routes/profiles");
 const providerRoutes = require("./routes/providers");
 
@@ -23,7 +24,7 @@ const PORT = process.env.PORT;
 // Passport config
 //require("./config/passport")(passport);
 
-//Body Parsing
+//Body Parsing - pass data
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.urlenconded({limit: '10mb', extended: false}))
 app.use(express.json());
@@ -34,13 +35,13 @@ app.use(methodOverride("_method"));
 //Connect To Database
 connectDB();
 
+//Templating - setting layout folder for std html layout
+app.use(expressLayouts)
+app.set("layout", "layouts/layout")
+
 //Using EJS for views; setting views dir as default
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views")
-
-//Setting layout folder for std html layout
-app.set("layout", "layouts/layout")
-app.use(expressLayouts)
 
 //Static Folder
 app.use(express.static("public"));
@@ -74,6 +75,7 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/dashboard", dashboardRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 
