@@ -1,24 +1,26 @@
-<section class="container">
-  <div class="row mt-5">
-    <div class="col-6">
-      <p>profiles/profiles</p>
-
-          <section class="container mt-3">
-            <div class="row">
-              <div class="col">
-                <h2>Health Profiles</h2>
-                <h3><a href="/profiles/new">Create New Profile</a><h3>
-                  <% for( let i=0; i < profiles.length; i++) {%>
-                    <div class="card">
-                        <a href="/profiles/<%= profiles[i]._id %>">
-                          <h5 class="card-title"><%= profiles[i].name%></h5>
-                        </a>
-                    </div>
-                  <% } %>
-              </div>
-            </div>
-          </section>
-
+<div class="container-fluid container-fluid-custom">
+  <p>profiles/profiles</p>
+</div>
+<div class="container container-fluid container-fluid-custom pb-5 mb-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h1>Health Profiles</h1>
     </div>
-  </div>   
-</section>
+    <div class="col text-end">
+      <a href="/profiles/new" class="btn btn-primary">+ New Profile</a>
+    </div>
+
+    <div class="row">
+      <% if(profiles.length > 0) {
+        for(let i = 0; i < profiles.length; i++ ) { %>
+          <div class="col-sm-4 mb-4">
+              <div class="card border-primary" style="min-height: 60px">
+                  <a href="/profiles/<%= profiles[i]._id %>" class="card-body text-decoration-none">
+                      <h5 class="card-title"><%= profiles[i].name %></h5>
+                  </a>
+              </div>
+          </div>
+      <% }} %>
+    </div>
+    </div>
+</div>
