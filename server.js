@@ -3,12 +3,12 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts")
 const methodOverride = require("method-override");
 const mongoose = require("mongoose"); //db
-//const passport = require("passport"); //auth
+const connectDB = require("./config/database");
 const session = require("express-session");
+//const passport = require("passport"); //auth
 const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const logger = require("morgan");
-const connectDB = require("./config/database");
 const cors = require('cors')
 
 //routes
