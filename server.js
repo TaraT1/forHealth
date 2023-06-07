@@ -5,13 +5,14 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose"); //db
 const connectDB = require("./config/database");
 const session = require("express-session");
-//const passport = require("passport"); //auth
+const passport = require("passport"); //auth
 const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const logger = require("morgan");
 const cors = require('cors')
 
 //routes
+const authRoutes = require("./routes/auth");
 const mainRoutes = require("./routes/main");
 const dashboardRoutes = require("./routes/dashboard");
 const profileRoutes = require("./routes/profiles");
@@ -22,6 +23,8 @@ require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
 // Passport config
+app.use(passport.initialize())
+app.use(passport.session())
 //require("./config/passport")(passport);
 
 //Body Parsing - pass data
