@@ -78,6 +78,7 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/", authRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);

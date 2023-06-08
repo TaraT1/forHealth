@@ -3,17 +3,40 @@ const router = express.Router();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-//ref: https://www.passportjs.org/packages/passport-google-oauth20/
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://www.example.com/auth/google/callback"
+//https://www.passportjs.org/packages/passport-google-oauth20/
+//https://console.developers.google.com/
+passport.use(
+    new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL,
   },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
+
+function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    }
 ));
+  
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//       return cb(err, user);
+//     });
+//   }
+
+//Google login route
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['email', 'profile'] }));
+
+//Retrieve user data
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { 
+    failureRedirect: '/login-failure',
+    successRedirect: '/dashboard', })
+);
+//router if something goes awry
+router.get('/login-failure', (req, res) => {
+    res.send('Something went wrong')
+});
+
 
 module.exports = router;
