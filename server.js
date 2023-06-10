@@ -1,5 +1,4 @@
 const express = require("express"); //web app framework
-const app = express();
 const expressLayouts = require("express-ejs-layouts")
 const methodOverride = require("method-override");
 const mongoose = require("mongoose"); //db
@@ -11,21 +10,23 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const cors = require('cors')
 
-//routes
-const authRoutes = require("./routes/auth");
-const mainRoutes = require("./routes/main");
-const dashboardRoutes = require("./routes/dashboard");
-const profileRoutes = require("./routes/profiles");
-const providerRoutes = require("./routes/providers");
+const app = express();
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
-// Passport config
-app.use(passport.initialize())
-app.use(passport.session())
+// // Passport config
+// app.use(passport.session())
+// app.use(passport.initialize())
 //require("./config/passport")(passport);
+
+//routes 
+const authRoutes = require("./routes/auth");
+const mainRoutes = require("./routes/main");
+const dashboardRoutes = require("./routes/dashboard");
+const profileRoutes = require("./routes/profiles");
+const providerRoutes = require("./routes/providers");
 
 //Body Parsing - pass data
 app.use(express.urlencoded({ extended: true }));
@@ -70,8 +71,8 @@ app.use(
 );
 
 // Passport middleware
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Use flash messages for errors, info, etc...
 app.use(flash());

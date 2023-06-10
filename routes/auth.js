@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-//https://www.passportjs.org/packages/passport-google-oauth20/
+//https://www.passportjs.org/packages/passport-google-oauth20/ c.f. strategy
 //https://console.developers.google.com/
 passport.use(
     new GoogleStrategy({
@@ -28,10 +28,10 @@ router.get('/auth/google',
   passport.authenticate('google', { scope: ['email', 'profile'] }));
 
 //Retrieve user data
-router.get('/auth/google/callback', 
+router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login-failure',
-    successRedirect: '/dashboard', })
+    successRedirect: '/dashboard' })
 );
 //router if something goes awry
 router.get('/login-failure', (req, res) => {
