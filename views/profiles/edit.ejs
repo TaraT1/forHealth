@@ -1,7 +1,11 @@
-<h2>Edit Profile</h2>
-<p>profiles/edit</p>
-<form action="/profiles/<%= profile.id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
-  <%- include('_form_fields') %>
-  <a href="/profiles/<%= profile.id %>">Cancel</a>
-  <button type="submit">Update</button>
-</form>
+<div class="container-fluid container-fluid-custom">
+  <h2>Edit Profile</h2>
+  <p>profiles/edit</p>
+  <form action="/profiles/<%= profile.id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+    <%- include('_form_fields') %>
+    <div class="form-row form-row-end btn-row">
+      <a href="/profiles/<%= profile.id %>">Cancel</a>
+      <button type="submit">Update</button>
+    </div>
+  </form>
+</div>

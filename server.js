@@ -9,6 +9,7 @@ const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const logger = require("morgan");
 const cors = require('cors')
+const dayjs = require('dayjs')
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 
 //Connect To Database
+mongoose.set('strictQuery', true)
 connectDB();
 
 //Templating - setting layout folder for std html layout

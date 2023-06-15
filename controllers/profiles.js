@@ -3,6 +3,8 @@ const cloudinary = require("../middleware/cloudinary");
 const Profile = require("../models/Profile");
 const Provider = require("../models/Provider");
 const { trusted } = require("mongoose");
+const dayjs = require('dayjs') //not implementing correctly
+
 // const Comment = require("../models/Comment");
 
 module.exports = {
@@ -68,10 +70,22 @@ module.exports = {
   //router.get("/:id", profilesController.getProfile);
   getProfile: async (req, res) => {
     try {
-      const profile = await Profile.findById({_id: req.params.id});
+      const profile = await Profile.findById({_id: req.params.id})
+        //.where({user: req.user.id}) //User can only view profs they have access to
+        .lean();
       const profiles = await Profile.find();
       // res.redirect("/profiles/"+req.params.id);
       res.render('profiles/profile', { 
+        // id: req.params.id,
+        // name: req.body.name,
+        // birthDate: req.body.birthDate,
+        // // birthDate: Date(req.body.birthDate),
+        // sex: req.body.sex,
+        // genderId: req.body.genderId,
+        // geneticBackground:
+        // req.body.geneticBackground,
+        // eHealthRecords: req.body.eHealthRecords,
+        // journal: req.body.journal,
         profile: profile, 
         profiles: profiles 
       });
@@ -79,7 +93,8 @@ module.exports = {
       
     } catch (err) {
       console.log(err)
-      res.redirect('/profiles')
+      // res.redirect('/profiles')
+      res.send("Something went wrong.")
     }
   },
   
@@ -128,17 +143,30 @@ module.exports = {
     try {
       profile = await Profile.findOneAndUpdate(
         { _id: req.params.id},
-          req.body.name,
-          Date(req.body.birthDate),
-          req.body.sex,
-          req.body.genderId,
+          {name: req.body.name,
+          birthDate: req.body.birthDate,
+          // birthDate: Date(req.body.birthDate),
+          sex: req.body.sex,
+          genderId: req.body.genderId,
+          geneticBackground:
           req.body.geneticBackground,
-          req.body.eHealthRecords,
-          req.body.journal, {
-          new: true
-          })
+          eHealthRecords: req.body.eHealthRecords,
+          journal: req.body.journal}, {
+          returnNewDocument: true
+        })
 
-          res.redirect('/profiles')
+        // profile = await Profile.findById({ _id: req.params.id})
+        // profile.name = req.body.name
+        // profile.birthDate = Date(req.body.birthDate)
+        // profile.sex = req.body.sex
+        // profile.genderId = req.body.genderId
+        // profile.geneticBackground = req.body.geneticBackground
+        // profile.eHealthRecords = req.body.eHealthRecords
+        // profile.journal = req.body.journal
+        // await profile.save()
+
+          res.redirect(`/profiles/${req.params.id}`)
+          // res.redirect(`/profiles${profile.id}`)
     } catch (err){
         console.log(err)
     }
