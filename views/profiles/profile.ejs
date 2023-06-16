@@ -1,25 +1,32 @@
-<section class="container">
+<section class="container-fluid container-fluid-custom pb-5 mb-5">
+  <p>profiles/profile</p> 
+
   <div class="row mt-5">
-    <div class="col-6">
-          <p>profiles/profile</p> 
-          <section class="container mt-5">
-            <h2>Health Profile for <%= profile.name %> </h2>
+    <div class="col">
+      <div class="col d-flex justify-content-between align-items-center">
+        <h2>Health Profile for <%= profile.name %> </h2>
 
-            <%- include('_form_fields')  %>
+        <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
             
-            <div>
-              <%/*%> 
-              <a href="/profiles/<%= profile.id %>">View</a> 
-              <%*/%>
-              <a href="/profiles/<%= profile.id %>/edit">Edit</a>
+  
+  <div>    
+            <%- include('_form_fields')  %>
 
-              <form method="POST" action="/profiles/<%= profile.id %>?_method=DELETE">
-                <button type="submit">Delete</button>  
-              </form>
+          <form action="/profiles/<%= profile.id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+            <div class="form-row form-row-end btn-row">
+              <a href="/profiles/<%= profile.id %>">Cancel</a>
+              <button type="submit">Update</button>
             </div>
+          </form>
 
-          </section>
 
+
+          <%# Eliminate profile list in view? %>
           <section class="container mt-3">
             <div class="row">
                 <h2>Health Profiles</h2>
@@ -34,7 +41,29 @@
           </section>
 
 
-      </div>
-    </div>   
   </div>   
+
 </section>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete this profile?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <p>You are about to delete this profile. Are you sure?</p>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+
+        <form action="/profiles/<%= profile.id %>_method=DELETE" method="POST" class="position-relative">
+          <button type="submit" class="btn btn-primary">Delete Profile</button>
+        </form> 
+
+      </div>
+    </div>
+  </div>
+</div>
