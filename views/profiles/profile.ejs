@@ -15,33 +15,20 @@
             
   
   <div>    
-            <%- include('_form_fields')  %>
 
           <form action="/profiles/<%= profile.id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+
+            <%- include('_form_fields')  %>
+            
             <div class="form-row form-row-end btn-row">
-              <a href="/profiles/<%= profile.id %>">Cancel</a>
-              <button type="submit">Update</button>
+              <button type="button" class="btn btn-secondary btn-lg" <a href="/profiles/<%= profile.id %>">Cancel</a></button>
+              <button type="submit" class="btn btn-primary btn-lg">Update</button>
             </div>
+
           </form>
 
-
-
-          <%# Eliminate profile list in view? %>
-          <section class="container mt-3">
-            <div class="row">
-                <h2>Health Profiles</h2>
-                  <% for(let i=0; i < profiles.length; i++) {%>
-                    <div class="card">
-                      <a href="/profiles/<%= profiles[i].id %>" class="card-link">
-                          <h5 class="card-title"><%= profiles[i].name%></h5>
-                        </a>
-                    </div>
-                  <% } %>
-            </div>
-          </section>
-
-
   </div>   
+
 
 </section>
 
@@ -53,13 +40,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <p>You are about to delete this profile. Are you sure?</p>
+      <p>You are about to delete the profile for <%= profile.name %>.<br/>
+      Are you sure?</p>
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 
-        <form action="/profiles/<%= profile.id %>_method=DELETE" method="POST" class="position-relative">
+        <form action="/profiles/<%= profile._id %>_method=DELETE" method="POST" class="position-relative">
           <button type="submit" class="btn btn-primary">Delete Profile</button>
         </form> 
 
