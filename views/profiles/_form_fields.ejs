@@ -1,4 +1,3 @@
-<div class="container-fluid container-fluid-custom pb-5 mb-5">
   <div>
     <label for="name" class="form-label">Name</label>
     <input type="text" class="form-control" id="name" name="name" value="<%= profile.name %>">
@@ -6,9 +5,7 @@
 
   <div>
   <label for="birthDate" class="form-label">Enter your birthday</label>
-    <%# Problems with parsing date: Invalid time value%>
-    <%# cf notes for wds code input type="date" name="birthDate"  value="ang%profile.birthDate%"ang %>
-    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= new Date(profile.birthDate).toUTCString().split(" ").slice(0, 4).join(" ") %>">
+    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate%>">
   </div>
 
   <div>
@@ -49,4 +46,3 @@
     <label for="imgUpload" class="form-label">Image</label>
     <input type="file" class="form-control" id="imgUpload" name="file">
   </div>
-</div>
