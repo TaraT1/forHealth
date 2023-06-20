@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Profile = require("../models/Profile");//troubleshooting
+const Profile = require("../models/Profile");
 const upload = require("../middleware/multer");
 const profilesController = require("../controllers/profiles");
 //const { ensureAuth } = require("../middleware/auth");
@@ -23,7 +23,7 @@ router.post("/", upload.single("file"), profilesController.createProfile);
 router.get("/:id", profilesController.getProfile);
 
 //Edit profile
-router.get("/:id/edit", profilesController.editProfile);
+// router.get("/:id/edit", profilesController.editProfile);
 
 //Update db
 router.put("/:id", profilesController.updateProfile);

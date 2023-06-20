@@ -16,12 +16,12 @@
   
 
   <div class="container-fluid container-fluid-custom pb-5 mb-5">
-          <form action="/profiles/<%= profile.id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+          <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
 
             <%- include('_form_fields')  %>
             
             <div class="form-row form-row-end btn-row">
-              <button type="button" class="btn btn-secondary btn-lg" <a href="/profiles/<%= profile.id %>">Cancel</a></button>
+              <a type="text" class="btn btn-secondary btn-lg" href="/profiles %>">Cancel</a>  
               <button type="submit" class="btn btn-primary btn-lg">Update</button>
             </div>
 
@@ -45,7 +45,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-        <form action="/profiles/<%= profile._id %>_method=DELETE" method="POST" class="position-relative">
+        <form action="/profiles/<%= profile._id %>?_method=DELETE" method="POST" class="position-relative">
           <button type="submit" class="btn btn-primary">Delete Profile</button>
         </form> 
 

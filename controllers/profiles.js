@@ -64,8 +64,6 @@ module.exports = {
         }
       },
  
-  
-  //edit Update: get/show, view/edit, update
   //Show profile
   //router.get("/:id", profilesController.getProfile);
   getProfile: async (req, res) => {
@@ -73,104 +71,60 @@ module.exports = {
       const profile = await Profile.findById({_id: req.params.id})
         //.where({user: req.user.id}) //User can only view profs they have access to
         .lean();
-      const profiles = await Profile.find();
-      // res.redirect("/profiles/"+req.params.id);
-      res.render('profiles/profile', { 
-        // id: req.params.id,
-        // name: req.body.name,
-        // birthDate: req.body.birthDate,
-        // // birthDate: Date(req.body.birthDate),
-        // sex: req.body.sex,
-        // genderId: req.body.genderId,
-        // geneticBackground:
-        // req.body.geneticBackground,
-        // eHealthRecords: req.body.eHealthRecords,
-        // journal: req.body.journal,
-        profile: profile, 
-        profiles: profiles 
-      });
-      console.log(profile);
-      
-    } catch (err) {
-      console.log(err)
-      // res.redirect('/profiles')
-      res.send("Something went wrong.")
-    }
-  },
-  
-  //get profile to edit 
-  //router.get("/:id/edit", profilesController.editProfile);
-  editProfile: async (req, res) => {
-    try {
-      // const profile = await Profile.findById({_id: req.params.id})
-      const profile = await Profile.findById(req.params.id)
-      res.render('profiles/edit', { profile: profile })
-    } catch {
-      res.redirect('/profiles')
-    }
-  }, 
-  
 
-  // renderEditProfile: async (res, profile, hasError = false)  => {
-  //   renderFormPage(res, profile, 'edit', hasError)
-  // },
+          res.render("profiles/profile", {
+            // _id: req.params.id,
+            profile
+            // name: req.body.name,
+            // birthDate: req.body.birthDate,
+            // // birthDate: Date(req.body.birthDate),
+            // sex: req.body.sex,
+            // genderId: req.body.genderId,
+            // geneticBackground:
+            // req.body.geneticBackground,
+            // eHealthRecords: req.body.eHealthRecords,
+            // journal: req.body.journal,
+            // profile: profile, 
+          }) 
+      } catch (err) { 
+        console.log(err)
+        res.send("Something went wrong")
+      }},
+
   
-  // ***Render form refactor for creating and updating form, error handling
-  // renderFormPage: async (res, profile, form, hasError = false)  => {
-  //   try {
-  //     const profiles = await Profile.find({})
-  //     const params = {
-  //       profile: profile,
-  //       profiles: profiles
-  //     }
-  //     if (hasError) {
-  //       if (form === 'edit') {
-  //         params.errorMessage = 'Error Updating Profile'
-  //       } else {
-  //         params.errorMessage = 'Error Creating Profile'
-  //       }
-  //     }
-  //     res.render(`profiles/${form}`, params)
-  //   } catch {
-  //     res.redirect('/profiles')
-  //   }
-  // },
 
   //Update 
   //router.put("/:id", profilesController.updateProfile);
   updateProfile: async (req, res) => {
-    let profile 
+    // let profile 
     try {
-      profile = await Profile.findOneAndUpdate(
-        { _id: req.params.id},
-          {name: req.body.name,
-          birthDate: req.body.birthDate,
-          // birthDate: Date(req.body.birthDate),
-          sex: req.body.sex,
-          genderId: req.body.genderId,
-          geneticBackground:
-          req.body.geneticBackground,
-          eHealthRecords: req.body.eHealthRecords,
-          journal: req.body.journal}, {
-          returnNewDocument: true
-        })
+        const {id} = req.params
+        const profile = await Profile.findByIdAndUpdate(id, req.body)
+        if(!profile){
+          console.log('Something is wrong')
+        }
 
-        // profile = await Profile.findById({ _id: req.params.id})
-        // profile.name = req.body.name
-        // profile.birthDate = Date(req.body.birthDate)
-        // profile.sex = req.body.sex
-        // profile.genderId = req.body.genderId
-        // profile.geneticBackground = req.body.geneticBackground
-        // profile.eHealthRecords = req.body.eHealthRecords
-        // profile.journal = req.body.journal
-        // await profile.save()
-
-          res.redirect(`/profiles/${req.params.id}`)
-          // res.redirect(`/profiles${profile.id}`)
-    } catch (err){
+        res.redirect(`/profiles/${profile._id}`)
+        console.log("Updated profile. Whomp!")
+      } catch (err){
         console.log(err)
-    }
-  },
+      }},
+      // profile = await Profile.findOneAndUpdate(
+      // await Profile.findOneAndUpdate(
+        // profile = await Profile.findByIdAndUpdate(id, req.body)
+        // { _id: req.params.id},//params allows query from url
+        //   {name: req.body.name,
+        //   // birthDate: req.body.birthDate,
+        //   birthDate: Date(req.body.birthDate),
+        //   sex: req.body.sex,
+        //   genderId: req.body.genderId,
+        //   geneticBackground: req.body.geneticBackground,
+        //   eHealthRecords: req.body.eHealthRecords,
+        //   journal: req.body.journal}, 
+        //   {returnNewDocument: true}
+        //   )
+
+    
 
 
       // ** testing findByIdAndUpdate
