@@ -1,7 +1,6 @@
 <section class="container-fluid container-fluid-custom pb-5 mb-5">
   <div class="row mt-5">
-    <div class="col">
-      <div class="col d-flex justify-content-between align-items-center">
+      <div class="col col-lg-6 d-flex mx-auto justify-content-between align-items-center">
         <h2>Health Profile for <%= profile.name %> </h2>
 
         <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">
@@ -14,16 +13,20 @@
   
 
   <div class="container-fluid container-fluid-custom pb-5 mb-5">
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
           <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
 
             <%- include('_form_fields')  %>
             
-            <div class="form-row form-row-end btn-row">
-              <a type="text" class="btn btn-secondary btn-lg" href="/profiles %>">Cancel</a>  
-              <button type="submit" class="btn btn-primary btn-lg">Update</button>
+            <div class="d-flex form-row form-row-end btn-row justify-content-between pt-3">
+              <a type="text" class="btn btn-secondary btn-lg " href="/profiles %>">Cancel</a>  
+              <button type="submit" class="btn btn-primary btn-lg ">Update</button>
             </div>
 
           </form>
+      </div>
+    </div>
   </div>   
 
 
