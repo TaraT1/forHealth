@@ -84,22 +84,33 @@ module.exports = {
   //Update 
   //router.put("/:id", profilesController.updateProfile);
   updateProfile: async (req, res) => {
-    let profile 
+    // let profile 
+    // try {
+    //     profile = await Profile.findByIdAndUpdate(
+    //     req.params.id, //params allows query from url
+    //     { name: req.body.name,
+    //       // birthdate: req.body.birthdate,
+    //       birthdate: date(req.body.birthdate),
+    //       sex: req.body.sex,
+    //       genderid: req.body.genderid,
+    //       geneticbackground: req.body.geneticbackground,
+    //       ehealthrecords: req.body.ehealthrecords,
+    //       journal: req.body.journal
+    //     }, 
+    //       );
     try {
-        profile = await Profile.findOneAndUpdate(
-        { _id: req.params.id}, //params allows query from url
-        { name: req.body.name,
-          // birthDate: req.body.birthDate,
+      await Profile.findByIdAndUpdate(req.params.id, 
+        {
+          name: req.body.name,
+          // birthdate: req.body.birthdate,
           birthDate: Date(req.body.birthDate),
           sex: req.body.sex,
           genderId: req.body.genderId,
           geneticBackground: req.body.geneticBackground,
-          eHealthRecords: req.body.eHealthRecords,
-          journal: req.body.journal}, 
-          {new: true}
-          )
-
-        res.redirect("/profiles")
+          ehealthrecords: req.body.eHealthRecords,
+          journal: req.body.journal
+      })
+        await res.redirect(`/profiles/${req.params.id}`)
         console.log("Updated profile. Whomp!")
       } catch (err){
         console.log(err)
