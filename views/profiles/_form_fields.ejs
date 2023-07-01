@@ -5,10 +5,10 @@
 
   <div>
   <label for="birthDate" class="form-label">Enter your birthday</label>
-    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate%>">
+    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= new Date(profile.birthDate) %>">
   </div>
-
-  <div>
+        
+    <div>
   <label for="sex" class="sex">What is your sex (gender assigned at birth)?</label>
       <select class="form-select" id="sex" name="sex">
         <option value="" <%= profile.sex == "choose" ? "selected" : "" %>></option>
@@ -17,15 +17,15 @@
       </select>
   </div>
 
-  <div>
+  <!-- <div>
   <label for="genderId" class="form-label">What is your gender identity?</label>
-    <input type="text" class="form-control" id="genderId" name="genderId" value="<%= profile.genderId %>">
+    <input type="text" class="form-control" id="genderId" name="genderId" value="<%#= profile.genderId %>">
   </div>
 
   <div>
   <label for="geneticBackground" class="form-label">Genetic Background</label>
-    <textarea class="form-control" id="geneticBackground" name="genenticBackground" value="<%= profile.geneticBackground %>"></textarea>
-  </div>
+    <textarea class="form-control" id="geneticBackground" name="genenticBackground" value="<%#= profile.geneticBackground %>"></textarea>
+  </div> -->
 
   <div>
   <label for="eHealthRecords" class="form-label">eHealth Records</label>
