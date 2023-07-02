@@ -5,31 +5,11 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  birthDate: {
-    type: Date,
-    required: false,
-  },
-  sex: {
-    type: String,
-    required: false,
-  },
-  genderId: {
-    type: String,
-    required: false,
-  },
-  geneticBackground: {
-    type: String,
-    required: false,
-  },
   eHealthRecords: {
     type: String,
     require: false,
   },
   journal: {
-    type: String,
-    require: false,
-  },
-  todo: {
     type: String,
     require: false,
   },
@@ -46,6 +26,11 @@ const ProfileSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
+  updated: {
+    type: Date,
+    required: true,
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model("Profile", ProfileSchema);

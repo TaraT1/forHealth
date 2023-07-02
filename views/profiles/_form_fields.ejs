@@ -4,30 +4,6 @@
   </div>
 
   <div>
-  <label for="birthDate" class="form-label">Enter your birthday</label>
-    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= new Date(profile.birthDate) %>">
-  </div>
-        
-    <div>
-  <label for="sex" class="sex">What is your sex (gender assigned at birth)?</label>
-      <select class="form-select" id="sex" name="sex">
-        <option value="" <%= profile.sex == "choose" ? "selected" : "" %>></option>
-        <option value="female" <%= profile.sex == "female" ? "selected" : "" %>>female</option>
-        <option value="male" <%= profile.sex == "male" ? "selected" : "" %>>male</option>
-      </select>
-  </div>
-
-  <!-- <div>
-  <label for="genderId" class="form-label">What is your gender identity?</label>
-    <input type="text" class="form-control" id="genderId" name="genderId" value="<%#= profile.genderId %>">
-  </div>
-
-  <div>
-  <label for="geneticBackground" class="form-label">Genetic Background</label>
-    <textarea class="form-control" id="geneticBackground" name="genenticBackground" value="<%#= profile.geneticBackground %>"></textarea>
-  </div> -->
-
-  <div>
   <label for="eHealthRecords" class="form-label">eHealth Records</label>
     <textarea class="form-control" id="eHealthRecords" name="eHealthRecords" value="<%= profile.eHealthRecords %>"></textarea>
   </div>
@@ -35,11 +11,6 @@
   <div>
   <label for="journal" class="form-label">Journal</label>
     <textarea class="form-control" id="journal" name="journal" value="<%= profile.journal %>"></textarea>
-  </div>
-
-  <div>
-  <label for="todo" class="form-label">To Do</label>
-      <textarea class="form-control" id="todo" name="todo" value="<%= profile.todo %>"></textarea>
   </div>
 
   <div>
