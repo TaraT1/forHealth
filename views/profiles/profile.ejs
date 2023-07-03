@@ -19,6 +19,7 @@
           <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
 
             <%- include('_form_fields')  %>
+            <%#- include('profile_tbl')  %>
             
             <div class="d-flex form-row form-row-end btn-row justify-content-between pt-3">
               <a type="text" class="btn btn-secondary btn-lg " href="/profiles %>">Cancel</a>  
@@ -55,49 +56,3 @@
     </div>
   </div>
 </div>
-<!-- Commented ejs vars
-<ul class="list-group">
-
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Name:</b></div>
-      <div class="col"><%#= customer.firstName %> <%#= customer.lastName %></div>
-    </div>
-  </li>
-
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Tel:</b></div>
-      <div class="col"><%#= customer.tel %></div>
-    </div>
-  </li>
-
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Email:</b></div>
-      <div class="col"><%#= customer.email %></div>
-    </div>
-  </li>
-
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Details:</b></div>
-      <div class="col"><%#= customer.details %></div>
-    </div>
-  </li>
-
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Date Created:</b></div>
-      <div class="col"><%#= customer.createdAt %></div>
-    </div>
-  </li>
-
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Date Modified:</b></div>
-      <div class="col"><%#= customer.updatedAt %></div>
-    </div>
-  </li>
-
-</ul> -->
