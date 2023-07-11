@@ -1,18 +1,22 @@
-<section class="container">
+<section class="container-fluid container-fluid-custom pb-5 mb-5">
   <div class="row mt-5">
-    <div class="col-6">
+    <div class="col col-lg-6 mx-auto">
       <h2>Create a Health Profile</h2>
+    
       <p><em>profiles/new</em></p>
-      <form action="/profiles" method="POST" enctype="multipart/form-data">
-        <%- include("_form_fields") %>
-        
-        <div class="d-flex justify-content-between pt-3" >
-          <a type="text" class="btn btn-secondary btn-lg"
-          href="/profiles">Cancel</a>
-          <button type="submit" class="btn btn-primary btn-lg">Create</button>
-        </div>
-
-      </form>
+          
+      <div>
+        <form action="/profiles" method="POST" enctype="multipart/form-data">
+          
+          <%- include("_form_fields") %>
+          
+          <div class="d-flex justify-content-between pt-3" >
+            <a type="text" class="btn btn-secondary btn-lg"
+            href="/profiles">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-lg">Create</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </section>
