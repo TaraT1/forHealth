@@ -13,23 +13,23 @@
   
       <p><em>profiles/profile (view/profile)</em></p>
 
+  <%# Update not working; Using POST -  Page not found, db not updated %>
   <div class="container-fluid container-fluid-custom pb-5 mb-5">
     <div class="row">
       <div class="col-lg-6 mx-auto">
-          <form action="/profiles/update/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+          <form action="/profiles/update/<%= profile._id %> method="POST" enctype="multipart/form-data">
 
             <%- include('_form_fields')  %>
             
             <div class="d-flex btn-row justify-content-between pt-3">
               <a type="text" class="btn btn-secondary btn-lg" href="/profiles">Cancel</a>  
-              <button type="submit" class="btn btn-primary btn-lg ">Update</button> 
+              <button type="submit" class="btn btn-primary btn-lg">Update</button> 
             </div>
 
           </form>
       </div>
     </div>
   </div>   
-
 
 </section>
 
