@@ -29,6 +29,7 @@ const dashboardRoutes = require("./routes/dashboard");
 const profileRoutes = require("./routes/profiles");
 const providerRoutes = require("./routes/providers");
 
+// MIDDLEWARE (app.use)
 //Body Parsing - pass data
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.urlenconded({limit: '10mb', extended: false}))
@@ -41,7 +42,7 @@ app.use(methodOverride("_method"));
 mongoose.set('strictQuery', true)
 connectDB();
 
-//Templating - setting layout folder for std html layout
+//Templating - setting layout folder for std html layout - *** Not using
 app.use(expressLayouts)
 app.set("layout", "layouts/layout")
 

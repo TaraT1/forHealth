@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ProfileSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: false,
+    required: true,
   },
   eHealthRecords: {
     type: String,

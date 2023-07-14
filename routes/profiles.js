@@ -21,13 +21,13 @@ router.post("/", upload.single("file"), profilesController.createProfile);
 //*Update Profile (get/show, view/edit, update)
 //Show profile
 router.get("/:id", profilesController.getProfile);
-// router.get("/update/:id", profilesController.getProfile);
 
 //Edit profile
-router.get("/update/:id", profilesController.editProfile);
+// TS router.get("/update/:id", profilesController.editProfile);
 
 //Update db
-router.put("/update/:id", profilesController.updateProfile);
+router.post("/update/:id", profilesController.updateProfile);
+// router.put("/:id", profilesController.updateProfile);//not working
 
 //*Delete profile - setting up to use form and method override
 // router.delete("/edit/:id", profilesController.deleteProfile);
