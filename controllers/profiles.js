@@ -89,18 +89,21 @@ module.exports = {
   // router.post("/update/:id", profilesController.updateProfile) - page not found error;
   // TS*** router.put("/update/:id", profilesController.updateProfile); //methodoverride not working. No error, no page update***
   updateProfile: async (req, res) => {
-      const profile = Profile.findByIdAndUpdate({_id: req.params.id},
+       
+    
+       const profile = Profile.findByIdAndUpdate(req.params.id,
+      //  const profile = Profile.findByIdAndUpdate({_id: req.params.id},
         {
           name: req.body.name,
           eHealthRecords: req.body.eHealthRecords,
           journal: req.body.journal}, 
           {new: true});
-    try {
-      const updateProfile = await profile.save()
-      console.log(updateProfile,"Updated profile. Whomp!")
+     
+     try { 
+      console.log(profile, "Updated profile. Whomp!")
       res.redirect("/profiles");
       } catch (err){
-        console.log(err)
+        console.log(profile, err)
         res.send("Something went wrong")
       }},
     
