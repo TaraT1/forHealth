@@ -22,15 +22,10 @@ router.post("/", upload.single("file"), profilesController.createProfile);
 //Show profile
 router.get("/:id", profilesController.getProfile);
 
-//Edit profile
-// TS router.get("/update/:id", profilesController.editProfile);
-
 //Update db
 router.post("/update/:id", profilesController.updateProfile);
-// router.put("/:id", profilesController.updateProfile);//not working
 
-//*Delete profile - setting up to use form and method override
-// router.delete("/edit/:id", profilesController.deleteProfile);
+//*Delete profile 
 router.delete("/:id", profilesController.deleteProfile);
 
 module.exports = router;
