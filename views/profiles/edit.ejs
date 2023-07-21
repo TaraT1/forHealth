@@ -1,7 +1,7 @@
 <div class="container-fluid container-fluid-custom">
   <h2>Edit Profile</h2>
   <p>profiles/edit</p>
-  <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
+  <form action="/profiles/update/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
     <%- include('_form_fields') %>
     <div class="form-row form-row-end btn-row">
       <a href="/profiles/<%= profile._id %>">Cancel</a>
