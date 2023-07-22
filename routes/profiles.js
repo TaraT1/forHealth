@@ -20,15 +20,19 @@ router.post("/", upload.single("file"), profilesController.createProfile);
 
 //*Update Profile (get/show, view/edit, update)
 //Show profile
+// router.get("/view/:id", profilesController.getProfile);
 router.get("/:id", profilesController.getProfile);
 
 //Edit profile
-// router.get("/:id/edit", profilesController.editProfile);
+// router.get("/edit/:id", profilesController.editProfile);
+router.get("/update/:id", profilesController.editProfile);
 
 //Update db
-router.put("/:id", profilesController.updateProfile);
+// router.put("/edit/:id", profilesController.updateProfile);
+router.put("/update/:id", profilesController.updateProfile);
 
 //*Delete profile - setting up to use form and method override
+// router.delete("/edit/:id", profilesController.deleteProfile);
 router.delete("/:id", profilesController.deleteProfile);
 
 module.exports = router;

@@ -34,12 +34,17 @@ module.exports = {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
 
+      // const profile = new Profile({
+      //   name: req.body.name,
+      //   birthDate: new Date(req.body.birthDate),
+      //   sex: req.body.sex,
+      //   genderId: req.body.genderId,
+      //   geneticBackground: req.body.geneticBackground,
+      //   eHealthRecords: req.body.eHealthRecords,
+      //   journal: req.body.journal,
+      //   image: req.body.image
       const profile = new Profile({
         name: req.body.name,
-        birthDate: new Date(req.body.birthDate),
-        sex: req.body.sex,
-        genderId: req.body.genderId,
-        geneticBackground: req.body.geneticBackground,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
         image: req.body.image
@@ -48,8 +53,8 @@ module.exports = {
         try {
           const newProfile = await profile.save()
           console.log("New profile! Whomp")
-          res.redirect(`profiles/${newProfile.id}`)      
-          // res.redirect("/profiles")
+          // res.redirect(`profiles/${newProfile.id}`)      
+          res.redirect("/profiles")
         } catch (err) {
           console.log(err)
           //+renderNewProfile(res, book, true) (Delete the rest of func)
@@ -79,10 +84,22 @@ module.exports = {
         res.send("Something went wrong")
       }},
 
-  
+  //router.get("/update/:id", profilesController.editProfile);
+  editProfile: async (req, res) => {
+    try {
+      const profile = await Profile.findById({_id: req.params.id})
+      
+      // res.render("profiles/edit", {
+      res.render("profiles/profile", {
+        profile
+      })
+    } catch(err) {
+      console.log(err)
+      res.send("Something went wrong")
+    }},
 
   //Update 
-  //router.put("/:id", profilesController.updateProfile);
+  // router.put("/update/:id", profilesController.updateProfile);
   updateProfile: async (req, res) => {
     // let profile 
     // try {
@@ -99,18 +116,15 @@ module.exports = {
     //     }, 
     //       );
     try {
-      await Profile.findByIdAndUpdate(req.params.id, 
+      const profile = await Profile.findByIdAndUpdate(req.params.id, 
         {
           name: req.body.name,
-          // birthdate: req.body.birthdate,
-          birthDate: Date(req.body.birthDate),
-          sex: req.body.sex,
-          genderId: req.body.genderId,
-          geneticBackground: req.body.geneticBackground,
-          ehealthrecords: req.body.eHealthRecords,
-          journal: req.body.journal
-      })
-        await res.redirect(`/profiles/${req.params.id}`)
+          eHealthRecords: req.body.eHealthRecords,
+          journal: req.body.journal }, 
+          {new: true});
+
+        // res.redirect(`/profiles/${profile._id}`)
+        res.redirect("/profiles");
         console.log("Updated profile. Whomp!")
       } catch (err){
         console.log(err)
@@ -130,7 +144,7 @@ module.exports = {
       console.log("Deleted Profile");
       res.redirect("/profiles");
     } catch (err) {
-      res.redirect(`/profiles/${profile.id}`);
+      res.redirect(`/profiles/${profile._id}`);
       console.log(err)
     }
   }
