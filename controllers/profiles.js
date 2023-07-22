@@ -56,16 +56,11 @@ module.exports = {
           // res.redirect(`profiles/${newProfile.id}`)      
           res.redirect("/profiles")
         } catch (err) {
-          console.log(err)
-          //+renderNewProfile(res, book, true) (Delete the rest of func)
-          if (err){
-            let locals = {errorMessage: "Error Creating Profile"}
+          console.log(err);
           res.render('profiles/new', {
-            profile: profile,
-            locals: locals
+            profile: profile
           }) 
           }
-        }
       },
  
   //Show profile
@@ -74,7 +69,6 @@ module.exports = {
     try {
       const profile = await Profile.findById({_id: req.params.id})
         //.where({user: req.user.id}) //User can only view profs they have access to
-        .lean();
 
           res.render("profiles/profile", {
             profile
@@ -89,9 +83,14 @@ module.exports = {
     try {
       const profile = await Profile.findById({_id: req.params.id})
       
+      // const profile = await Profile.findById(req.params.id)
+
       // res.render("profiles/edit", {
       res.render("profiles/profile", {
-        profile
+        _id: req.params.id,
+          name: req.body.name,
+          eHealthRecords: req.body.eHealthRecords,
+          journal: req.body.journal 
       })
     } catch(err) {
       console.log(err)
@@ -101,26 +100,13 @@ module.exports = {
   //Update 
   // router.put("/update/:id", profilesController.updateProfile);
   updateProfile: async (req, res) => {
-    // let profile 
-    // try {
-    //     profile = await Profile.findByIdAndUpdate(
-    //     req.params.id, //params allows query from url
-    //     { name: req.body.name,
-    //       // birthdate: req.body.birthdate,
-    //       birthdate: date(req.body.birthdate),
-    //       sex: req.body.sex,
-    //       genderid: req.body.genderid,
-    //       geneticbackground: req.body.geneticbackground,
-    //       ehealthrecords: req.body.ehealthrecords,
-    //       journal: req.body.journal
-    //     }, 
-    //       );
     try {
-      const profile = await Profile.findByIdAndUpdate(req.params.id, 
+      // const profile = await Profile.findByIdAndUpdate(
+      await Profile.findByIdAndUpdate(req.params.id,
         {
           name: req.body.name,
           eHealthRecords: req.body.eHealthRecords,
-          journal: req.body.journal }, 
+          journal: req.body.journal}, 
           {new: true});
 
         // res.redirect(`/profiles/${profile._id}`)

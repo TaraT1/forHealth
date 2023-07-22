@@ -19,11 +19,10 @@
           <form action="/profiles/update/<%= profile._id %>?_method=PUT" method="POST"  enctype="multipart/form-data">
 
             <%- include('_form_fields')  %>
-            <%#- include('_li_fields')  %>
             
             <div class="d-flex btn-row justify-content-between pt-3">
-              <a type="text" class="btn btn-secondary btn-lg " href="/profiles %>">Cancel</a>  
-              <button type="submit" class="btn btn-primary btn-lg ">Update</button>
+              <a type="text" class="btn btn-secondary btn-lg" href="/profiles">Cancel</a>  
+              <button type="submit" class="btn btn-primary btn-lg ">Update</button> 
             </div>
 
           </form>
