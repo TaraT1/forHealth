@@ -19,9 +19,9 @@ router.post("/", upload.single("file"), providersController.createProvider);
 router.get("/:id", providersController.getProvider);
 
 //Edit profile
-router.get("/:id/edit", providersController.editProvider);
+router.get("/update/:id", providersController.editProvider);
 
-router.put("/:id", providersController.updateProvider);
+router.put("/update/:id", providersController.updateProvider);
 
 router.delete("/:id", providersController.deleteProvider);
 
