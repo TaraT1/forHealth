@@ -23,7 +23,7 @@ module.exports = {
     }
   },
 
-  // router.get("/new", profilesController.renderNewProfile); **WORKS
+  // router.get("/new", profilesController.renderNewProfile); 
   renderNewProfile:  (req, res) => {
     res.render("profiles/new", {profile: new Profile () })
   },
@@ -95,6 +95,7 @@ module.exports = {
       const profile = await Profile.findById({_id: req.params.id} );
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
+
       // Delete post from db
       await Profile.deleteOne({ _id: req.params.id });
       console.log("Deleted Profile");
