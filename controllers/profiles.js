@@ -53,7 +53,6 @@ module.exports = {
         try {
           const newProfile = await profile.save()
           console.log("New profile! Whomp")
-          // res.redirect(`profiles/${newProfile.id}`)      
           res.redirect("/profiles")
         } catch (err) {
           console.log(err);
@@ -80,20 +79,16 @@ module.exports = {
 
   //router.get("/update/:id", profilesController.editProfile);
   editProfile: async (req, res) => {
-    try {
       const profile = await Profile.findById({_id: req.params.id})
       
-      // const profile = await Profile.findById(req.params.id)
-
-      // res.render("profiles/edit", {
+      if(profile){
       res.render("profiles/profile", {
         _id: req.params.id,
-          name: req.body.name,
-          eHealthRecords: req.body.eHealthRecords,
-          journal: req.body.journal 
+        name: req.body.name,
+        eHealthRecords: req.body.eHealthRecords,
+        journal: req.body.journal 
       })
-    } catch(err) {
-      console.log(err)
+    } else { 
       res.send("Something went wrong")
     }},
 
@@ -109,7 +104,6 @@ module.exports = {
           journal: req.body.journal}, 
           {new: true});
 
-        // res.redirect(`/profiles/${profile._id}`)
         res.redirect("/profiles");
         console.log("Updated profile. Whomp!")
       } catch (err){
