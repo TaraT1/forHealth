@@ -17,7 +17,7 @@ const app = express();
 require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
-// // Passport config
+// Passport config
 // app.use(passport.session())
 // app.use(passport.initialize())
 //require("./config/passport")(passport);
@@ -42,7 +42,7 @@ app.use(methodOverride("_method"));
 mongoose.set('strictQuery', true)
 connectDB();
 
-//Templating - setting layout folder for std html layout - *** Not using
+//Templating - setting layout folder for std html layout - *** Not usingt 
 app.use(expressLayouts)
 app.set("layout", "layouts/layout")
 
@@ -53,13 +53,11 @@ app.set("views", __dirname + "/views")
 //Static Folder
 app.use(express.static("public"));
 
-
 // cross-origin resource sharing
 app.use(cors())
 
 //Logging
 app.use(logger("dev"));
-
 
 //Setup Sessions - stored in MongoDB
 app.use(
