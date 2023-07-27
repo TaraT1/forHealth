@@ -3,6 +3,11 @@
     <input type="text" class="form-control" id="name" name="name" required value="<%= profile.name %>">
   </div>
 
+ <div>
+    <label for="birthDate" class="form-label">Birthdate</label>
+    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate.toISOString().slice(0,10) %>">
+ </div> 
+  
   <div>
     <label for="eHealthRecords" class="form-label">eHealth Records</label>
     <input type="text" class="form-control" id="eHealthRecords" name="eHealthRecords" value="<%= profile.eHealthRecords %>">

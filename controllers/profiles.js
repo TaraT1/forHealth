@@ -36,6 +36,7 @@ module.exports = {
 
       const profile = new Profile({
         name: req.body.name,
+        birthDate: req.body.birthDate,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
         image: req.body.image
@@ -77,6 +78,7 @@ module.exports = {
        const profile = await Profile.findByIdAndUpdate({_id: req.params.id},
         {
           name: req.body.name,
+          birthDate: req.body.birthDate,
           eHealthRecords: req.body.eHealthRecords,
           journal: req.body.journal}, 
           {new: true});
@@ -96,7 +98,7 @@ module.exports = {
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
 
-      // Delete post from db
+      // Delete profile from db
       await Profile.deleteOne({ _id: req.params.id });
       console.log("Deleted Profile");
       res.redirect("/profiles");
