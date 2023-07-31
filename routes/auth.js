@@ -49,7 +49,7 @@ router.get('/auth/google',
 router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login-failure',
-    successRedirect: '/dashboard' })
+    successRedirect: '/profiles' })
 );
 //router if something goes awry
 router.get('/login-failure', (req, res) => {

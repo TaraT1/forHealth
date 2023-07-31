@@ -17,10 +17,23 @@ const app = express();
 require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
+//Setup Sessions - stored in MongoDB
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ 
+      mongoUrl: process.env.DB_STRING,
+    }),
+      //cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
+  // Date.now() - 30 * 24 * 60 * 60 * 1000
+  })
+);
+
 // Passport config
-// app.use(passport.session())
-// app.use(passport.initialize())
-//require("./config/passport")(passport);
+app.use(passport.initialize())
+app.use(passport.session())
 
 //routes 
 const authRoutes = require("./routes/auth");
@@ -42,7 +55,10 @@ app.use(methodOverride("_method"));
 mongoose.set('strictQuery', true)
 connectDB();
 
-//Templating - setting layout folder for std html layout - *** Not usingt 
+//Static Folder
+app.use(express.static("public"));
+
+//Templating - setting layout folder for std html layout - *** Not using 
 app.use(expressLayouts)
 app.set("layout", "layouts/layout")
 
@@ -50,8 +66,6 @@ app.set("layout", "layouts/layout")
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views")
 
-//Static Folder
-app.use(express.static("public"));
 
 // cross-origin resource sharing
 app.use(cors())
@@ -59,29 +73,13 @@ app.use(cors())
 //Logging
 app.use(logger("dev"));
 
-//Setup Sessions - stored in MongoDB
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ 
-      mongoUrl: process.env.DB_STRING,
-    }),
-  })
-);
-
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
 //Use flash messages for errors, info, etc...
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/", authRoutes);
-app.use("/dashboard", dashboardRoutes);
+app.use("/dashboard", dashboardRoutes); //delete - not using
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 
