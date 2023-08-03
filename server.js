@@ -20,9 +20,11 @@ const PORT = process.env.PORT;
 //Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "upright bass",
+    // secret: "keyboard cat",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    // orig saveUninitialized: false,
     store: MongoStore.create({ 
       mongoUrl: process.env.DB_STRING,
     }),

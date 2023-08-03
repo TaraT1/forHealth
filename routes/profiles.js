@@ -3,12 +3,10 @@ const router = express.Router();
 const Profile = require("../models/Profile");
 const upload = require("../middleware/multer");
 const profilesController = require("../controllers/profiles");
-const { ensureAuth } = require("../middleware/auth");
+const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Profile Routes
 //*Retrieve all profiles
-// router.get("/", profilesController.getProfiles);
-
 router.get("/", ensureAuth, profilesController.getProfiles);
 
 //*Create profile route

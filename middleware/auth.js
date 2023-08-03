@@ -1,7 +1,8 @@
+ // Checks for authentication /user logged in
 module.exports = {
   //bub
   ensureAuth: function (req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.user) { //isAuthenticated bub
       return next();
     } else {
       res.redirect("/");
@@ -9,7 +10,7 @@ module.exports = {
     }
   },
   ensureGuest: function (req, res, next) {
-    if (!req.isAuthenticated()) {
+    if (!req.user) {
       return next();
     } else {
       res.redirect("/");
