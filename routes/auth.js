@@ -13,30 +13,30 @@ passport.use(
         callbackURL: process.env.GOOGLE_CALLBACK_URL,
   },
 
-async function(accessToken, refreshToken, profile, done) {
-    const newUser = {
-        googleId: profile.id,
-        displayName: profile.displayName,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        profileImage: profile.photos[0].value
-    }
-
-        console.log(`>>>profile`, profile)
-
-    try {
-        let user = await User.findOne({ googleId: profile.id});
-        if (user) {
-            done(null, user);
-        } else {
-            user = await User.create(newUser);
-            done(null, user);
+    async function(accessToken, refreshToken, profile, done) {
+        const newUser = {
+            googleId: profile.id,
+            displayName: profile.displayName,
+            firstName: profile.name.givenName,
+            lastName: profile.name.familyName,
+            profileImage: profile.photos[0].value
         }
-    } catch (error) {
-        console.log(`>>>error `, error)
+
         console.log(`>>>profile`, profile)
-    }}
-));
+
+        try {
+            let user = await User.findOne({ googleId: profile.id});
+            if (user) {
+                done(null, user);
+            } else {
+                user = await User.create(newUser);
+                done(null, user);
+            }
+        } catch (error) {
+            console.log(`>>>error `, error)
+            } 
+        })
+    );
   
 //Google login route
 router.get('/auth/google',
@@ -46,8 +46,9 @@ router.get('/auth/google',
 router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login-failure',
-    successRedirect: '/profiles' })
-);
+    successRedirect: '/profiles',
+    }),
+    ),
 
 //router if something goes awry
 router.get('/login-failure', (req, res) => {
@@ -55,16 +56,26 @@ router.get('/login-failure', (req, res) => {
 });
 
 // Logout - Destroy user session
+// orig *** router.get('/logout', (req, res) => {
+//     req.logout((error) => {
+//         if(error) {return next(error)
+//             res.send('Error logging out')
+//         } else {
+//             res.redirect('/')
+//         }
+//     })
+// }),
+
 router.get('/logout', (req, res) => {
     req.session.destroy(error => {
         if(error) {
-            console.log(error)
-            res.send('Error logging out');
+            console.log('>>> logout error', error)
+            res.send('Error logging out')
         } else {
             res.redirect('/')
         }
     })
-});
+}),
 
 // Persist user data after auth success
 passport.serializeUser(function (user, done) {
@@ -72,13 +83,23 @@ passport.serializeUser(function (user, done) {
 });
 
 // Retrieve user data from session. Avoids callback of orig code
+// passport.deserializeUser(async (id, done) => {
+//     try {
+//         const user = await User.findById(id); 
+//         done(null, user);
+//     } catch (err) {
+//         done(err, null);
+//     }
+// });
+
+// Retrieve user data from session
 passport.deserializeUser(async (id, done) => {
     try {
-        const user = await User.findById(id); 
-        done(null, user);
+        const user = await User.findById(id)
+        done(null, user)
     } catch (err) {
-        done(err, null);
+        done(err, null)
     }
-});
+})
 
 module.exports = router;

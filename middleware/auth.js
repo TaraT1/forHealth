@@ -13,7 +13,7 @@ module.exports = {
     if (!req.user) {
       return next();
     } else {
-      res.redirect("/");
+      res.redirect("/profiles");
     }
   },
 };
