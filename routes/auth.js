@@ -56,16 +56,6 @@ router.get('/login-failure', (req, res) => {
 });
 
 // Logout - Destroy user session
-// orig *** router.get('/logout', (req, res) => {
-//     req.logout((error) => {
-//         if(error) {return next(error)
-//             res.send('Error logging out')
-//         } else {
-//             res.redirect('/')
-//         }
-//     })
-// }),
-
 router.get('/logout', (req, res) => {
     req.session.destroy(error => {
         if(error) {
@@ -81,16 +71,6 @@ router.get('/logout', (req, res) => {
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
-
-// Retrieve user data from session. Avoids callback of orig code
-// passport.deserializeUser(async (id, done) => {
-//     try {
-//         const user = await User.findById(id); 
-//         done(null, user);
-//     } catch (err) {
-//         done(err, null);
-//     }
-// });
 
 // Retrieve user data from session
 passport.deserializeUser(async (id, done) => {

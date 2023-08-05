@@ -12,12 +12,4 @@ router.get("/profiles", ensureAuth, profilesController.getProfiles);
 // router.get("/providers", providersController.getProviders);
 router.get("/dashboard", dashboardController.getDashboard);
 
-
-// //Routes for user login/signup
-// router.get("/login", authController.getLogin);
-// router.post("/login", authController.postLogin);
-// router.get("/logout", authController.logout);
-// router.get("/signup", authController.getSignup);
-// router.post("/signup", authController.postSignup);
-
 module.exports = router;
