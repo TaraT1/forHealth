@@ -40,7 +40,7 @@ app.use(passport.session())
 //routes 
 const authRoutes = require("./routes/auth");
 const mainRoutes = require("./routes/main");
-const dashboardRoutes = require("./routes/dashboard");
+// const dashboardRoutes = require("./routes/dashboard");
 const profileRoutes = require("./routes/profiles");
 const providerRoutes = require("./routes/providers");
 
@@ -81,7 +81,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/", authRoutes);
-app.use("/dashboard", dashboardRoutes); //delete - not using
+// app.use("/dashboard", dashboardRoutes); //delete - not using
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 

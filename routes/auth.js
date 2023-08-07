@@ -22,8 +22,6 @@ passport.use(
             profileImage: profile.photos[0].value
         }
 
-        console.log(`>>>profile`, profile)
-
         try {
             let user = await User.findOne({ googleId: profile.id});
             if (user) {
@@ -55,16 +53,13 @@ router.get('/login-failure', (req, res) => {
     res.send('Something went wrong')
 });
 
-// Logout - Destroy user session
-router.get('/logout', (req, res) => {
-    req.session.destroy(error => {
-        if(error) {
-            console.log('>>> logout error', error)
-            res.send('Error logging out')
-        } else {
-            res.redirect('/')
-        }
-    })
+// Logout 
+router.get('/logout', (req, res, next) => {
+            req.logout((error) => {
+                if(error) {
+                    return next(error)}
+                    res.redirect('/')
+                })
 }),
 
 // Persist user data after auth success

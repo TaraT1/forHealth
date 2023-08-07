@@ -9,6 +9,7 @@ module.exports = {
       return res.status(401).send('Access Denied')
     }
   },
+// if user authenticated, redirect to profiles instead of login page; if not authenticated, access login
   ensureGuest: function (req, res, next) {
     if (!req.user) {
       return next();
