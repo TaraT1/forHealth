@@ -29,3 +29,8 @@ module.exports = {
 //         }
 //     }
 // }
+
+// At storybooks 1:05:09, simply write:
+// if(req.isAuthenticated()){
+//     return next();
+// }
