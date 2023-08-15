@@ -15,10 +15,12 @@ module.exports = {
     
     try {
       const profiles = await Profile.find({});
+      // const profiles = await Profile.find({ user: req.user.id}).lean();
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
     catch (err) {
+      res.send("There were no profiles found. Please create a health profile by clicking Add New Profile.")
       console.log(err);
     }
   },
@@ -34,6 +36,7 @@ module.exports = {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
 
+      try {
       const profile = new Profile({
         name: req.body.name,
         birthDate: req.body.birthDate,
@@ -42,15 +45,13 @@ module.exports = {
         image: req.body.image
       })
 
-        try {
-          const newProfile = await profile.save()
+          // const newProfile = await profile.save()
           console.log("New profile! Whomp")
           res.redirect("/profiles")
-        } catch (err) {
+        
+        } catch(err) {
           console.log(err);
-          res.render('profiles/new', {
-            profile: profile
-          }) 
+          res.send("Something went wrong") 
           }
       },
  

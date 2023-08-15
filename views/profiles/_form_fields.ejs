@@ -5,7 +5,7 @@
 
  <div>
     <label for="birthDate" class="form-label">Birthdate</label>
-    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate.toISOString().slice(0,10) %>">
+    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().slice(0,10) %>">
  </div> 
   
   <div>

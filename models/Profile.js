@@ -7,7 +7,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   birthDate: {
     type: Date,
-    required: true
+    required: false, 
   },
   eHealthRecords: {
     type: String,
