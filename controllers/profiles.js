@@ -45,8 +45,8 @@ module.exports = {
         image: req.body.image
       })
 
-          // const newProfile = await profile.save()
-          console.log("New profile! Whomp")
+          const newProfile = await profile.save()
+          console.log(">>>> New profile! Whomp")
           res.redirect("/profiles")
         
         } catch(err) {
