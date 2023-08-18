@@ -2,16 +2,16 @@
 module.exports = {
   //bub
   ensureAuth: function (req, res, next) {
-    if (req.user) { //isAuthenticated bub
+    if (req.isAuthenticated()) {
       return next();
     } else {
       res.redirect("/");
       return res.status(401).send('Access Denied')
     }
   },
-// if user authenticated, redirect to profiles instead of login page; if not authenticated, access login
+// if user authenticated, avoid login page and redirect to profiles; if not authenticated, access login
   ensureGuest: function (req, res, next) {
-    if (!req.user) {
+    if (!req.isAuthenticated()) {
       return next();
     } else {
       res.redirect("/profiles");

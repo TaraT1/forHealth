@@ -1,5 +1,6 @@
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
+const User = require("../models/User");
 const Profile = require("../models/Profile");
 const Provider = require("../models/Provider");
 const { trusted } = require("mongoose");
@@ -14,8 +15,11 @@ module.exports = {
   getProfiles: async (req, res) => {
     
     try {
-      const profiles = await Profile.find({});
-      // const profiles = await Profile.find({ user: req.user.id}).lean();
+      // const profiles = await Profile.find({});
+      // const profiles = await Profile.find({user: req.user._id}).lean();//error: user not defined
+      const user = await req.user.id
+      const profiles = await Profile.find({ user: req.user.id});
+      console.log(user)
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
@@ -26,9 +30,19 @@ module.exports = {
   },
 
   // router.get("/new", profilesController.renderNewProfile); 
-  renderNewProfile:  (req, res) => {
-    res.render("profiles/new", {profile: new Profile () })
-  },
+  // OLD renderNewProfile:  (req, res) => {
+  //   res.render("profiles/new", {profile: new Profile () })
+  // },
+
+  renderNewProfile:  async (req, res) => {
+    try {
+      req.body.user = req.user.id
+      await Profile.create(req.body) 
+      res.render("profiles/new", {profile: new Profile () })
+    } catch (err){
+      console.log(err)
+    }
+    },
 
   //POST Profile 
   //router.post("/", upload.single("file"), profilesController.createProfile);
@@ -37,6 +51,7 @@ module.exports = {
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       try {
+      req.body.user = req.user.id
       const profile = new Profile({
         name: req.body.name,
         birthDate: req.body.birthDate,

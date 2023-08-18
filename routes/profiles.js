@@ -14,8 +14,7 @@ router.get("/", ensureAuth, profilesController.getProfiles);
 router.get("/new", ensureAuth, profilesController.renderNewProfile);
 
 //Create profile route
-router.post("/", ensureAuth, profilesController.createProfile);
-// router.post("/", ensureAuth, upload.single("file"), profilesController.createProfile);
+router.post("/", ensureAuth, upload.single("file"), profilesController.createProfile); //Note: Need upload... for multer middleware
 
 //*Update Profile (get/show, view/edit, update)
 //Show profile
