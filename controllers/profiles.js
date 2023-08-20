@@ -17,15 +17,17 @@ module.exports = {
     try {
       // const profiles = await Profile.find({});
       // const profiles = await Profile.find({user: req.user._id}).lean();//error: user not defined
-      const user = await req.user.id
-      const profiles = await Profile.find({ user: req.user.id});
+      // const user = await req.user.id
+      // const user = await User.findById(req.user.id).select('firstName')
+      const user = User.findById(req.user._id)
+      const profiles = await Profile.find( User.findById(req.user._id));
       console.log(user)
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
     catch (err) {
       res.send("There were no profiles found. Please create a health profile by clicking Add New Profile.")
-      console.log(err);
+      console.log(">>>>> ", err);
     }
   },
 
@@ -36,9 +38,13 @@ module.exports = {
 
   renderNewProfile:  async (req, res) => {
     try {
-      req.body.user = req.user.id
+      const user = await User.findById(req.user.id).select('firstName')
+      // req.body.user = req.user.id
       await Profile.create(req.body) 
-      res.render("profiles/new", {profile: new Profile () })
+      res.render("profiles/new", {
+        profile: new Profile (),
+        name: user.firstName
+      })
     } catch (err){
       console.log(err)
     }
@@ -51,9 +57,10 @@ module.exports = {
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       try {
-      req.body.user = req.user.id
+      // req.body.user = req.user.id
+      const user = await User.findById(req.user.id).select('firstName')
       const profile = new Profile({
-        name: req.body.name,
+        name: user.firstName,
         birthDate: req.body.birthDate,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
@@ -75,7 +82,7 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const profile = await Profile.findById({_id: req.params.id})
-        //.where({user: req.user.id}) //User can only view profs they have access 
+        .where({user: req.user.id}) //User can only view profs they have access 
 
           res.render("profiles/profile", {
             _id: req.params.id,
