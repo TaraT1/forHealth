@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const ProviderSchema = new mongoose.Schema({
     name: {
@@ -35,13 +35,22 @@ const ProviderSchema = new mongoose.Schema({
     },
     profile: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Profile",
+        ref: 'Profile',
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
     createdAt: {
         type: Date,
         required: true,
         default: Date.now,
     },
+    updated: {
+        type: Date,
+        required: true,
+        default: Date.now
+    }
 });
 
-module.exports = mongoose.model("Provider", ProviderSchema);
+module.exports = mongoose.model('Provider', ProviderSchema);
