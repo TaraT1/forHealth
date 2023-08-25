@@ -4,6 +4,7 @@ const User = require("../models/User");
 const Profile = require("../models/Profile");
 const Provider = require("../models/Provider");
 const { trusted } = require("mongoose");
+const { ensureAuth, ensureGuest } = require("../middleware/auth");
 const dayjs = require('dayjs') //not implementing correctly
 
 // const Comment = require("../models/Comment");
@@ -20,8 +21,9 @@ module.exports = {
       // const user = await req.user.id
       // const user = await User.findById(req.user.id).select('firstName')
       const user = User.findById(req.user._id)
-      const profiles = await Profile.find( User.findById(req.user._id));
-      console.log(user)
+      // const profiles = await Profile.find({});
+      const profiles = await Profile.find( User.findById(req.user));
+      console.log(req.user)
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
@@ -32,23 +34,23 @@ module.exports = {
   },
 
   // router.get("/new", profilesController.renderNewProfile); 
-  // OLD renderNewProfile:  (req, res) => {
-  //   res.render("profiles/new", {profile: new Profile () })
-  // },
+  renderNewProfile:  (req, res) => {
+    res.render("profiles/new", {profile: new Profile () })
+  },
 
-  renderNewProfile:  async (req, res) => {
-    try {
-      const user = await User.findById(req.user.id).select('firstName')
-      // req.body.user = req.user.id
-      await Profile.create(req.body) 
-      res.render("profiles/new", {
-        profile: new Profile (),
-        name: user.firstName
-      })
-    } catch (err){
-      console.log(err)
-    }
-    },
+  // renderNewProfile:  async (req, res) => {
+  //   try {
+  //     // const user = await User.findById(req.user.id).select('firstName')
+  //     // req.body.user = req.user.id
+  //     await Profile.create(req.body) 
+  //     res.render("profiles/new", {
+  //       profile: new Profile (),
+  //       // name: user.firstName
+  //     })
+    // } catch (err){
+    //   console.log(err)
+    // }
+    // },
 
   //POST Profile 
   //router.post("/", upload.single("file"), profilesController.createProfile);
@@ -58,9 +60,9 @@ module.exports = {
 
       try {
       // req.body.user = req.user.id
-      const user = await User.findById(req.user.id).select('firstName')
+      // const user = await User.findById(req.user.id).select('firstName')
       const profile = new Profile({
-        name: user.firstName,
+        name: req.body.name,
         birthDate: req.body.birthDate,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
@@ -82,7 +84,7 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const profile = await Profile.findById({_id: req.params.id})
-        .where({user: req.user.id}) //User can only view profs they have access 
+        // .where({user: req.user.id}) //User can only view profs they have access 
 
           res.render("profiles/profile", {
             _id: req.params.id,
