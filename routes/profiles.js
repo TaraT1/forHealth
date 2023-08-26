@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Profile = require("../models/Profile");
+const mongoose = require("mongoose")
 const upload = require("../middleware/multer");
 const profilesController = require("../controllers/profiles");
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+const { ensureAuth } = require("../middleware/auth"); //elimiate ensureGuest
 
 //Profile Routes
 //*Retrieve all profiles
