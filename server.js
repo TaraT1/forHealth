@@ -17,14 +17,15 @@ const app = express();
 require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
+//passport config (currently in/with routes/auth)
+
 //Setup Sessions - stored in MongoDB
 app.use(
   session({
     secret: "upright bass",
     // secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: true,
-    // orig saveUninitialized: false,
+    resave: false, //session not saved if session is not modified
+    saveUninitialized: false, //don't create session until something is stored
     store: MongoStore.create({ 
       mongoUrl: process.env.DB_STRING,
     }),
@@ -33,21 +34,21 @@ app.use(
   })
 );
 
-// Passport config
+// Passport middleware 
 app.use(passport.initialize())
 app.use(passport.session())
 
 //routes 
 const authRoutes = require("./routes/auth");
 const mainRoutes = require("./routes/main");
-// const dashboardRoutes = require("./routes/dashboard");
+const dashboardRoutes = require("./routes/dashboard");
 const profileRoutes = require("./routes/profiles");
 const providerRoutes = require("./routes/providers");
 
 // MIDDLEWARE (app.use)
 //Body Parsing - pass data
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.urlenconded({limit: '10mb', extended: false}))
+// app.use(express.urlencoded({limit: '10mb', extended: false}))
 app.use(express.json());
 
 //Method Override - Use forms for put / delete
@@ -80,8 +81,8 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-app.use("/", authRoutes);
-// app.use("/dashboard", dashboardRoutes); //delete - not using
+app.use("/auth", authRoutes);
+app.use("/dashboard", dashboardRoutes); 
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 

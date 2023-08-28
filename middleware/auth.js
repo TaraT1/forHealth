@@ -8,15 +8,15 @@ module.exports = {
       res.redirect("/");
       return res.status(401).send('Access Denied')
     }
-  },
-// if user authenticated, avoid login page and redirect to profiles; if not authenticated, access login
-  ensureGuest: function (req, res, next) {
-    if (!req.isAuthenticated()) {
-      return next();
-    } else {
-      res.redirect("/profiles");
-    }
-  },
+  }
+// // if user authenticated, avoid login page and redirect to profiles; if not authenticated, access login
+//   ensureGuest: function (req, res, next) {
+//     if (!req.isAuthenticated()) {
+//       return next();
+//     } else {
+//       res.redirect("/profiles");
+//     }
+//   },
 };
 
 //*** raddy checkAuth
