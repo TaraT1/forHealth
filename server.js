@@ -19,7 +19,7 @@ const PORT = process.env.PORT;
 
 //passport config (currently in/with routes/auth)
 
-//Setup Sessions - stored in MongoDB
+//Connect db - Setup Sessions (stored in MongoDB)
 app.use(
   session({
     secret: "upright bass",
@@ -81,7 +81,7 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-app.use("/auth", authRoutes);
+app.use("/", authRoutes);
 app.use("/dashboard", dashboardRoutes); 
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);

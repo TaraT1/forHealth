@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   name: {
     type: String,
     required: true,
@@ -20,10 +24,6 @@ const ProfileSchema = new mongoose.Schema({
   image: {
     type: String,
     require: false,
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
   },
   createdAt: {
     type: Date,

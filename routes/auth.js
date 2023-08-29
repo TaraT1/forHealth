@@ -41,13 +41,13 @@ passport.use(
 // @desc    Auth with Google
 // @route   GET /auth/google
 //Google Login Route -- /auth/google; /google since /routes/auth
-router.get('/google',
+router.get('/auth/google',
   passport.authenticate('google', { scope: ['email', 'profile'] })
 );
 
 // @desc    Google auth callback
-// @route   GET /auth/google/callback
-//Retrieve user data -- /auth/google/callback
+// @route   GET //google/callback
+//Retrieve user data -- /google/callback
 router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login-failure',
@@ -55,33 +55,33 @@ router.get('/google/callback',
     }),
     ),
 
-//Route if something goes awry -- /auth/login-failure
+//Route if something goes awry -- /login-failure
 router.get('/login-failure', (req, res) => {
     res.send('Something went wrong')
 });
 
 // Destroy user session -- /auth/logout
-// router.get('/logout', (req, res) => {
-//     req.session.destroy(error => {
-//         if(error) {
-//             console.log(error)
-//             res.send('Error logging out')
-//         } else {
-//             res.redirect('/')
-//         }
-//     })
-// }) 
- 
- // @desc    Logout user
-// @route   /auth/logout
-// Logout (Traversy -- /auth/logout
-router.get('/logout', (req, res, next) => {
-    req.logout((error) => {
+router.get('/auth/logout', (req, res) => {
+    req.session.destroy(error => {
         if(error) {
-            return next(error)}
+            console.log(error)
+            res.send('Error logging out')
+        } else {
             res.redirect('/')
+        }
     })
-}),
+}) 
+ 
+//  // @desc    Logout user
+// // @route   /auth/logout
+// // Logout (Traversy -- /auth/logout
+// router.get('/logout', (req, res, next) => {
+//     req.logout((error) => {
+//         if(error) {
+//             return next(error)}
+//             res.redirect('/')
+//     })
+// }),
 
 // Persist user data after auth success
 passport.serializeUser(function (user, done) {
