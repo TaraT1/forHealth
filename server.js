@@ -17,7 +17,8 @@ const app = express();
 require("dotenv").config({ path: "./config/.env" });
 const PORT = process.env.PORT;
 
-//passport config (currently in/with routes/auth)
+//passport config
+require('./config/passport')(passport)
 
 //Connect db - Setup Sessions (stored in MongoDB)
 app.use(
