@@ -9,6 +9,7 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
+const cors = require('cors')
 
 //routes
 const mainRoutes = require("./routes/main");
@@ -41,6 +42,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // app.use(express.urlenconded({limit: '10mb', extended: false}))
+
+// cross-origin resource sharing
+app.use(cors())
 
 //Logging
 app.use(logger("dev"));
