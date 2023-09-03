@@ -1,3 +1,4 @@
+const path = require("path")
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
@@ -12,23 +13,19 @@ const dayjs = require('dayjs') //not implementing correctly
 module.exports = {
 
   //get all profiles 
-  //router.get("/", profilesController.getProfiles);
+  //router.get("/", ensureAuth, profilesController.getProfiles);
   getProfiles: async (req, res) => {
+    console.log(req.user)
     
     try {
       // const profiles = await Profile.find({});
-      // const profiles = await Profile.find({user: req.user._id}).lean();//error: user not defined
-      // const user = await req.user.id
-      // const user = await User.findById(req.user.id).select('firstName')
-      const user = User.findById(req.user._id)
-      // const profiles = await Profile.find({});
-      const profiles = await Profile.find( User.findById(req.user));
-      console.log(req.user)
+      const profiles = await Profile.find( {user: req.user.id});
+      // const profiles = await Profile.find({}).populate('user');
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
     catch (err) {
-      res.send("There were no profiles found. Please create a health profile by clicking Add New Profile.")
+      // res.send("There were no profiles found. Please create a health profile by clicking Add New Profile.")
       console.log(">>>>> ", err);
     }
   },
@@ -56,12 +53,13 @@ module.exports = {
   //router.post("/", upload.single("file"), profilesController.createProfile);
   createProfile: async (req, res) => {
       // try... Upload image to cloudinary
-      // const result = await cloudinary.uploader.upload(req.file.path);
 
       try {
-      // req.body.user = req.user.id
-      // const user = await User.findById(req.user.id).select('firstName')
-      const profile = new Profile({
+      // const result = await cloudinary.uploader.upload(req.file.path);
+
+      req.body.user = req.user.id 
+      await Profile.create({
+        user: req.body.user,
         name: req.body.name,
         birthDate: req.body.birthDate,
         eHealthRecords: req.body.eHealthRecords,
@@ -69,9 +67,8 @@ module.exports = {
         image: req.body.image
       })
 
-          const newProfile = await profile.save()
-          console.log(">>>> New profile! Whomp")
-          res.redirect("/profiles")
+      console.log(">>>> New profile! Whomp")
+      res.redirect('/profiles')
         
         } catch(err) {
           console.log(err);
@@ -83,13 +80,15 @@ module.exports = {
   //router.get("/:id", profilesController.getProfile);
   getProfile: async (req, res) => {
     try {
-      const profile = await Profile.findById({_id: req.params.id})
-        // .where({user: req.user.id}) //User can only view profs they have access 
-
+      const profile = await Profile.findById(req.params.id).populate('user')
+        if(profile.user._id != req.user.id) {
+          res.send("Err 404")
+        } else {
           res.render("profiles/profile", {
             _id: req.params.id,
             profile
           }) 
+        }
       } catch (err) { 
         console.log(err)
         res.send("Something went wrong")
