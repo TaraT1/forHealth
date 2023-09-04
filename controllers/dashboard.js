@@ -1,3 +1,4 @@
+const User = require("../models/User");
 const Note = require('../models/Note')
 const mongoose = require('mongoose')
 const { render } = require("ejs");
@@ -34,7 +35,7 @@ module.exports = {
     const count = await Note.count();
 
     res.render('dashboard/index', {
-      userName: req.user.firstName,
+      firstName: req.user.firstName,
       locals,
       notes,
       layout: '../views/layouts/dashboard',
