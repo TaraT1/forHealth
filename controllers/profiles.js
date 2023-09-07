@@ -11,16 +11,13 @@ const dayjs = require('dayjs') //not implementing correctly
 // const Comment = require("../models/Comment");
 
 module.exports = {
-
-  //get all profiles 
-  //router.get("/", ensureAuth, profilesController.getProfiles);
+  // @desc  Show all profiles
+  // @route GET /profiles 
   getProfiles: async (req, res) => {
     console.log(req.user)
     
     try {
-      // const profiles = await Profile.find({});
       const profiles = await Profile.find( {user: req.user.id});
-      // const profiles = await Profile.find({}).populate('user');
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
@@ -29,28 +26,14 @@ module.exports = {
       console.log(">>>>> ", err);
     }
   },
-
-  // router.get("/new", profilesController.renderNewProfile); 
+  // @desc  Show add page
+  // @route GET /profiles/new 
   renderNewProfile:  (req, res) => {
     res.render("profiles/new", {profile: new Profile () })
   },
 
-  // renderNewProfile:  async (req, res) => {
-  //   try {
-  //     // const user = await User.findById(req.user.id).select('firstName')
-  //     // req.body.user = req.user.id
-  //     await Profile.create(req.body) 
-  //     res.render("profiles/new", {
-  //       profile: new Profile (),
-  //       // name: user.firstName
-  //     })
-    // } catch (err){
-    //   console.log(err)
-    // }
-    // },
-
-  //POST Profile 
-  //router.post("/", upload.single("file"), profilesController.createProfile);
+  // @desc  Process add profile 
+  // @route POST /profiles
   createProfile: async (req, res) => {
       // try... Upload image to cloudinary
 
@@ -76,8 +59,8 @@ module.exports = {
           }
       },
  
-  //Show profile
-  //router.get("/:id", profilesController.getProfile);
+  // @desc    Show profile
+  // @router  GET /profiles/:id
   getProfile: async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.id).populate('user')
@@ -94,8 +77,8 @@ module.exports = {
         res.send("Something went wrong")
       }},
 
-  //Update 
-  // router.post("/update/:id", profilesController.updateProfile)
+  // @desc    Update profile
+  // @router  POST /profiles/update/:id"
   updateProfile: async (req, res) => {
     
      try { 
@@ -114,8 +97,8 @@ module.exports = {
         res.send("Something went wrong")
       }},
     
-  //Delete
-  //router.delete("/:id", profilesController.deleteProfile);
+  // @desc    Delete profile  
+  // @router  DELETE /profiles/:id
   deleteProfile: async (req, res) => {
     try {
       const profile = await Profile.findById({_id: req.params.id} );
