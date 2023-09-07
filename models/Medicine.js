@@ -8,8 +8,12 @@ const MedicineSchema = new mongoose.Schema({
     description: {
         type: String,
     },
-    prescriber: {
+    dosage: {
         type: String,
+    },
+    provider: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Provider',
     },
     dateStart: {
         type: Date,
