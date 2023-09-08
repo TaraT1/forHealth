@@ -1,8 +1,10 @@
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
+const User = require("../models/User")
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
-// const Comment = require("../models/Comment");
+const { trusted } = require("mongoose")
+const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
 module.exports = {
 
@@ -11,12 +13,13 @@ module.exports = {
   getProviders: async (req, res) => {
     
     try {
-      const providers = await Provider.find({});
+      const providers = await Provider.find({user: req.user.id});
       res.render("providers/providers", { providers: providers });
       console.log("Providers found")
     } 
     catch (err) {
-      console.log(err);
+      //res.send("There were no providers found. Please create a provider by clicking Add New Provider. ")
+      console.log(">>>> ", err);
     }
   },
   // @desc    Show add page
@@ -31,7 +34,9 @@ module.exports = {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
 
-      const provider = new Provider({
+      try {
+      req.body.user = req.user.id
+      await Provider.create({
         name: req.body.name,
         specialization: req.body.specialization,
         address: req.body.address,
@@ -42,33 +47,18 @@ module.exports = {
         notes: req.body.notes,
         profile: req.body.profile
       })
-      
 
-        try {
-          const newProvider = await provider.save()
-          const providers = await Provider.find({});
-          const profiles = await Profile.find({})
-          console.log("New provider! Whomp")
-          let params = {
-            providers: providers, 
-            profiles: profiles
-          }
-          // res.redirect(`providers/${newProvider.id}` )      
-          res.render(`providers/${newProvider.id}`, params )      
-          // res.redirect("/providers")
-        } catch (err) {
-          console.log(err)
-          if (err){
-            let locals = {errorMessage: "Error Creating Provider"}
-          res.render('providers/new', {
-            provider: provider,
-            locals: locals
-          }) 
-          }
-        }
-      },
-// @desc    Show provider
-// @router  GET /providers/:id
+      console.log(">>>> New provider! Whomp")
+      res.redirect('/providers')
+    
+    } catch(err) {
+      console.log(err)
+      res.send("Something went wrong")
+    }
+  },
+
+  // @desc    Show provider
+  // @router  GET /providers/:id
   getProvider: async (req, res) => {
     try {
       const provider = await Provider.findById(req.params.id).populate('user');
@@ -109,14 +99,14 @@ module.exports = {
       res.send("Something went wrong")
     }},
     
-    // @desc    Delete provider
-    // @router  DELETE /providers/:id
+  // @desc    Delete provider
+  // @router  DELETE /providers/:id
   deleteProvider: async (req, res) => {
     try {
-      // Find profile by id
       const provider = await Provider.findById({ _id: req.params.id });
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
+
       // Delete provider from db
       await Provider.deleteOne({ _id: req.params.id });
       console.log("Deleted Provider");

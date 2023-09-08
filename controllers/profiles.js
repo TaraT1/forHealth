@@ -8,14 +8,10 @@ const { trusted } = require("mongoose");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 const dayjs = require('dayjs') //not implementing correctly
 
-// const Comment = require("../models/Comment");
-
 module.exports = {
   // @desc  Show all profiles
   // @route GET /profiles 
   getProfiles: async (req, res) => {
-    console.log(req.user)
-    
     try {
       const profiles = await Profile.find( {user: req.user.id});
       res.render("profiles/profiles", { profiles: profiles });
