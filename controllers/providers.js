@@ -6,7 +6,8 @@ const Profile = require("../models/Profile");
 
 module.exports = {
 
-  //get all providers
+  // @desc Show all providers 
+  // @route GET /providers
   getProviders: async (req, res) => {
     
     try {
@@ -18,13 +19,14 @@ module.exports = {
       console.log(err);
     }
   },
-
-  //** ~get - New provider (display form)
+  // @desc    Show add page
+  // @router  GET /providers/new
   renderNewPage:  (req, res) => {
     res.render("providers/new", {provider: new Provider () })
   },
 
-  //Post Provider Route
+  // @desc    Process add provider
+  // @router  POST /profiles
   createProvider: async (req, res) => {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
@@ -65,78 +67,63 @@ module.exports = {
           }
         }
       },
- 
-  
-  //get one provider 
+// @desc    Show provider
+// @router  GET /providers/:id
   getProvider: async (req, res) => {
     try {
-      const provider = await Provider.findById(req.params.id).lean();
-      const providers = await Provider.find();
-      res.render("providers/provider", { provider: provider, providers: providers });
-      console.log(provider);
-      
-    } catch (err) {
-      console.log(err);
-      res.redirect('/')
-    }
-  },
+      const provider = await Provider.findById(req.params.id).populate('user');
+      if(provider.user._id != req.user.id) {
+        res.send('Err 404')
+      } else{ 
+        res.render("providers/provider", { 
+          _id: req.params.id,
+          provider
+        })
+      }
+      } catch (err) {
+        console.log(err);
+        res.send("something went wrong")
+    }},
   
-  //edit
-  //get
-  
-  // editProvider: async (req, res) => {
-  editProvider: (req, res) => {
-
-  },
-
+  // @desc    Update provider
+  // @router  POST /profiles/update/:id
   updateProvider: async (req, res) => {
     
     try {
-      const provider = await Provider.findById(req.params.id)
-      provider.name = req.body.name,
-      provider.specialization = req.body.specialization
-      provider.address = req.body.address
-      provider.phone = req.body.phone,
-      provider.website =  req.body.website
-      provider.socials = req.body.socials
-      provider.media = req.body.media
-      provider.notes = req.body.notes
+      const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
+      {
+      name: req.body.name,
+      specialization: req.body.specialization,
+      address: req.body.address,
+      phone: req.body.phone,
+      website:  req.body.website,
+      socials: req.body.socials,
+      media: req.body.media,
+      notes: req.body.notes},
+      {new: true})
 
-      await provider.save()
-      res.redirect(`/providers/${req.params.id}`)
+      console.log(">>> Whomp! Update provider: ", provider)
+      res.redirect("/providers")
     } catch (err) {
-      console.log(err);
-    }
-  },
-
+      console.log(provider, err)
+      res.send("Something went wrong")
+    }},
+    
+    // @desc    Delete provider
+    // @router  DELETE /providers/:id
   deleteProvider: async (req, res) => {
     try {
       // Find profile by id
       const provider = await Provider.findById({ _id: req.params.id });
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
-      await Provider.remove({ _id: req.params.id });
+      // Delete provider from db
+      await Provider.deleteOne({ _id: req.params.id });
       console.log("Deleted Provider");
       res.redirect("/providers");
     } catch (err) {
-      res.redirect("/providers");
+      res.redirect(`/providers/${providder._id}`);
+      console.log(err)
     }
   }
 }
-  // async function renderNewProfile(res, profile, hasError = false) {
-  //   renderFormPage(res, profile, 'new', hasError)
-  // }
-
-  // async function renderFormPage(res, profile, form, hasError = false) {
-  //   const profiles = await Profile.find({})
-  //   const params = {
-
-  //   }
-  // }
-
-
-
-
-
-

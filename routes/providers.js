@@ -18,10 +18,10 @@ router.post("/", upload.single("file"), providersController.createProvider);
 //Get sgl profile
 router.get("/:id", providersController.getProvider);
 
-//Edit profile
+//Edit provider 
 router.get("/update/:id", providersController.editProvider);
 
-router.put("/update/:id", providersController.updateProvider);
+router.post("/update/:id", providersController.updateProvider);
 
 router.delete("/:id", providersController.deleteProvider);
 

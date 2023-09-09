@@ -78,7 +78,7 @@ module.exports = {
       }},
 
   // @desc    Update profile
-  // @router  POST /profiles/update/:id"
+  // @router  POST /profiles/update/:id
   updateProfile: async (req, res) => {
     
      try { 
