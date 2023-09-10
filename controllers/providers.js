@@ -1,9 +1,9 @@
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
-const User = require("../models/User")
+const User = require("../models/User");
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
-const { trusted } = require("mongoose")
+const { trusted } = require("mongoose");
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
 module.exports = {
@@ -11,9 +11,10 @@ module.exports = {
   // @desc Show all providers 
   // @route GET /providers
   getProviders: async (req, res) => {
+    console.log("User is: ", req.user) //???
     
     try {
-      const providers = await Provider.find({user: req.user.id});
+      const providers = await Provider.find({user: req.user.id}); //TS
       res.render("providers/providers", { providers: providers });
       console.log("Providers found")
     } 
@@ -36,6 +37,7 @@ module.exports = {
 
       try {
       req.body.user = req.user.id
+      // req.body.profile = req.profile.id
       await Provider.create({
         name: req.body.name,
         specialization: req.body.specialization,
@@ -45,7 +47,8 @@ module.exports = {
         socials: req.body.socials,
         media: req.body.media,
         notes: req.body.notes,
-        profile: req.body.profile
+        // profile: req.body.profile,
+        user: req.body.user
       })
 
       console.log(">>>> New provider! Whomp")
@@ -112,7 +115,7 @@ module.exports = {
       console.log("Deleted Provider");
       res.redirect("/providers");
     } catch (err) {
-      res.redirect(`/providers/${providder._id}`);
+      res.redirect(`/providers/${provider._id}`);
       console.log(err)
     }
   }
