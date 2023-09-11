@@ -31,7 +31,7 @@ module.exports = {
       const profile = new Profile({
         name: req.body.name,
         birthDate: new Date(req.body.birthDate),
-        genderAssignedAtBirth: req.body.genderAssignedAtBirth,
+        sex: req.body.sex,
         genderId: req.body.genderId,
         geneticBackground: req.body.geneticBackground,
         eHealthRecords: req.body.eHealthRecords,

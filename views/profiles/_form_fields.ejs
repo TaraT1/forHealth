@@ -11,11 +11,11 @@
 </div>
 
 <div>
-<label for="genderAssignedAtBirth" class="genderAssignedAtBirth">What is your sex (gender assigned at birth)?</label>
-    <select class="form-select" id="genderAssignedAtBirth" name="genderAssignedAtBirth">
-      <option value="" <%= profile.genderAssignedAtBirth == "choose" ? "selected" : "" %>></option>
-      <option value="female" <%= profile.genderAssignedAtBirth == "female" ? "selected" : "" %>>female</option>
-      <option value="male" <%= profile.genderAssignedAtBirth == "male" ? "selected" : "" %>>male</option>
+<label for="sex" class="sex">What is your sex (gender assigned at birth)?</label>
+    <select class="form-select" id="sex" name="sex">
+      <option value="" <%= profile.sex == "choose" ? "selected" : "" %>></option>
+      <option value="female" <%= profile.sex == "female" ? "selected" : "" %>>female</option>
+      <option value="male" <%= profile.sex == "male" ? "selected" : "" %>>male</option>
     </select>
 </div>
 

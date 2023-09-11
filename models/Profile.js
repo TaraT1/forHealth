@@ -9,7 +9,7 @@ const ProfileSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  genderAssignedAtBirth: {
+  sex: {
     type: String,
     required: true,
   },
