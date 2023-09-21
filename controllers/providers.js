@@ -11,10 +11,15 @@ module.exports = {
   // @desc Show all providers 
   // @route GET /providers
   getProviders: async (req, res) => {
-    console.log("User is: ", req.user) //???
     
     try {
-      const providers = await Provider.find({user: req.user.id}); //TS
+      req.body.user = req.user.id
+      console.log("User is: ", req.user) //???
+      const profiles = await Profile.find({user: req.user.id})
+      const profileName = profiles.name
+      const providers = await Provider.find({
+        user: req.user.id,
+      }); //TS
       res.render("providers/providers", { providers: providers });
       console.log("Providers found")
     } 
@@ -71,18 +76,19 @@ module.exports = {
         res.render("providers/provider", { 
           _id: req.params.id,
           provider
-        })
-      }
+        }) }
       } catch (err) {
         console.log(err);
         res.send("something went wrong")
     }},
-  
   // @desc    Update provider
   // @router  POST /profiles/update/:id
   updateProvider: async (req, res) => {
     
     try {
+      //Get profiles associated with user in order to link profile to provide
+      const profiles = await Profile.find({user: req.user.id})
+
       const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
       {
       name: req.body.name,
@@ -92,13 +98,15 @@ module.exports = {
       website:  req.body.website,
       socials: req.body.socials,
       media: req.body.media,
-      notes: req.body.notes},
+      notes: req.body.notes,
+      },
       {new: true})
 
       console.log(">>> Whomp! Update provider: ", provider)
       res.redirect("/providers")
+
     } catch (err) {
-      console.log(provider, err)
+      console.log(err)
       res.send("Something went wrong")
     }},
     
