@@ -3,7 +3,8 @@ const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
-const { trusted } = require("mongoose");
+const mongoose  = require("mongoose");
+const { trusted } = require("mongoose"); //not sure where this is from 
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
 module.exports = {
@@ -13,14 +14,14 @@ module.exports = {
   getProviders: async (req, res) => {
     
     try {
-      req.body.user = req.user.id
-      console.log("User is: ", req.user) //???
       const profiles = await Profile.find({user: req.user.id})
       const profileName = profiles.name
       const providers = await Provider.find({
         user: req.user.id,
       }); //TS
-      res.render("providers/providers", { providers: providers });
+      res.render("providers/providers", { 
+        profiles: profiles, 
+        providers: providers });
       console.log("Providers found")
     } 
     catch (err) {
@@ -31,18 +32,27 @@ module.exports = {
   // @desc    Show add page
   // @router  GET /providers/new
   renderNewPage:  (req, res) => {
-    res.render("providers/new", {provider: new Provider () })
+    const profiles = Profile.find({user: req.user.id})
+    const profile = Profile.query({ _id: mongoose.Types.ObjectId(id) })//await?
+    res.render("providers/new", {
+      profiles: profiles, 
+      profile: profile,
+      provider: new Provider () 
+    })
   },
 
   // @desc    Process add provider
-  // @router  POST /profiles
+  // @router  POST /provider
   createProvider: async (req, res) => {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       try {
       req.body.user = req.user.id
-      // req.body.profile = req.profile.id
+      const profiles = await Profile.find({user: req.user.id})
+      const profile = await Profile.query({ _id: mongoose.Types.ObjectId(id) })
+      req.body.profile = req.profile.id
+
       await Provider.create({
         name: req.body.name,
         specialization: req.body.specialization,
@@ -52,7 +62,8 @@ module.exports = {
         socials: req.body.socials,
         media: req.body.media,
         notes: req.body.notes,
-        // profile: req.body.profile,
+        proflle: req.body.profile,
+        profiles: profiles,
         user: req.body.user
       })
 
@@ -69,12 +80,16 @@ module.exports = {
   // @router  GET /providers/:id
   getProvider: async (req, res) => {
     try {
+      const profiles = await Profile.find({user: req.user.id})
+      const profile = await Profile.findById(req.params.id)
       const provider = await Provider.findById(req.params.id).populate('user');
       if(provider.user._id != req.user.id) {
         res.send('Err 404')
       } else{ 
         res.render("providers/provider", { 
           _id: req.params.id,
+          profiles: profiles, 
+          profile: profile, 
           provider
         }) }
       } catch (err) {
@@ -88,9 +103,12 @@ module.exports = {
     try {
       //Get profiles associated with user in order to link profile to provide
       const profiles = await Profile.find({user: req.user.id})
+      //Link profile, (find, associate, post)
+      const profile = await Profile.findById({user: req.user.id})
 
       const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
       {
+      profile: req.body.profile,
       name: req.body.name,
       specialization: req.body.specialization,
       address: req.body.address,

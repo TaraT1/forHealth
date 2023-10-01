@@ -25,6 +25,9 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     require: false,
   },
+  providers: 
+    [{type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Provider' }],
   createdAt: {
     type: Date,
     required: true,
