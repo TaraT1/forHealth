@@ -1,7 +1,7 @@
 
 <div>
     <label for="profile" class="form-label">Associate Profile</label>
-    <select class="form-control" id="profile" name="profile" >
+    <select class="form-select" id="profile" name="profile" >
         <% for(let i=0; i < profiles.length; i++) { %>
             <option value="<%= profiles[i].name %>">
                 <%= profiles[i].name %>
