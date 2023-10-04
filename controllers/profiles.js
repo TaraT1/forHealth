@@ -13,7 +13,7 @@ module.exports = {
   // @route GET /profiles 
   getProfiles: async (req, res) => {
     try {
-      const profiles = await Profile.find( {user: req.user.id});
+      const profiles = await Profile.find( {user: req.user.id} ).populate('providers');
       res.render("profiles/profiles", { profiles: profiles });
       console.log("Profiles found")
     } 
