@@ -9,6 +9,19 @@
     </select>
 </div>
 <div>
+    <label for="profiles">Profiles (div2)</label>
+    <select name="profiles" id="profiles" class="form-control" multiple>
+        <% profiles.forEach(function(profile) { %>
+            <option value="<%= profile._id %>"
+                <% if (provider && provider.profiles.includes(profile._id)) { %> 
+                    selected
+                <% } %>
+                ><%= profile.name %>
+            </option>
+        <% }) %>
+    </select>
+</div>
+<div>
     <label for="name" class="form-label">Name</label>
     <input type="text" class="form-control" id="name" name="name" value="<%= provider.name %>">
 </div>

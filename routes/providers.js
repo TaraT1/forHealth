@@ -6,8 +6,8 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Provider Routes
 //Retrieve all providers
-router.get("/", providersController.getProviders);
-// router.get("/", ensureAuth, providersController.getProviders);
+// router.get("/", providersController.getProviders);
+router.get("/", ensureAuth, providersController.getProviders);
 
 //new provider route to render form
 router.get("/new", ensureAuth, providersController.renderNewPage);

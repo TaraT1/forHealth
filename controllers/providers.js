@@ -14,11 +14,8 @@ module.exports = {
   getProviders: async (req, res) => {
     
     try {
-      const profiles = await Profile.find({user: req.user.id})
-      const profileName = profiles.name
-      const providers = await Provider.find({
-        user: req.user.id,
-      }); //TS
+      const providers = await Provider.find({ user: req.user.id }).populate('profiles')
+      // const profiles = await Profile.find({user: req.user.id})
       res.render("providers/providers", { 
         profiles: profiles, 
         providers: providers });
@@ -31,12 +28,12 @@ module.exports = {
   },
   // @desc    Show add page
   // @router  GET /providers/new
-  renderNewPage:  (req, res) => {
-    const profiles = Profile.find({user: req.user.id})
-    const profile = Profile.query({ _id: mongoose.Types.ObjectId(id) })//await?
+  renderNewPage:  async (req, res) => {
+    const profiles = await Profile.find({user: req.user.id})
+    // const profile = await Profile.query({ _id: mongoose.Types.ObjectId })//await?
     res.render("providers/new", {
       profiles: profiles, 
-      profile: profile,
+      // profile: profile,
       provider: new Provider () 
     })
   },
