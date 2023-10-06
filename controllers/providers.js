@@ -14,10 +14,10 @@ module.exports = {
   getProviders: async (req, res) => {
     
     try {
-      const providers = await Provider.find({ user: req.user.id }).populate('profiles')
+      const providers = await Provider.find({ user: req.user.id }).populate('profile')
       // const profiles = await Profile.find({user: req.user.id})
       res.render("providers/providers", { 
-        profiles: profiles, 
+        // profile: profile, 
         providers: providers });
       console.log("Providers found")
     } 
@@ -101,7 +101,9 @@ module.exports = {
       //Get profiles associated with user in order to link profile to provide
       const profiles = await Profile.find({user: req.user.id})
       //Link profile, (find, associate, post)
-      const profile = await Profile.findById({user: req.user.id})
+      
+      const profile = await Profile.findByIdAndUpdate({user: req.user.id})
+      // const profile = await Profile.findById({user: req.user.id})
 
       const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
       {
