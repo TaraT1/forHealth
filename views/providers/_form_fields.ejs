@@ -13,7 +13,7 @@
     <select name="profiles" id="profiles" class="form-control" multiple>
         <% profiles.forEach(function(profile) { %>
             <option value="<%= profile._id %>"
-                <% if (provider && provider.profiles.includes(profile._id)) { %> 
+                <% if (provider && provider.profiles && provider.profiles.includes(profile._id)) { %> 
                     selected
                 <% } %>
                 ><%= profile.name %>
