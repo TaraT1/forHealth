@@ -13,9 +13,9 @@ module.exports = {
   // @route GET /profiles 
   getProfiles: async (req, res) => {
     try {
-      const profiles = await Profile.find( {user: req.user.id} ).populate('providers');
+      const profiles = await Profile.find( {user: req.user.id} )
+        .populate('providers');
       res.render("profiles/profiles", { profiles: profiles });
-      console.log("Profiles found")
     } 
     catch (err) {
       // res.send("There were no profiles found. Please create a health profile by clicking Add New Profile.")
@@ -25,7 +25,8 @@ module.exports = {
   // @desc  Show add page
   // @route GET /profiles/new 
   renderNewProfile:  (req, res) => {
-    res.render("profiles/new", {profile: new Profile () })
+    res.render("profiles/new", { profile: new Profile () })  
+      // {profile: new Profile () })//or {profile: null instead of {profile: new Profile}}
   },
 
   // @desc  Process add profile 
@@ -37,13 +38,16 @@ module.exports = {
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       req.body.user = req.user.id 
-      await Profile.create({
+      // await Profile.create(req.body) //Error: providers is not defined
+
+      await Profile.create({//await Profile.create(req.body)
         user: req.body.user,
         name: req.body.name,
         birthDate: req.body.birthDate,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
-        image: req.body.image
+        image: req.body.image,
+        providers: req.body.providers
       })
 
       console.log(">>>> New profile! Whomp")
