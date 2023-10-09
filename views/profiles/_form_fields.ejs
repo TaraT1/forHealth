@@ -17,6 +17,20 @@
   <label for="journal" class="form-label">Journal</label>
     <input type="text" class="form-control" id="journal" name="journal" value="<%= profile.journal %>">
   </div>
+  
+  <div>
+    <label for="providers">Providers</label>
+    <select name="providers" id="providers" class="form-control" multiple>
+      <% providers.forEach(function(provider) { %>
+      <option value="<%= provider._id %>"
+        <% if (profile && profile.providers && profile.providers.includes(provider._id)) { %>
+          selected
+        <% } %>
+        ><%= provider.name %>
+      </option>
+      <% }) %>
+    </select>
+  </div>
 
   <div>
     <label for="imgUpload" class="form-label">Image</label>
