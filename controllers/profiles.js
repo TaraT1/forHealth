@@ -38,6 +38,7 @@ module.exports = {
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       req.body.user = req.user.id 
+      //???How define providers
       // await Profile.create(req.body) //Error: providers is not defined
 
       await Profile.create({//await Profile.create(req.body)
@@ -46,8 +47,8 @@ module.exports = {
         birthDate: req.body.birthDate,
         eHealthRecords: req.body.eHealthRecords,
         journal: req.body.journal,
-        image: req.body.image,
-        providers: req.body.providers
+        image: req.body.image
+        // providers: req.body.providers
       })
 
       console.log(">>>> New profile! Whomp")
