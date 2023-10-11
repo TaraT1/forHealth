@@ -14,7 +14,8 @@ module.exports = {
   getProviders: async (req, res) => {
     
     try {
-      const providers = await Provider.find({ user: req.user.id }).populate('profile')
+      const providers = await Provider.find({ user: req.user.id })
+      .populate('profiles')
       // const profiles = await Profile.find({user: req.user.id})
       res.render("providers/providers", { 
         // profile: profile, 
@@ -45,24 +46,31 @@ module.exports = {
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       try {
+      // ORIG
+      // req.body.user = req.user.id
+      // const profiles = await Profile.find({user: req.user.id})
+      // const profile = await Profile.query({ _id: mongoose.Types.ObjectId(id) })
+      // req.body.profile = req.profile.id
+      
       req.body.user = req.user.id
-      const profiles = await Profile.find({user: req.user.id})
-      const profile = await Profile.query({ _id: mongoose.Types.ObjectId(id) })
-      req.body.profile = req.profile.id
+      req.body.profiles = Array.isArray(req.body.profiles) ? req.body.profiles : [req.body.profiles]
 
-      await Provider.create({
-        name: req.body.name,
-        specialization: req.body.specialization,
-        address: req.body.address,
-        phone: req.body.phone,
-        website: req.body.website,
-        socials: req.body.socials,
-        media: req.body.media,
-        notes: req.body.notes,
-        proflle: req.body.profile,
-        profiles: profiles,
-        user: req.body.user
-      })
+      await Provider.create(req.body)
+
+      // ORIG note: req.body works
+      // await Provider.create({
+      //   name: req.body.name,
+      //   specialization: req.body.specialization,
+      //   address: req.body.address,
+      //   phone: req.body.phone,
+      //   website: req.body.website,
+      //   socials: req.body.socials,
+      //   media: req.body.media,
+      //   notes: req.body.notes,
+      //   proflle: req.body.profile,
+      //   profiles: profiles,
+      //   user: req.body.user
+      // })
 
       console.log(">>>> New provider! Whomp")
       res.redirect('/providers')
@@ -73,7 +81,7 @@ module.exports = {
     }
   },
 
-  // @desc    Show provider
+  // @desc    Show provider ??? need this?
   // @router  GET /providers/:id
   getProvider: async (req, res) => {
     try {
@@ -98,29 +106,42 @@ module.exports = {
   updateProvider: async (req, res) => {
     
     try {
-      //Get profiles associated with user in order to link profile to provide
-      const profiles = await Profile.find({user: req.user.id})
-      //Link profile, (find, associate, post)
+      req.body.profiles = Array.isArray(req.body.profiles) ? req.body.profiles : [req.body.profiles]
+      let provider = await Provider.findOne({ _id: req.params.id, user: req.user.id })
+      if (provider) {
+        provider = await Provider.findOneAndUpdate({_id: req.params.id}, req.body, {
+          new: true,
+          runValidators: true,
+        })
       
-      const profile = await Profile.findByIdAndUpdate({user: req.user.id})
-      // const profile = await Profile.findById({user: req.user.id})
 
-      const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
-      {
-      profile: req.body.profile,
-      name: req.body.name,
-      specialization: req.body.specialization,
-      address: req.body.address,
-      phone: req.body.phone,
-      website:  req.body.website,
-      socials: req.body.socials,
-      media: req.body.media,
-      notes: req.body.notes,
-      },
-      {new: true})
+
+
+      //ORIG
+      // //Get profiles associated with user in order to link profile to provide const profiles = await Profile.find({user: req.user.id})
+      // //Link profile, (find, associate, post)
+      // const profile = await Profile.findByIdAndUpdate({user: req.user.id})
+      // // const profile = await Profile.findById({user: req.user.id})
+
+      // const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
+      // {
+      // profile: req.body.profile,
+      // name: req.body.name,
+      // specialization: req.body.specialization,
+      // address: req.body.address,
+      // phone: req.body.phone,
+      // website:  req.body.website,
+      // socials: req.body.socials,
+      // media: req.body.media,
+      // notes: req.body.notes,
+      // },
+      // {new: true})
 
       console.log(">>> Whomp! Update provider: ", provider)
       res.redirect("/providers")
+      } else {
+        res.redirect("/providers")
+      }
 
     } catch (err) {
       console.log(err)
