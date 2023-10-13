@@ -6,7 +6,6 @@ const Profile = require("../models/Profile");
 const Provider = require("../models/Provider");
 const { trusted } = require("mongoose");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
-const dayjs = require('dayjs') //not implementing correctly
 
 module.exports = {
   // @desc  Show all profiles
@@ -26,7 +25,6 @@ module.exports = {
   // @route GET /profiles/new 
   renderNewProfile:  (req, res) => {
     res.render("profiles/new", { profile: new Profile () })  
-      // {profile: new Profile () })//or {profile: null instead of {profile: new Profile}}
   },
 
   // @desc  Process add profile 
@@ -38,20 +36,8 @@ module.exports = {
       // const result = await cloudinary.uploader.upload(req.file.path);
 
       req.body.user = req.user.id 
-      //???How define providers
-      // await Profile.create(req.body) //Error: providers is not defined
+      await Profile.create(req.body)
 
-      await Profile.create({//await Profile.create(req.body)
-        user: req.body.user,
-        name: req.body.name,
-        birthDate: req.body.birthDate,
-        eHealthRecords: req.body.eHealthRecords,
-        journal: req.body.journal,
-        image: req.body.image
-        // providers: req.body.providers
-      })
-
-      console.log(">>>> New profile! Whomp")
       res.redirect('/profiles')
         
         } catch(err) {
