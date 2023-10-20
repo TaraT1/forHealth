@@ -18,7 +18,8 @@ module.exports = {
     };
 
     try {
-      const notes = Note.aggregate([
+      // const notes = Note.aggregate([
+      const profiles = Profile.aggregate([
       { $sort: { updatedAt: -1 } },
       { $match: {user: mongoose.Types.ObjectId(req.user.id) } },
       {
@@ -32,12 +33,14 @@ module.exports = {
     .limit(perPage)
     .exec();
 
-    const count = await Note.count();
+    // const count = await Note.count();
+    const count = await Profile.count();
 
-    res.render('dashboard/index', {
+    // res.render('dashboard/index', {
+    res.render('profiles/profiles', {
       firstName: req.user.firstName,
       locals,
-      notes,
+      profiles,
       layout: '../views/layouts/dashboard',
       current: page,
       pages: Math.ceil(count / perPage)

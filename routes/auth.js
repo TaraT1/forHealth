@@ -20,7 +20,8 @@ router.get('/auth/google',
 router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login-failure',
-    successRedirect: '/profiles', // >>>> Change to /dashboard
+    successRedirect: '/dashboard', // >>>> To dashboard after authentication
+    // successRedirect: '/profiles', // >>>> Change to /dashboard
     }),
     ),
 
