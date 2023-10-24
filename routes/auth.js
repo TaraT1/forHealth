@@ -20,16 +20,17 @@ router.get('/auth/google',
 router.get('/google/callback', 
   passport.authenticate('google', { 
     failureRedirect: '/login-failure',
-    successRedirect: '/dashboard', // >>>> To dashboard after authentication
-    // successRedirect: '/profiles', // >>>> Change to /dashboard
+    successRedirect: '/dashboard', // To dashboard after authentication
     }),
-    ),
+),
 
 //Route if something goes awry -- /login-failure
 router.get('/login-failure', (req, res) => {
     res.send('Something went wrong')
 });
 
+// @desc    Logout user
+// @route   /auth/logout
 // Destroy user session -- /auth/logout
 router.get('/auth/logout', (req, res) => {
     req.session.destroy(error => {
