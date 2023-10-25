@@ -22,12 +22,12 @@ module.exports = {
       const profiles = Profile.aggregate([
       { $sort: { updatedAt: -1 } },
       { $match: {user: mongoose.Types.ObjectId(req.user.id) } },
-      {
-        $project: {
-          title: { $substr: ['$title', 0, 30 ] },
-          body: { $substr: ['$body', 0, 100 ] },
-        },
-      }
+      // {
+      //   $project: {
+      //     title: { $substr: ['$title', 0, 30 ] },
+      //     body: { $substr: ['$body', 0, 100 ] },
+      //   },
+      // }
     ])
     .skip(perPage * page - perPage)
     .limit(perPage)
@@ -36,8 +36,8 @@ module.exports = {
     // const count = await Note.count();
     const count = await Profile.count();
 
-    // res.render('dashboard/index', {
-    res.render('profiles/profiles', {
+    res.render('dashboard/index', {
+    // res.render('profiles/profiles', {
       firstName: req.user.firstName,
       locals,
       profiles,
