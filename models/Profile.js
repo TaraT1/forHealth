@@ -13,9 +13,31 @@ const ProfileSchema = new mongoose.Schema({
     type: Date,
     required: false, 
   },
+  bloodType: {
+    type: String,
+    require: false,
+  },
   eHealthRecords: {
     type: String,
     require: false,
+  },
+  insurance: {
+    type: String,
+    require: false,
+  },
+  inCaseOfEmergency: {
+    iceName: {
+      type: String,
+    },
+    location: {
+      type: String,
+    },
+    phone: {
+      type: phone,
+    },
+    email: {
+      type: email,
+    },
   },
   journal: {
     type: String,
