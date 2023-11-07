@@ -33,10 +33,10 @@ const ProfileSchema = new mongoose.Schema({
       type: String,
     },
     phone: {
-      type: phone,
+      type: String,
     },
     email: {
-      type: email,
+      type: String,
     },
   },
   journal: {

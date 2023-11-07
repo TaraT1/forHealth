@@ -19,7 +19,7 @@ module.exports = {
 
     try {
       // const notes = Note.aggregate([
-      const profiles = Profile.find({ user: req.user.id })
+      const profiles = await Profile.find({ user: req.user.id })
       // .aggregate([
       //   { $sort: { updatedAt: -1 } },
       //   { $match: {user: mongoose.Types.ObjectId(req.user.id) } },
@@ -52,3 +52,17 @@ module.exports = {
   }
 }
 
+/*
+  // @desc  Show all profiles
+  // @route GET /profiles 
+  getProfiles: async (req, res) => {
+    try {
+      const profiles = await Profile.find( {user: req.user.id} )
+        .populate('providers');
+      res.render("profiles/profiles", { profiles: profiles });
+    } 
+    catch (err) {
+      // res.send("There were no profiles found. Please create a health profile by clicking Add New Profile.")
+      console.log(">>>>> ", err);
+     } }
+*/
