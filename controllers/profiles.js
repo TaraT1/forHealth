@@ -73,6 +73,9 @@ module.exports = {
         {
           name: req.body.name,
           birthDate: req.body.birthDate,
+          bloodType: req.body.bloodType,
+          inCaseOfEmergency: req.body.inCaseOfEmergency,
+          insurance: req.body.insurance,
           eHealthRecords: req.body.eHealthRecords,
           journal: req.body.journal}, 
           {new: true});

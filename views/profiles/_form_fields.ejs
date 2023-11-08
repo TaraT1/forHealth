@@ -7,7 +7,22 @@
     <label for="birthDate" class="form-label">Birthdate</label>
     <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().slice(0,10) %>">
  </div> 
-  
+
+ <div> 
+    <label for="bloodType" class="form-label">Blood type</label>
+    <input type="text" class="form-control" id="bloodType" name="bloodType" value="<%= profile.bloodType %>">
+ </div>
+
+  <div>
+    <label for="inCaseOfEmergency" class="form-label">In Case of Emergency</label>
+    <input type="'text" class="form-control" id="inCaseOfEmergency" name="inCaseOfEmergency" value="<%= profile.inCaseOfEmergency %>">
+  </div>
+
+  <div>
+    <label for="insurance" class="form-label">Insurance Information</label>
+    <input type="text" class="form-control" id="insurance" name="insurance" value="<%= profile.insurance %>">
+  </div>
+
   <div>
     <label for="eHealthRecords" class="form-label">eHealth Records</label>
     <input type="text" class="form-control" id="eHealthRecords" name="eHealthRecords" value="<%= profile.eHealthRecords %>">

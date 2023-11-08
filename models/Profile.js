@@ -26,18 +26,7 @@ const ProfileSchema = new mongoose.Schema({
     require: false,
   },
   inCaseOfEmergency: {
-    iceName: {
       type: String,
-    },
-    location: {
-      type: String,
-    },
-    phone: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
   },
   journal: {
     type: String,
