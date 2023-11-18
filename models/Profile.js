@@ -9,6 +9,20 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  /*
+ fullName: {
+  fName,
+  lName,
+ }, 
+ contact: {
+  phone: String,
+  email: String
+},
+  address: {
+    street: String,
+    city: String
+ },
+*/
   birthDate: {
     type: Date,
     required: false, 
@@ -43,14 +57,11 @@ const ProfileSchema = new mongoose.Schema({
     }],
   createdAt: {
     type: Date,
-    required: true,
+    immutable: true,
     default: Date.now,
   },
-  updated: {
-    type: Date,
-    required: true,
-    default: Date.now,
-  },
-});
+},
+{ timestamps: true}
+);
 
 module.exports = mongoose.model('Profile', ProfileSchema);
