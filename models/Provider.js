@@ -37,20 +37,25 @@ const ProviderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
     }],
-    user: {
+    facilities: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Facility',
+    }],
+    user: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-    },
+    }],
     createdAt: {
         type: Date,
-        required: true,
+        immutable: true,
         default: Date.now,
     },
-    updated: {
+    updatedAt: {
         type: Date,
-        required: true,
-        default: Date.now
-    }
-});
+        default: Date.now,
+    },
+},
+{timestamps: true},
+);
 
 module.exports = mongoose.model('Provider', ProviderSchema);
