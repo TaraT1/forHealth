@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const Provider = require('./Provider')
+const Profile = require('./Profile')
 
 const HealthInfoSchema = new mongoose.Schema({
     user: {
@@ -9,8 +11,21 @@ const HealthInfoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
     },
+    requirements: {
+        name: String,
+        description: String,
+        status: String,
+    },
+    recommendations: {
+        name: String,
+        description: String,
+        status: String,
+    },
     events: {
-        type: String,
+        title: String,
+        description: String,
+        date: Date,
+        outcome: String,
     },
     allergies: {
         trigger: String,
@@ -19,6 +34,7 @@ const HealthInfoSchema = new mongoose.Schema({
         note: String,
     },
     conditions: {
+        name: String,
         type: String,
         note: String,
     },
