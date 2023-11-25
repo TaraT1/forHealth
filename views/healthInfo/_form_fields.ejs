@@ -4,12 +4,30 @@
 </div>
 <div>
     <label for="requirement" class="form-label">Requirements for Care</label>
-    <input type="text" class="form-control" id="requirement" name="requirement" 
-    required value="<%#= requirement.name %>">
-</<div>
+    <input type="text" class="form-control" id="requirement" name="requirement" value="<%#= requirement.name %>">
+</div>
+<div>
+    <label for ="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description" name="description" value="<%#= requirement.description %>">
+</div>
+<div>
+    <label for="status" class="form-label">Status</label>
+    <input type="text" class="form-control" id="status"
+    name="status" value="<%#=requirement.status %>">
+</div>
+<div>
     <label for="recommendation" class="form-label">Recommendations for Care </label>
-    <input type="text" class="form-control" id="recommendation" name="recommendation" 
-    required value="<%#= recommendation.name %>">
+    <input type="text" class="form-control" id="recommendation" name="recommendation" value="<%#= recommendation.name %>">
+</div>
+<div>
+    <label for="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description"
+    name="description" value="<%#=recommendation.description %>">
+</div>
+<div>
+    <label for="status" class="form-label">Status</label>
+    <input type="text" class="form-control" id="status"
+    name="status" value="<%#=recommendation.status %>">
 </div>
 <div>
     <label for="event" class="form-label">Medical Event </label>
@@ -26,3 +44,5 @@
     <input type="allergy" class="form-control" id="allergy" name="allergy" 
     required value="<%#= allergies.trigger %>">
 </div>
+<div>
+    <label
