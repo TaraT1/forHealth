@@ -32,16 +32,37 @@
 <div>
     <label for="event" class="form-label">Medical Event </label>
     <input type="event" class="form-control" id="event" name="event" 
-    required value="<%#= events.title%>">
+    value="<%#= event.title%>">
 </div>
 <div>
-    <label for="conditions" class="form-label">Medical Conditions </label>
-    <input type="conditions" class="form-control" id="conditions" name="conditions" 
-    required value="<%#= conditions.name%>">
+    <label for="description" class="form-label">Event Description </label>
+    <input type="text" class="form-control" id="description" name="description" value="<%#= event.description %>">
+</div>
+<div>
+    <label for="eventDate" class="form-label">Event Date</label>
+    <input type="date" class="form-control" id="eventDate" 
+    name="eventDate" value="<%#= event.date == null ? '' : event.date.toISOString().slice(0,10) %>">
+</div>
+<div>
+    <label for="outcome" class="form-label">Event Outcome</label>
+    <input type="text" class="form-control" id="outcome"
+    name="outcome" value="<%#= event.outcome %>">
+</div>
+<div>
+    <label for="condition" class="form-label">Medical Condition </label>
+    <input type="text" class="form-control" id="condition" name="condition" value="<%#= condition.name%>">
+</div>
+<div>
+    <label for="type" class="form-label">Condition Type</label>
+    <input type="text" class="form-control" id="type" name="type" value="<%#= condition.type %>">
+</div>
+<div>
+    <label for="note" class="form-label">Note for Condition</label>
+    <input type="text" class="form-control" id="note" name="note" value="<%#= condition.note %>">
 </div>
 <div>
     <label for="allergies" class="form-label"> Allergies </label>
-    <input type="allergy" class="form-control" id="allergy" name="allergy" 
+    <input type="text" class="form-control" id="allergy" name="allergy" 
     required value="<%#= allergies.trigger %>">
 </div>
 <div>
