@@ -63,7 +63,17 @@
 <div>
     <label for="allergies" class="form-label"> Allergies </label>
     <input type="text" class="form-control" id="allergy" name="allergy" 
-    required value="<%#= allergies.trigger %>">
+    value="<%#= allergies.trigger %>">
 </div>
 <div>
-    <label
+    <label for="type" class="form-label">Type of Allergy </label>
+    <input type="text" class="form-control" id="type" name="type" value="<%#= allergies.type %>">
+</div>
+<div>
+    <label for="reaction" class="form-label">Allergy Reaction </label>
+    <input type="text" class="form-control" id="reaction" name="reaction" value="<%#= allergies.value %>">
+</div>
+<div>
+    <label for="allergyNote" class="form-label">Note for Allergy</label>
+    <input type="text" class="form-control" id="allergyNote" name="allergyNote" value="<%#= allergies.note %>">
+</div>
