@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// integrated in HealthInfo
 const MedSuppVaxSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -9,7 +10,7 @@ const MedSuppVaxSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
     },
-    medicine: {
+    medicine: [{
         medName: String,
         description: String,
         dosage: String,
@@ -17,20 +18,20 @@ const MedSuppVaxSchema = new mongoose.Schema({
             ref: 'Provider',
         dateStart: Date,
         dateEnd: Date,
-    },
-    supplements: {
+    }],
+    supplements: [{
         suppName: String,
         note: String,
         dateStart: Date,
         dateEnd: Date,
-    },
-    vax: {
+    }],
+    vax: [{
         vaxName: String,
         date: Date,
         note: String,
         provider: mongoose.Schema.Types.ObjectId,
             ref: 'Provider',
-    },
+    }],
 },
 {timestamps: true},
 )
