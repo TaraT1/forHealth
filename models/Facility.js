@@ -31,6 +31,12 @@ const FacilitySchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    pharmacy: [{
+        name: String,
+        address: String,
+        phone: String,
+        website: String,
+    }],
     providers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Provider',
