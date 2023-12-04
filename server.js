@@ -43,6 +43,7 @@ app.use(passport.session())
 const authRoutes = require("./routes/auth");
 const mainRoutes = require("./routes/main");
 const dashboardRoutes = require("./routes/dashboard");
+const healthInfoRoutes = require("./routes/healthInfo");
 const profileRoutes = require("./routes/profiles");
 const providerRoutes = require("./routes/providers");
 
@@ -84,6 +85,7 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/", authRoutes);
 app.use("/dashboard", dashboardRoutes); 
+app.use("/healthInfo", healthInfoRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 
