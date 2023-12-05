@@ -11,47 +11,46 @@ const HealthInfoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
     },
-    requirements: [{
-        reqName: String,
-        reqDescription: String,
-        reqStatus: String,
+    notes: [{
+        name: String,
+        description: String,
     }],
-    recommendations: [{
-        recName: String,
-        recDescription: String,
-        recStatus: String,
+    tasks: [{
+        name: String,
+        description: String,
+        status: String,
     }],
     medicine: [{
-        medName: String,
-        medDescription: String,
-        medDosage: String,
-        medProvider: mongoose.Schema.Types.ObjectId, ref: 'Provider',
-        medDateStart: Date,
-        medDateEnd: Date,
+        name: String,
+        description: String,
+        dosage: String,
+        provider: mongoose.Schema.Types.ObjectId, ref: 'Provider',
+        dateStart: Date,
+        dateEnd: Date,
     }],
     vaccinations: [{
-        vaxName: String,
-        vaxDescription: String,
-        vaxDate: Date,
-        vaxProvder: mongoose.Schema.Types.ObjectId, ref: 'Provider',
+        name: String,
+        description: String,
+        date: Date,
+        provder: mongoose.Schema.Types.ObjectId, ref: 'Provider',
     }],
     supplements: [{
-        suppName: String,
-        suppNote: String,
-        suppDateStart: Date,
-        suppDateEnd: Date,
+        name: String,
+        note: String,
+        dateStart: Date,
+        dateEnd: Date,
     }],
     events: [{
-        eventTitle: String,
-        eventDescription: String,
-        eventDate: Date,
-        eventOutcome: String,
+        title: String,
+        description: String,
+        date: Date,
+        outcome: String,
     }],
     allergies: [{
-        allergyTrigger: String,
-        allergyType: String, //food, drug, latex, insect, airborne, skin
-        allergyReaction: String, //mild, moderate, severe
-        allergyNote: String,
+        trigger: String,
+        type: String, //food, drug, latex, insect, airborne, skin
+        reaction: String, //mild, moderate, severe
+        note: String,
     }],
     conditions: [{
         name: String,
