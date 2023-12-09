@@ -23,7 +23,7 @@ getHealthInfo: async (req, res) => {
 // @desc Show add page
 // @route GET /healthInfo/new ***TODO
 renderNewHealthInfo: async (req, res) => {
-
+    res.render("healthInfo/new", {healthInfo: new HealthInfo () })
 },
 
 // @desc Create healthInfo route
