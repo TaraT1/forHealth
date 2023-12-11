@@ -140,7 +140,7 @@ module.exports = {
       console.log(">>> Whomp! Update provider: ", provider)
       res.redirect("/providers")
       } else {
-        res.redirect("/providers")
+        res.redirect("/dashboard")
       }
 
     } catch (err) {
