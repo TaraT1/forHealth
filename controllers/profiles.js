@@ -69,17 +69,11 @@ module.exports = {
   updateProfile: async (req, res) => {
     
      try { 
-       const profile = await Profile.findByIdAndUpdate({_id: req.params.id},
-        {
-          name: req.body.name,
-          birthDate: req.body.birthDate,
-          bloodType: req.body.bloodType,
-          inCaseOfEmergency: req.body.inCaseOfEmergency,
-          insurance: req.body.insurance,
-          eHealthRecords: req.body.eHealthRecords,
-          journal: req.body.journal}, 
-          {new: true});
-     
+      const profile  = await Profile.findOneAndUpdate({ _id: req.params.id, user: req.user.id }, req.body, {
+        new: true,
+        runValidators: true,
+        })
+      
       console.log(">>> Whomp! Updated profile: ", profile)
       res.redirect("/profiles");
       } catch (err){
