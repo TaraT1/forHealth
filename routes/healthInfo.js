@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const upload = require("../middleware/multer")
 const healthInfoController = require("../controllers/healthInfo")
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
