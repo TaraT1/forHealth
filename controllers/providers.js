@@ -3,7 +3,6 @@ const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
-const mongoose  = require("mongoose");
 const { trusted } = require("mongoose"); //not sure where this is from 
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
@@ -35,7 +34,7 @@ module.exports = {
     res.render("providers/new", {
       profiles: profiles, 
       // profile: profile,
-      provider: new Provider () 
+      provider: new Provider () //???
     })
   },
 
@@ -57,21 +56,6 @@ module.exports = {
 
       await Provider.create(req.body)
 
-      // ORIG note: req.body works
-      // await Provider.create({
-      //   name: req.body.name,
-      //   specialization: req.body.specialization,
-      //   address: req.body.address,
-      //   phone: req.body.phone,
-      //   website: req.body.website,
-      //   socials: req.body.socials,
-      //   media: req.body.media,
-      //   notes: req.body.notes,
-      //   proflle: req.body.profile,
-      //   profiles: profiles,
-      //   user: req.body.user
-      // })
-
       console.log(">>>> New provider! Whomp")
       res.redirect('/providers')
     
@@ -81,22 +65,25 @@ module.exports = {
     }
   },
 
-  // @desc    Show provider ??? need this?
+  // @desc    Show provider 
   // @router  GET /providers/:id
   getProvider: async (req, res) => {
     try {
       const profiles = await Profile.find({user: req.user.id})
       const profile = await Profile.findById(req.params.id)
       const provider = await Provider.findById(req.params.id).populate('user');
-      if(provider.user._id != req.user.id) {
-        res.send('Err 404')
-      } else{ 
+      //user.id validation rror. user is [new ObjectId("")]
+      // if(provider.user._id != req.user.id) {
+      //   res.send('Err 404')
+        // console.log(`provider.user._id: ${provider.user._id}`)
+        console.log(`req.user.id: ${req.user.id}`)
+      // } else{ 
         res.render("providers/provider", { 
           _id: req.params.id,
           profiles: profiles, 
           profile: profile, 
           provider
-        }) }
+        }) //}
       } catch (err) {
         console.log(err);
         res.send("something went wrong")
@@ -104,49 +91,23 @@ module.exports = {
   // @desc    Update provider
   // @router  POST /profiles/update/:id
   updateProvider: async (req, res) => {
-    
     try {
-      req.body.profiles = Array.isArray(req.body.profiles) ? req.body.profiles : [req.body.profiles]
+      //Error 404
+      // req.body.profiles = Array.isArray(req.body.profiles) ? req.body.profiles : [req.body.profiles]
+
       let provider = await Provider.findOne({ _id: req.params.id, user: req.user.id })
       if (provider) {
         provider = await Provider.findOneAndUpdate({_id: req.params.id}, req.body, {
           new: true,
           runValidators: true,
         })
-      
-
-
-
-      //ORIG
-      // //Get profiles associated with user in order to link profile to provide const profiles = await Profile.find({user: req.user.id})
-      // //Link profile, (find, associate, post)
-      // const profile = await Profile.findByIdAndUpdate({user: req.user.id})
-      // // const profile = await Profile.findById({user: req.user.id})
-
-      // const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
-      // {
-      // profile: req.body.profile,
-      // name: req.body.name,
-      // specialization: req.body.specialization,
-      // address: req.body.address,
-      // phone: req.body.phone,
-      // website:  req.body.website,
-      // socials: req.body.socials,
-      // media: req.body.media,
-      // notes: req.body.notes,
-      // },
-      // {new: true})
-
+      }
       console.log(">>> Whomp! Update provider: ", provider)
       res.redirect("/providers")
-      } else {
-        res.redirect("/dashboard")
-      }
-
     } catch (err) {
-      console.log(err)
-      res.send("Something went wrong")
-    }},
+        console.log(err)
+        res.send("Something went wrong")
+      }},
     
   // @desc    Delete provider
   // @router  DELETE /providers/:id

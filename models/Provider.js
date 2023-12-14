@@ -33,10 +33,10 @@ const ProviderSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    profiles: {
+    profiles: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
-    },
+    }],
     facilities: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Facility',
