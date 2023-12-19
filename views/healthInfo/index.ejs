@@ -1,0 +1,31 @@
+<div class="container container-fluid container-fluid-custom pb-5 mb-5">
+  <div class="row mb-4">
+    <div class="col">
+      <h1>Health Information</h1>
+    </div>
+
+    <%- include('../partials/_navbar') %>
+
+    <div class="col text-end">
+      <a href="/healthInfo/new" class="btn btn-primary">Add Health Information</a>
+    </div>
+  </div>
+
+  <div class="container container-fluid container-fluid-custom">
+    <div class="row">
+      <% if(healthInfoData.length > 0) { for(let i = 0; i < healthInfoData.length; i++ ) {
+      %>
+      <div class="col-sm-4 mb-4">
+        <div class="card border-primary" style="min-height: 60px">
+          <a
+            href="/healthInfo/<%= healthInfoData[i]._id %>"
+            class="card-body text-decoration-none"
+          >
+            <h5 class="card-title"><%= profile[i].name %></h5>
+          </a>
+        </div>
+      </div>
+      <% }} %>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
-const Provider = require('./Provider')
-const Profile = require('./Profile')
 
-const HealthInfoSchema = new mongoose.Schema({
+const HealthInfoSchema = new mongoose.Schema(
+    {
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -24,7 +23,9 @@ const HealthInfoSchema = new mongoose.Schema({
         name: String,
         description: String,
         dosage: String,
-        provider: mongoose.Schema.Types.ObjectId, ref: 'Provider',
+        provider: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Provider'},
         dateStart: Date,
         dateEnd: Date,
     }],
@@ -32,7 +33,9 @@ const HealthInfoSchema = new mongoose.Schema({
         name: String,
         description: String,
         date: Date,
-        provder: mongoose.Schema.Types.ObjectId, ref: 'Provider',
+        provder: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Provider'},
     }],
     supplements: [{
         name: String,
