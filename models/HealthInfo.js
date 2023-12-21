@@ -6,7 +6,7 @@ const HealthInfoSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    profile: {
+    profiles: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile',
     },

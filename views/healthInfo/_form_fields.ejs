@@ -1,6 +1,15 @@
 <div>
-    <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control" id="name" name="name" required value="<%= profile.name %>">
+    <label for="profiles" class="form-label">Profile</label> 
+    <select name="profiles" id="profiles" class="form-control" multiple>
+        <% profiles.forEach(function(profile) { %>
+        <option value="<%= profile._id %>"
+            <% if (healthInfo && healthInfo.profiles && healthInfo.profiles.includes(profile._id)) { %>
+                selected
+                <% } %>
+                ><%= profile.name %>
+            </option>
+            <% }) %>
+    </select>
 </div>
 <div>
     <label for="requirement" class="form-label">Requirements for Care</label>
