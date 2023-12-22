@@ -16,12 +16,16 @@ module.exports = {
       // const profiles = await Profile.find( {user: req.user.id} )
       // !profile add profile
       const healthInfoData = await HealthInfo.find({
-        user: req.user.id,
-      }).populate("profiles");
+        user: req.user.id,})
+        .populate(
+            "profiles",
+            "providers"
+        );
       res.render("healthInfo/index", {
         healthInfoData: healthInfoData,
-        profiles: profiles,
+        // profiles: profiles,
       });
+      console.log("Health info found")
     } catch (err) {
       console.log(">>>> ", err);
     }
