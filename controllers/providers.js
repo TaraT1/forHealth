@@ -3,6 +3,7 @@ const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
+const HealthInfo = require("../models/HealthInfo");
 const { trusted } = require("mongoose"); //not sure where this is from
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
