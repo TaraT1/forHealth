@@ -6,7 +6,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
 //HealthInfo Routes
 //*Retrieve health information for profiles accessible to user
-router.get("/", ensureAuth, healthInfoController.getHealthInfoData)
+router.get("/", ensureAuth, healthInfoController.getHealthInfoRecords)
 
 //*Create healthInfo route
 //new healthInfo to render form

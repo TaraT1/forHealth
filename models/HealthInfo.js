@@ -5,10 +5,12 @@ const HealthInfoSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
-    profiles: {
+    profile: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Profile",
+      required: true,
     },
     providers: {
       type: mongoose.Schema.Types.ObjectId,
