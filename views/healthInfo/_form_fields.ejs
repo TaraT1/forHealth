@@ -1,6 +1,6 @@
 <div>
-    <label for="profiles" class="form-label">Profile</label> 
-    <select name="profiles" id="profiles" class="form-control" multiple>
+    <label for="profile" class="form-label">Profile</label> 
+    <select name="profile" id="profile" class="form-control" multiple>
         <% profiles.forEach(function(profile) { %>
         <option value="<%= profile._id %>"
             <% if (healthInfo && healthInfo.profiles && healthInfo.profiles.includes(profile._id)) { %>

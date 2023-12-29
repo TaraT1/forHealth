@@ -5,6 +5,15 @@
         </div>
 
         <form action="/healthInfo" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="profile">Select Profile</label>
+                <select name="profile" ide="profile" class="form-control">
+                    <% profiles.forEach(function(profile) { %>
+                        <option value="<%= profile._id %>"><%= profile.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+
             <%- include("_form_fields") %>
 
             <div class="d-flex justify-content-between pt-3" >
