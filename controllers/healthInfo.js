@@ -16,7 +16,8 @@ module.exports = {
       // const profiles = await Profile.find( {user: req.user.id} )
       // !profile add profile
       const healthInfoRecords = await HealthInfo.find({ user: req.user.id })
-        .populate("profile", "name")
+        // .populate("profile", "name")
+        .populate("profile")
         .populate("providers");
       res.render("healthInfo/index", { healthInfoRecords });
       console.log("Health info found")
@@ -47,6 +48,7 @@ module.exports = {
 
       console.log(">>>> New health info! Whomp");
       res.redirect("/healthInfo");
+
     } catch (err) {
       console.log(err);
       res.send("Something went wrong");
@@ -58,7 +60,7 @@ module.exports = {
   // @route GET [[/:id]]
   getHealthInfo: async (req, res) => {
     try {
-      const healthInfo = await HealthInfo.findOne({_id: req.params.id, user: req.user.id }) 
+      const healthInfo = await HealthInfo.findOne({_id: req.params.id, user: req.user.id }).populate("profile")
       const profiles = await Profile.find({user: req.user.id});
       const providers = await Provider.find({user: req.user.id})
 
@@ -82,7 +84,7 @@ module.exports = {
         // req.body.providers = Array.isArray(req.body.providers)
         //     ? req.body.providers 
         //     : [req.body.providers]
-        let healthInfo = await HealthInfo.findOne({ _id: req.params.id, user: req.user.id })
+        let healthInfo = await HealthInfo.findOne({ _id: req.params.id, user: req.user.id }).populate("profile")
         if (healthInfo) {
             healthInfo = await HealthInfo.findOneAndUpdate({ _id: req.params.id}, req.body, { 
                 new: true, 

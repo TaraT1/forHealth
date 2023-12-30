@@ -12,10 +12,12 @@ const HealthInfoSchema = new mongoose.Schema(
       ref: "Profile",
       required: true,
     },
-    providers: {
+    providers: [
+      {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Provider",
-    },
+      },
+    ],
     notes: [
       {
         name: String,

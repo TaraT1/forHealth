@@ -1,7 +1,7 @@
 <section class = "container-fluid container-fluid-custom pb-5 mb-5"
     <div class="row mt-5">
         <div class="col col-lg-6 d-flex mx-auto justify-content-between align-items_center">
-            <h2>Health Information </h2>
+            <h2>Health Information for <%= healthInfo.profile.name %> </h2>
 
             <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">
                 Delete
@@ -17,7 +17,7 @@
                     <%- include('_form_fields') %>
 
                     <div class="d-flex btn-row justify-content-between pt-3">
-                        <a type="text" class="btn btn-secondary btn-lg" href="/profiles">Cancel</a>
+                        <a type="text" class="btn btn-secondary btn-lg" href="/healthInfo">Cancel</a>
                         <button type="submit" class="btn btn-primary btn-lg">
                             Update
                         </button>

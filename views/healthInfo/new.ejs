@@ -7,7 +7,7 @@
         <form action="/healthInfo" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="profile">Select Profile</label>
-                <select name="profile" ide="profile" class="form-control">
+                <select name="profile" id="profile" class="form-control" required>
                     <% profiles.forEach(function(profile) { %>
                         <option value="<%= profile._id %>"><%= profile.name %></option>
                     <% }) %>
