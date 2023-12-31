@@ -6,21 +6,22 @@ const Provider = require("../models/Provider");
 const HealthInfo = require("../models/HealthInfo");
 const { trusted } = require("mongoose");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
-const providers = require("./providers");
 
 module.exports = {
   // @desc Retrieve health information accessible to user
   // @route GET /healthInfoRecords/
   getHealthInfoRecords: async (req, res) => {
     try {
-      // const profiles = await Profile.find( {user: req.user.id} )
+      const profiles = await Profile.find( {user: req.user.id} )
       // !profile add profile
       const healthInfoRecords = await HealthInfo.find({ user: req.user.id })
-        // .populate("profile", "name")
-        .populate("profile")
-        .populate("providers");
-      res.render("healthInfo/index", { healthInfoRecords });
+        .populate('profile', 'name')
+        // .populate({path: 'profile', select: 'name - _id'})
+        .exec();
+        //.populate("providers")
+      res.render("healthInfo/index", { healthInfoRecords, profiles });
       console.log("Health info found")
+      
     } catch (err) {
       console.log(">>>> ", err);
     }
@@ -28,7 +29,7 @@ module.exports = {
 
   // Add health information
   // @desc Show add page
-  // @route GET /healthInfo/new ***TODO
+  // @route GET /healthInfo/new 
   renderNewHealthInfo: async (req, res) => {
     const profiles = await Profile.find({ user: req.user.id });
     const providers = await Provider.find({ user: req.user.id })
@@ -40,9 +41,9 @@ module.exports = {
   createHealthInfo: async (req, res) => {
     try {
       req.body.user = req.user.id;
-      req.body.providers = Array.isArray(req.body.providers)
-        ? req.body.providers
-        : [req.body.providers];
+      // req.body.providers = Array.isArray(req.body.providers)
+      //   ? req.body.providers
+      //   : [req.body.providers];
 
       await HealthInfo.create(req.body);
 
@@ -71,9 +72,10 @@ module.exports = {
         profiles,
         providers,
       });
+      console.log(healthInfo)
     } catch (err) {
       console.log(err);
-      res.send("Something went wrong");
+      // res.send("something went wrong");
     }
   },
 
@@ -84,12 +86,16 @@ module.exports = {
         // req.body.providers = Array.isArray(req.body.providers)
         //     ? req.body.providers 
         //     : [req.body.providers]
-        let healthInfo = await HealthInfo.findOne({ _id: req.params.id, user: req.user.id }).populate("profile")
+        let healthInfo = await HealthInfo.findOne({ _id: req.params.id, user: req.user.id })
+          .populate("profile", "name")
+          // .populate("providers")
+          .exec()
         if (healthInfo) {
             healthInfo = await HealthInfo.findOneAndUpdate({ _id: req.params.id}, req.body, { 
                 new: true, 
                 runValidators: true,
             })
+            console.log(profile.name)
             res.redirect("/healthInfo")
         } else {
             res.send("Something went wrong in the update")
@@ -102,14 +108,16 @@ module.exports = {
   },
 
   // @desc delete healthinfo
-  // @route DELETE profiles/:id/healthInfo
+  // @route DELETE /:id
   deleteHealthInfo: async (req, res) => {
     try {
-        await HealthInfo.deleteOne({_id: req.params.id, user: req.user.id})
-        res.redirect("/healthInfo")
+      const healthInfo = await HealthInfo.findOne({_id: req.params.id, user: req.user.id }).populate("profile")
+
+      await HealthInfo.deleteOne({_id: req.params.id, user: req.user.id})
+      res.redirect("/healthInfo")
     } catch (err) {
-        console.error(err)
         res.redirect(`/healthInfo/${healthInfo._id}`)
+        console.error(err)
     }
   },
 };
