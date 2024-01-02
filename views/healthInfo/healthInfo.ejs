@@ -37,7 +37,9 @@
                 <button type="button" class="btn-close" data-bs-dismss="modal" aria-label="Close">
                 </button>
                 <div class="modal-body">
-                    <p> You are about to delete the health information for <%= healthInfo.profile.name %>.<br/>
+                    <p> You are about to delete<br> 
+                        the health information for <br>
+                        <%= healthInfo.profile.name %>.<br/>
                         Are you sure?
                     </p>
                 </div>
@@ -46,7 +48,7 @@
                         Close
                     </button>
 
-                    <form action="/healthInfo/<%= healthInfo._id %>?method=DELETE" method="POST" class="position-relative">
+                    <form action="/healthInfo/<%= healthInfo._id %>?_method=DELETE" method="POST" class="position-relative">
                         <button type="submit" class="btn btn-primary">
                             Delete Health Information
                         </button>
