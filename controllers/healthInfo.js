@@ -19,7 +19,8 @@ module.exports = {
         // .populate({path: 'profile', select: 'name - _id'})
         .exec();
         //.populate("providers")
-      res.render("healthInfo/index", { healthInfoRecords, profiles });
+      res.render("healthInfo/index", { healthInfoRecords });
+      // res.render("healthInfo/index", { healthInfoRecords, profiles });
       console.log("Health info found")
       
     } catch (err) {
