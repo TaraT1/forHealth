@@ -20,8 +20,8 @@ const HealthInfoSchema = new mongoose.Schema(
     ],
     notes: [
       {
-        name: String,
-        description: String,
+        noteTitle: String,
+        noteDescription: String,
       },
     ],
     tasks: [

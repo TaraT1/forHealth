@@ -17,11 +17,8 @@ module.exports = {
       const healthInfoRecords = await HealthInfo.find({ user: req.user.id })
         .populate('profile', 'name')
         // .populate({path: 'profile', select: 'name - _id'})
-        .exec();
-        //.populate("providers")
+        .populate("providers")
       res.render("healthInfo/index", { healthInfoRecords });
-      // res.render("healthInfo/index", { healthInfoRecords, profiles });
-      console.log("Health info found")
       
     } catch (err) {
       console.log(">>>> ", err);
@@ -34,7 +31,7 @@ module.exports = {
   renderNewHealthInfo: async (req, res) => {
     const profiles = await Profile.find({ user: req.user.id });
     const providers = await Provider.find({ user: req.user.id })
-    res.render("healthInfo/new", { profiles, providers });
+    res.render("healthInfo/new", { healthInfo: new HealthInfo(), profiles, providers });
   },
 
   // @desc Create healthInfo route
@@ -42,6 +39,7 @@ module.exports = {
   createHealthInfo: async (req, res) => {
     try {
       req.body.user = req.user.id;
+      req.body.notes = req.body.notes || []
       // req.body.providers = Array.isArray(req.body.providers)
       //   ? req.body.providers
       //   : [req.body.providers];
@@ -54,12 +52,11 @@ module.exports = {
     } catch (err) {
       console.log(err);
       res.send("Something went wrong");
-      res.redirect("/healthInfo")
     }
   },
 
   // @desc Get healthInfo (update: get/show, view/edit, update)
-  // @route GET [[/:id]]
+  // @route GET /:id
   getHealthInfo: async (req, res) => {
     try {
       const healthInfo = await HealthInfo.findOne({_id: req.params.id, user: req.user.id }).populate("profile")
@@ -69,42 +66,52 @@ module.exports = {
       if (!healthInfo) return res.redirect("/healthInfo")
 
       res.render("healthInfo/healthInfo", {
+        _id: req.params.id,
         healthInfo,
         profiles,
         providers,
       });
       console.log(healthInfo)
     } catch (err) {
-      console.log(err);
-      // res.send("something went wrong");
+      console.log(">>>> ",err);
+      res.send("something went wrong");
     }
   },
 
   // @desc Update db
-  // @route POST /update/:id
+  // @route POST /healthInfo/update/:id
   updateHealthInfo: async (req, res) => {
     try {
-        // req.body.providers = Array.isArray(req.body.providers)
-        //     ? req.body.providers 
-        //     : [req.body.providers]
-        let healthInfo = await HealthInfo.findOne({ _id: req.params.id, user: req.user.id })
-          .populate("profile", "name")
-          // .populate("providers")
-          .exec()
-        if (healthInfo) {
-            healthInfo = await HealthInfo.findOneAndUpdate({ _id: req.params.id}, req.body, { 
-                new: true, 
-                runValidators: true,
-            })
-            console.log(profile.name)
-            res.redirect("/healthInfo")
-        } else {
-            res.send("Something went wrong in the update")
+        const healthInfo = await HealthInfo.findOne({ 
+          _id: req.params.id, 
+          user: req.user.id 
         }
-    } catch (err) {
-    console.error(err)
-    res.send("Something went wrong")
-    // res.redirect("/dashboard")
+          // .populate("profile", "name")
+          // .populate("providers")
+      )
+        
+        req.body.providers = Array.isArray(req.body.providers)
+            ? req.body.providers 
+            : [req.body.providers]
+
+        req.body.notes = req.body.notes || []
+
+        await HealthInfo.findOneAndUpdate(
+          { _id: req.params.id, user: req.user.id}, 
+          req.body, { 
+            new: true, 
+            runValidators: true,
+            })
+            .populate("profile", "name")
+            .populate("providers")
+
+        console.log(">>>> Whomp! update health info: ", healthInfo)
+        res.redirect('/healthInfo')
+          
+        } catch (err) {
+          console.error(">>>> ",err)
+          res.send("Something went wrong")
+          // res.redirect("/dashboard")
     }
   },
 
