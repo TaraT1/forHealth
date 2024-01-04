@@ -71,7 +71,8 @@ module.exports = {
     try {
       const profiles = await Profile.find({ user: req.user.id });
       const profile = await Profile.findById(req.params.id);
-      const provider = await Provider.findById(req.params.id).populate("user");
+      // const provider = await Provider.findById(req.params.id).populate("user");
+      const provider = await Provider.findOne({_id: req.params.id, user: req.user.id}).populate("profiles")
       //user.id validation rror. user is [new ObjectId("")]
       // if(provider.user._id != req.user.id) {
       //   res.send('Err 404')
