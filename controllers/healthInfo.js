@@ -94,7 +94,7 @@ module.exports = {
             ? req.body.providers 
             : [req.body.providers]
 
-        req.body.notes = req.body.notes || []
+        req.body.notes = req.body.notes || [] // handle empty notes
 
         await HealthInfo.findOneAndUpdate(
           { _id: req.params.id, user: req.user.id}, 
