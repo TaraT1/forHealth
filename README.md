@@ -57,16 +57,12 @@ curl -d {"name": "testName", "birthDate": "2023-01-01", "genderAssignedAtBirth":
 {
 "name": "",
 "birthDate": "",
-"genderAssignedAtBirth": "",
-"genderId": "",
-"geneticBackground": "",
 "eHealthRecords": "",
 "journal:" "",
-"todo": "",
 "image": "",
 "user": "",
 "createdAt": "",
+"updated": ""
 }
 
 ```
-- not working "Unexpected end of JSON input"
