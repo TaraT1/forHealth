@@ -2,27 +2,26 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
 const providersController = require("../controllers/providers");
-//const { ensureAuth } = require("../middleware/auth");
+const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Provider Routes
-//All providers
+//Retrieve all providers
 router.get("/", providersController.getProviders);
-
-// router.get("/", ensureAuth, profilesController.getProfiles);
+// router.get("/", ensureAuth, providersController.getProviders);
 
 //new provider route to render form
-router.get("/new", providersController.renderNewPage);
-//create profile route
-router.post("/", upload.single("file"), providersController.createProvider);
+router.get("/new", ensureAuth, providersController.renderNewPage);
 
-//Get sgl profile
-router.get("/:id", providersController.getProvider);
+//create provider route
+router.post("/", ensureAuth, upload.single("file"), providersController.createProvider); //need upload... multer middleware for POST route
 
-//Edit profile
-router.get("/update/:id", providersController.editProvider);
+//Show provider (get/show, view/edit)
+router.get("/:id", ensureAuth, providersController.getProvider);
 
-router.put("/update/:id", providersController.updateProvider);
+//update db
+router.post("/update/:id", ensureAuth, providersController.updateProvider);
 
-router.delete("/:id", providersController.deleteProvider);
+//Delete profile
+router.delete("/:id", ensureAuth, providersController.deleteProvider);
 
 module.exports = router;

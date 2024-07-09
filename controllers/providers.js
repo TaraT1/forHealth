@@ -1,35 +1,44 @@
 const { render } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
+const User = require("../models/User");
 const Provider = require("../models/Provider");
 const Profile = require("../models/Profile");
-// const Comment = require("../models/Comment");
+const { trusted } = require("mongoose");
+const { ensureAuth, ensureGuest } = require("../middleware/auth")
 
 module.exports = {
 
-  //get all providers
+  // @desc Show all providers 
+  // @route GET /providers
   getProviders: async (req, res) => {
+    console.log("User is: ", req.user) //???
     
     try {
-      const providers = await Provider.find({});
+      const providers = await Provider.find({user: req.user.id}); //TS
       res.render("providers/providers", { providers: providers });
       console.log("Providers found")
     } 
     catch (err) {
-      console.log(err);
+      //res.send("There were no providers found. Please create a provider by clicking Add New Provider. ")
+      console.log(">>>> ", err);
     }
   },
-
-  //** ~get - New provider (display form)
+  // @desc    Show add page
+  // @router  GET /providers/new
   renderNewPage:  (req, res) => {
     res.render("providers/new", {provider: new Provider () })
   },
 
-  //Post Provider Route
+  // @desc    Process add provider
+  // @router  POST /profiles
   createProvider: async (req, res) => {
       // try... Upload image to cloudinary
       // const result = await cloudinary.uploader.upload(req.file.path);
 
-      const provider = new Provider({
+      try {
+      req.body.user = req.user.id
+      // req.body.profile = req.profile.id
+      await Provider.create({
         name: req.body.name,
         specialization: req.body.specialization,
         address: req.body.address,
@@ -38,105 +47,76 @@ module.exports = {
         socials: req.body.socials,
         media: req.body.media,
         notes: req.body.notes,
-        profile: req.body.profile
+        // profile: req.body.profile,
+        user: req.body.user
       })
-      
 
-        try {
-          const newProvider = await provider.save()
-          const providers = await Provider.find({});
-          const profiles = await Profile.find({})
-          console.log("New provider! Whomp")
-          let params = {
-            providers: providers, 
-            profiles: profiles
-          }
-          // res.redirect(`providers/${newProvider.id}` )      
-          res.render(`providers/${newProvider.id}`, params )      
-          // res.redirect("/providers")
-        } catch (err) {
-          console.log(err)
-          if (err){
-            let locals = {errorMessage: "Error Creating Provider"}
-          res.render('providers/new', {
-            provider: provider,
-            locals: locals
-          }) 
-          }
-        }
-      },
- 
-  
-  //get one provider 
-  getProvider: async (req, res) => {
-    try {
-      const provider = await Provider.findById(req.params.id).lean();
-      const providers = await Provider.find();
-      res.render("providers/provider", { provider: provider, providers: providers });
-      console.log(provider);
-      
-    } catch (err) {
-      console.log(err);
-      res.redirect('/')
+      console.log(">>>> New provider! Whomp")
+      res.redirect('/providers')
+    
+    } catch(err) {
+      console.log(err)
+      res.send("Something went wrong")
     }
   },
-  
-  //edit
-  //get
-  
-  // editProvider: async (req, res) => {
-  editProvider: (req, res) => {
 
-  },
-
+  // @desc    Show provider
+  // @router  GET /providers/:id
+  getProvider: async (req, res) => {
+    try {
+      const provider = await Provider.findById(req.params.id).populate('user');
+      if(provider.user._id != req.user.id) {
+        res.send('Err 404')
+      } else{ 
+        res.render("providers/provider", { 
+          _id: req.params.id,
+          provider
+        })
+      }
+      } catch (err) {
+        console.log(err);
+        res.send("something went wrong")
+    }},
+  
+  // @desc    Update provider
+  // @router  POST /profiles/update/:id
   updateProvider: async (req, res) => {
     
     try {
-      const provider = await Provider.findById(req.params.id)
-      provider.name = req.body.name,
-      provider.specialization = req.body.specialization
-      provider.address = req.body.address
-      provider.phone = req.body.phone,
-      provider.website =  req.body.website
-      provider.socials = req.body.socials
-      provider.media = req.body.media
-      provider.notes = req.body.notes
+      const provider = await Provider.findByIdAndUpdate({_id: req.params.id},
+      {
+      name: req.body.name,
+      specialization: req.body.specialization,
+      address: req.body.address,
+      phone: req.body.phone,
+      website:  req.body.website,
+      socials: req.body.socials,
+      media: req.body.media,
+      notes: req.body.notes},
+      {new: true})
 
-      await provider.save()
-      res.redirect(`/providers/${req.params.id}`)
+      console.log(">>> Whomp! Update provider: ", provider)
+      res.redirect("/providers")
     } catch (err) {
-      console.log(err);
-    }
-  },
-
+      console.log(provider, err)
+      res.send("Something went wrong")
+    }},
+    
+  // @desc    Delete provider
+  // @router  DELETE /providers/:id
   deleteProvider: async (req, res) => {
     try {
-      // Find profile by id
       const provider = await Provider.findById({ _id: req.params.id });
       // Delete image from cloudinary
       //await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
-      await Provider.remove({ _id: req.params.id });
+
+      // Delete provider from db
+      await Provider.deleteOne({ _id: req.params.id });
       console.log("Deleted Provider");
       res.redirect("/providers");
     } catch (err) {
-      res.redirect("/providers");
+      res.redirect(`/providers/${provider._id}`);
+      console.log(err)
     }
   }
 }
-  // async function renderNewProfile(res, profile, hasError = false) {
-  //   renderFormPage(res, profile, 'new', hasError)
-  // }
-
-  // async function renderFormPage(res, profile, form, hasError = false) {
-  //   const profiles = await Profile.find({})
-  //   const params = {
-
-  //   }
-  // }
-
-
-
-
-
-

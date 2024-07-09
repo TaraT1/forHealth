@@ -1,0 +1,13 @@
+<div class="container-fluid container-fluid-custom">
+    <h2>Edit Provider</h2>
+    <p> provider/edit </p>
+    
+    <form action="/providers/update/<%= provider._id %>?=_method=PUT" method="POST" enctype="multipart/form-data">
+        <%- include('_form_fields') %>
+        <div class="form-row form-row-end btn-row">
+            <a href="/providers/<%= provider._id %>">Cancel</a>
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+</div>
