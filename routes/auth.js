@@ -55,11 +55,11 @@ router.get('/login-failure', (req, res) => {
 
 // Logout 
 router.get('/logout', (req, res, next) => {
-            req.logout((error) => {
-                if(error) {
-                    return next(error)}
-                    res.redirect('/')
-                })
+    req.logout((error) => {
+        if(error) {
+            return next(error)}
+            res.redirect('/')
+    })
 }),
 
 // Persist user data after auth success
