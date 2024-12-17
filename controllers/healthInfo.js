@@ -39,29 +39,70 @@ module.exports = {
   createHealthInfo: async (req, res) => {
     try {
       req.body.user = req.user.id;
-      
+      req.body.profiles = req.body.profiles
+
+      const newHealthInfo = new HealthInfo({
+        profile: profile._id,
+        notes: [],
+        tasks: [],
+        medicine: [],
+        vaccinations: [],
+        supplements: [],
+        events: [],
+        allergies: [],
+        conditions: []
+      })
+
+      await newHealthInfo.save()
+      profile.healthInfo.push(newHealthInfo._id) //??
+      await profile.save()
+
+      console.log(">>>> New health info! Whomp");
+      res.redirect(`/healthInfo/${req.params.id}`);
+
+    } catch (err) {
+      console.log(err);
+      res.redirect(`/healthInfo`)
+    }
+  },
+  // @desc Create note route
+  // @route POST /healthInfo/:id/note
+  createNote: async (req, res) => {
+    try {
+      const note = await HealthInfo.findById(req.params.id)
+      healthInfo.notes.push({
+        noteTitle: req.body.title,
+        noteDescription: req.body.description
+      })
+    } catch (err) {
+      res.status(500).send(err)
+    }
+  },
+
+
+     /* 
       const newNote = {
         noteTitle: req.body.noteTitle,
         noteDescription: req.body.noteDescription,
       }
 
-      healthInfo.notes.push(newNote) //push new note into notes array
-
+      HealthInfo.notes.push(newNote) //push new note into notes array
+      await HealthInfo.save();
+      */
       // req.body.notes = req.body.notes || []
       // req.body.providers = Array.isArray(req.body.providers)
       //   ? req.body.providers
       //   : [req.body.providers];
 
-      await HealthInfo.save();
-
+      /*
       console.log(">>>> New health info! Whomp");
-      res.redirect("/healthInfo");
-
+      res.redirect(`/healthInfo/${req.params.id}`);
     } catch (err) {
       console.log(err);
-      res.send("Something went wrong");
+      res.redirect(`/healthInfo`)
     }
   },
+  */
 
   // @desc Get healthInfo (update: get/show, view/edit, update)
   // @route GET /:id

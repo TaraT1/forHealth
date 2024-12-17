@@ -25,4 +25,7 @@ router.post("/update/:id", ensureAuth, healthInfoController.updateHealthInfo)
 //*Delete healthInfo
 router.delete("/:id", ensureAuth, healthInfoController.deleteHealthInfo)
 
+//Note Route for healthInfo
+router.post("/:id/note", ensureAuth, healthInfoController.createNote)
+
 module.exports = router;
