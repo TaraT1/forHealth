@@ -42,6 +42,7 @@ module.exports = {
       req.body.profiles = req.body.profiles
 
       const newHealthInfo = new HealthInfo({
+        user: user._id,
         profile: profile._id,
         notes: [],
         tasks: [],
@@ -54,8 +55,9 @@ module.exports = {
       })
 
       await newHealthInfo.save()
-      profile.healthInfo.push(newHealthInfo._id) //??
-      await profile.save()
+      healthInfo.push(newHealthInfo._id) //??
+      // profile.healthInfo.push(newHealthInfo._id) //??
+      await newHealthInfo.save()
 
       console.log(">>>> New health info! Whomp");
       res.redirect(`/healthInfo/${req.params.id}`);
@@ -65,44 +67,6 @@ module.exports = {
       res.redirect(`/healthInfo`)
     }
   },
-  // @desc Create note route
-  // @route POST /healthInfo/:id/note
-  createNote: async (req, res) => {
-    try {
-      const note = await HealthInfo.findById(req.params.id)
-      healthInfo.notes.push({
-        noteTitle: req.body.title,
-        noteDescription: req.body.description
-      })
-    } catch (err) {
-      res.status(500).send(err)
-    }
-  },
-
-
-     /* 
-      const newNote = {
-        noteTitle: req.body.noteTitle,
-        noteDescription: req.body.noteDescription,
-      }
-
-      HealthInfo.notes.push(newNote) //push new note into notes array
-      await HealthInfo.save();
-      */
-      // req.body.notes = req.body.notes || []
-      // req.body.providers = Array.isArray(req.body.providers)
-      //   ? req.body.providers
-      //   : [req.body.providers];
-
-      /*
-      console.log(">>>> New health info! Whomp");
-      res.redirect(`/healthInfo/${req.params.id}`);
-    } catch (err) {
-      console.log(err);
-      res.redirect(`/healthInfo`)
-    }
-  },
-  */
 
   // @desc Get healthInfo (update: get/show, view/edit, update)
   // @route GET /:id

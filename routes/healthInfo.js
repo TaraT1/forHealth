@@ -25,7 +25,22 @@ router.post("/update/:id", ensureAuth, healthInfoController.updateHealthInfo)
 //*Delete healthInfo
 router.delete("/:id", ensureAuth, healthInfoController.deleteHealthInfo)
 
+/*
 //Note Route for healthInfo
+//Get all notes for healthInfo record
+// router.get("/note", healthInfoController.getHealthInfoNotes )
+
+//Show note (get/show, view/edit, update)
+router.get("/:id/note", ensureAuth, healthInfoController.getNote )
+
+//Create note
 router.post("/:id/note", ensureAuth, healthInfoController.createNote)
 
+//Update note
+// router.post("/update/:id", ensureAuth, healthInfoController.updateNote)
+
+
+//Delete note
+// router.delete("/:id", ensureAuth, healthInfoController.deleteNote)
+*/
 module.exports = router;
