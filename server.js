@@ -44,6 +44,7 @@ const authRoutes = require("./routes/auth");
 const mainRoutes = require("./routes/main");
 const dashboardRoutes = require("./routes/dashboard");
 const healthInfoRoutes = require("./routes/healthInfo");
+const noteRoutes = require("./routes/notes")
 const profileRoutes = require("./routes/profiles");
 const providerRoutes = require("./routes/providers");
 
@@ -86,6 +87,7 @@ app.use("/", mainRoutes);
 app.use("/", authRoutes);
 app.use("/dashboard", dashboardRoutes); 
 app.use("/healthInfo", healthInfoRoutes);
+app.use("/notes", noteRoutes);
 app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 
