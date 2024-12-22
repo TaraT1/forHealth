@@ -44,7 +44,10 @@ module.exports = {
       const newHealthInfo = new HealthInfo({
         user: user._id,
         profile: profile._id,
-        notes: [],
+        notes: [{
+          noteTitle: req.body.noteTitle,
+          noteDescription: req.body.noteDescription
+        }],
         tasks: [],
         medicine: [],
         vaccinations: [],
@@ -54,10 +57,10 @@ module.exports = {
         conditions: []
       })
 
+
       await newHealthInfo.save()
-      healthInfo.push(newHealthInfo._id) //??
+      // healthInfo.push(newHealthInfo._id) //??
       // profile.healthInfo.push(newHealthInfo._id) //??
-      await newHealthInfo.save()
 
       console.log(">>>> New health info! Whomp");
       res.redirect(`/healthInfo/${req.params.id}`);
