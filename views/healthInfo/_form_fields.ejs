@@ -7,7 +7,7 @@
         <h3>Add note to Health Info</h3>
         <ul>
             <% healthInfo.notes.forEach( note => { %>
-            <li><%= note.noteTitle %> - <%= note.noteDescription %> </li>
+            <li><%#= note.noteTitle %> - <%= note.noteDescription %> </li>
             <% }) %>
         
         </ul>
@@ -20,7 +20,7 @@
                     id="noteTitle" 
                     class="form-control" 
                     placeholder="Enter note title"
-                    value="<%= note.noteTitle %>"
+                    value="<%= healthInfo.notes.noteTitle %>"
                 />
 
                 <label for="noteDescription" class="form-label">Note Description</label>
@@ -30,7 +30,7 @@
                     class="form-control"
                     rows="4"
                     placeholder="Enter note description"
-                    value="<%= note.noteDescription %>"
+                    value="<%= healthInfo.notes.noteDescription %>"
                 ></textarea>
             </div>
 </div>
