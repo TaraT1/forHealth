@@ -30,26 +30,26 @@ const ProfileSchema = new mongoose.Schema(
     },
     bloodType: {
       type: String,
-      require: false,
+      required: false,
     },
     eHealthRecords: {
       type: String,
-      require: false,
+      required: false,
     },
     insurance: {
       type: String,
-      require: false,
+      required: false,
     },
     inCaseOfEmergency: {
       type: String,
     },
     journal: {
       type: String,
-      require: false,
+      required: false,
     },
     image: {
       type: String,
-      require: false,
+      required: false,
     },
     healthInfo: {
       type: mongoose.Schema.Types.ObjectId,
