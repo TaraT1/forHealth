@@ -25,7 +25,7 @@ const FacilitySchema = new mongoose.Schema({
     },
     media: {
         type: String,
-        require: false,
+        required: false,
     },
     notes: {
         type: String,
