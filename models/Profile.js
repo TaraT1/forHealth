@@ -13,14 +13,19 @@ const ProfileSchema = new mongoose.Schema(
     fullName: {
       type: String,
     },
-    contact: [{
-      phone: String,
-      email: String
-    }],
-      address: [{
-        street: String,
-        city: String
-    }],
+    // contact: [{
+    //   phone: String,
+    //   email: String,
+    // }],
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
     birthDate: {
       type: Date,
       required: false,
