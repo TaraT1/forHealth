@@ -1,11 +1,12 @@
 const path = require("path")
-const { render } = require("ejs");
+const { render, name } = require("ejs");
 const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
 const Profile = require("../models/Profile");
 const Provider = require("../models/Provider");
 const { trusted } = require("mongoose");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
+const { profile } = require("console");
 
 module.exports = {
   // @desc  Show all profiles
@@ -37,6 +38,37 @@ module.exports = {
 
       req.body.user = req.user.id 
       await Profile.create(req.body)
+
+      // const user = await User.findById(req.params.id)
+
+      // const addContact = profiles.map(async (contact) => {
+        // const newProfile = new Profile({
+        //   user: req.user.id,
+        //   // user,
+        //   name: req.body.name,
+        //   // name,
+        //   fullName: req.body.fullName,
+        //   // fullName,
+        //   contact: req.body.contact,
+        //   // phone: contact.phone,
+        //   // email: contact.email,
+        //   // address: [],
+        //   address: req.body.address,
+        //   birthDate: req.body.birthDate,
+        //   // birthDate,
+        //   bloodType: req.body.bloodType,
+        //   // bloodType,
+        //   inCaseOfEmergency: req.body.inCaseOfEmergency
+        //   // inCaseOfEmergency
+        // })
+        // await newProfile.save()
+        // return newProfile 
+      
+
+      // profile.contact.push({
+      //   phone: req.body.phone,
+      //   email: req.body.email
+      // })
 
       res.redirect('/profiles')
         
