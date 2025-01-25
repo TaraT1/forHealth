@@ -1,19 +1,20 @@
 
 <!-- This is rendering notes, not adding -->
 
-    <div class="form-group">
-        <label for="notes">Notes</label>
-        <div id="notes-container">
-        <h3>Add note to Health Info</h3>
-        <ul>
-            <% healthInfo.notes.forEach( note => { %>
-            <li><%#= note.noteTitle %> - <%= note.noteDescription %> </li>
-            <% }) %>
-        
-        </ul>
+        <div id="notesContainer">
 
+            <ul>
+                <% healthInfo.notes.forEach( note => { %>
+                <li><%= note.noteTitle %> - <%= note.noteDescription %> </li>
+                <% }) %>
+            
+            </ul>
+
+            <h3>Add note to Health Info</h3>
+
+            <!-- <div class="form-group"> -->
             <div class="note-item mb-2">
-                <label for="noteTitle>" class="form-label">Note Title </label>
+                <label for="noteTitle" class="form-label">Note Title</label>
                 <input 
                     type="text" 
                     name="noteTitle"
@@ -33,18 +34,17 @@
                     value="<%= healthInfo.notes.noteDescription %>"
                 ></textarea>
             </div>
-</div>
-    <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
-    </div>
+            <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
+        </div>
 
 <div>
     <label for="recommendation" class="form-label">Recommendations for Care </label>
     <input type="text" class="form-control" id="recommendation" name="recommendation" value="<%#= recommendation.name %>">
 </div>
 <div>
-    <label for="description" class="form-label">Description</label>
-    <input type="text" class="form-control" id="description"
-    name="description" value="<%#=recommendation.description %>">
+    <label for="recDescription" class="form-label">Recommendation Description</label>
+    <input type="text" class="form-control" id="recDescription"
+    name="recDescription" value="<%#=recommendation.description %>">
 </div>
 <div>
     <label for="status" class="form-label">Status</label>
@@ -59,8 +59,8 @@
     value="<%#= event.title%>">
 </div>
 <div>
-    <label for="description" class="form-label">Event Description </label>
-    <input type="text" class="form-control" id="description" name="description" value="<%#= event.description %>">
+    <label for="eventDescription" class="form-label">Event Description </label>
+    <input type="text" class="form-control" id="eventDescription" name="eventDescription" value="<%#= event.description %>">
 </div>
 <div>
     <label for="eventDate" class="form-label">Event Date</label>
@@ -77,34 +77,35 @@
 
 <div class="form-group">
 <div>
-    <label for="condition" class="form-label">Medical Condition </label>
-    <input type="text" class="form-control" id="condition" name="condition" value="<%#= condition.name%>">
+    <label for="conditionName" class="form-label">Medical Condition </label>
+    <input type="text" class="form-control" id="conditionName" name="conditionName" value="<%#= condition.name%>">
 </div>
 <div>
-    <label for="type" class="form-label">Condition Type</label>
-    <input type="text" class="form-control" id="type" name="type" value="<%#= condition.type %>">
+    <label for="conditionType" class="form-label">Condition Type</label>
+    <input type="text" class="form-control" id="conditionType" name="conditionType" value="<%#= condition.type %>">
 </div>
 <div>
-    <label for="note" class="form-label">Note for Condition</label>
-    <input type="text" class="form-control" id="note" name="note" value="<%#= condition.note %>">
+    <label for="conditionNote" class="form-label">Note for Condition</label>
+    <input type="text" class="form-control" id="conditionNote" name="conditionNote" value="<%#= condition.note %>">
 </div>
 </div>
 
 <div class="form-group">
 <div>
-    <label for="allergies" class="form-label"> Allergies </label>
-    <input type="text" class="form-control" id="allergy" name="allergy" 
+    <label for="allergyName" class="form-label"> Allergies </label>
+    <input type="text" class="form-control" id="allergyName" name="allergy" 
     value="<%#= allergies.trigger %>">
 </div> <div>
-    <label for="type" class="form-label">Type of Allergy </label>
-    <input type="text" class="form-control" id="type" name="type" value="<%#= allergies.type %>">
+    <label for="allergyType" class="form-label">Type of Allergy </label>
+    <input type="text" class="form-control" id="allergyType" name="type" value="<%#= allergies.type %>">
 </div>
 <div>
-    <label for="reaction" class="form-label">Allergy Reaction </label>
-    <input type="text" class="form-control" id="reaction" name="reaction" value="<%#= allergies.value %>">
+    <label for="allergyReaction" class="form-label">Allergy Reaction </label>
+    <input type="text" class="form-control" id="allergyReaction" name="reaction" value="<%#= allergies.value %>">
 </div>
 <div>
     <label for="allergyNote" class="form-label">Note for Allergy</label>
     <input type="text" class="form-control" id="allergyNote" name="allergyNote" value="<%#= allergies.note %>">
+</div>
 </div>
 </div>
