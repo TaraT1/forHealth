@@ -8,6 +8,17 @@
     <input type="text" class="form-control" id="fullName" name="fullName" value="<%=profile.fullName%>">
   </div>
 
+  <div>
+    <label for="phone" class="form-label">Phone</label>
+    <input type="text" class="form-control" id="phone"
+    name="phone" value="<%=profile.phone%>">
+  </div>
+  <div>
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email"
+    name="email" value="<%=profile.email%>">
+  </div>
+
  <div>
     <label for="birthDate" class="form-label">Birthdate</label>
     <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().slice(0,10) %>">
@@ -16,7 +27,7 @@
  <div> 
     <label for="bloodType" class="form-label">Blood type</label>
     <input type="text" class="form-control" id="bloodType" name="bloodType" value="<%= profile.bloodType %>">
- </div>
+  <div>
 
   <div>
     <label for="inCaseOfEmergency" class="form-label">In Case of Emergency</label>
