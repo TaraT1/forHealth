@@ -39,28 +39,35 @@ module.exports = {
   createHealthInfo: async (req, res) => {
     try {
       req.body.user = req.user.id;
-      req.body.profiles = req.body.profiles
+      // req.body.profiles = req.body.profiles
 
       const newHealthInfo = new HealthInfo({
         user: user._id,
-        profile: profile._id,
+        profile: profile._id,//profile is associated with dropdown
+        notes: healthInfo.notes, //no change 
+        /*no change
         notes: [{
           noteTitle: req.body.noteTitle,
           noteDescription: req.body.noteDescription
         }],
+        */
+        /* Not changing
+        notes: [],
         tasks: [],
         medicine: [],
         vaccinations: [],
         supplements: [],
         events: [],
         allergies: [],
-        conditions: []
+        conditions: [],
+        providers: [],
+        */
       })
 
 
       await newHealthInfo.save()
-      // healthInfo.push(newHealthInfo._id) //??
-      // profile.healthInfo.push(newHealthInfo._id) //??
+      healthInfo.push(newHealthInfo._id) //??
+      profile.healthInfo.push(newHealthInfo._id) //??
 
       console.log(">>>> New health info! Whomp");
       res.redirect(`/healthInfo/${req.params.id}`);
