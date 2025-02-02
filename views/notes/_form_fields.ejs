@@ -1,0 +1,72 @@
+
+
+    <div class="form-group">
+        <label for="notes">Notes</label>
+        <div id="notes-container">
+        <h3>Add note </h3>
+
+        <% healthInfo.notes.forEach(function(note, index) { %>
+            <div class="note-item mb-2">
+                <label for="noteTitle-<%= index %>" class="form-label">Note Title </label>
+                <input 
+                    type="text" 
+                    name="notes[<%= index %>][noteTitle]"
+                    id="noteTitle-<%= index %>" 
+                    class="form-control" 
+                    placeholder="Enter note title"
+                    value="<%= notes.noteTitle %>"
+                />
+
+                <label for="noteDescription-<%= index %>" class="form-label">Note Description</label>
+                <textarea
+                    name="notes[<%= index %>][noteDescription]"
+                    id="noteDescription-<%= index %>" 
+                    class="form-control"
+                    rows="4"
+                    placeholder="Enter note description"
+                    value="<%= notes.noteDescription %>"
+                ></textarea>
+            </div>
+        <% }) %>
+    </div>
+    <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
+    </div>
+
+
+<!-- This is rendering notes, not adding -->
+
+        <div id="notesContainer">
+
+            <ul>
+                <% healthInfo.notes.forEach( note => { %>
+                <li><%= note.noteTitle %> - <%= note.noteDescription %> </li>
+                <% }) %>
+            
+            </ul>
+
+            <h3>Add note to Health Info</h3>
+
+            <!-- <div class="form-group"> -->
+            <div class="note-item mb-2">
+                <label for="noteTitle" class="form-label">Note Title</label>
+                <input 
+                    type="text" 
+                    name="noteTitle"
+                    id="noteTitle" 
+                    class="form-control" 
+                    placeholder="Enter note title"
+                    value="<%= healthInfo.notes.noteTitle %>"
+                />
+
+                <label for="noteDescription" class="form-label">Note Description</label>
+                <textarea
+                    name="noteDescription"
+                    id="noteDescription"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Enter note description"
+                    value="<%= healthInfo.notes.noteDescription %>"
+                ></textarea>
+            </div>
+            <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
+        </div>

@@ -1,80 +1,4 @@
-
-<!-- This is rendering notes, not adding -->
-
-        <div id="notesContainer">
-
-            <ul>
-                <% healthInfo.notes.forEach( note => { %>
-                <li><%= note.noteTitle %> - <%= note.noteDescription %> </li>
-                <% }) %>
-            
-            </ul>
-
-            <h3>Add note to Health Info</h3>
-
-            <!-- <div class="form-group"> -->
-            <div class="note-item mb-2">
-                <label for="noteTitle" class="form-label">Note Title</label>
-                <input 
-                    type="text" 
-                    name="noteTitle"
-                    id="noteTitle" 
-                    class="form-control" 
-                    placeholder="Enter note title"
-                    value="<%= healthInfo.notes.noteTitle %>"
-                />
-
-                <label for="noteDescription" class="form-label">Note Description</label>
-                <textarea
-                    name="noteDescription"
-                    id="noteDescription"
-                    class="form-control"
-                    rows="4"
-                    placeholder="Enter note description"
-                    value="<%= healthInfo.notes.noteDescription %>"
-                ></textarea>
-            </div>
-            <button type="submit" class="btn btn-light btn-small mt-3">Add Note</button>
-        </div>
-
-<div>
-    <label for="recommendation" class="form-label">Recommendations for Care </label>
-    <input type="text" class="form-control" id="recommendation" name="recommendation" value="<%#= recommendation.name %>">
-</div>
-<div>
-    <label for="recDescription" class="form-label">Recommendation Description</label>
-    <input type="text" class="form-control" id="recDescription"
-    name="recDescription" value="<%#=recommendation.description %>">
-</div>
-<div>
-    <label for="status" class="form-label">Status</label>
-    <input type="text" class="form-control" id="status"
-    name="status" value="<%#=recommendation.status %>">
-</div>
-
-<div class="form-group">
-<div>
-    <label for="event" class="form-label">Medical Event </label>
-    <input type="event" class="form-control" id="event" name="event" 
-    value="<%#= event.title%>">
-</div>
-<div>
-    <label for="eventDescription" class="form-label">Event Description </label>
-    <input type="text" class="form-control" id="eventDescription" name="eventDescription" value="<%#= event.description %>">
-</div>
-<div>
-    <label for="eventDate" class="form-label">Event Date</label>
-    <input type="date" class="form-control" id="eventDate" 
-    name="eventDate" value="<%#= event.date == null ? '' : event.date.toISOString().slice(0,10) %>">
-</div>
-<div>
-    <label for="outcome" class="form-label">Event Outcome</label>
-    <input type="text" class="form-control" id="outcome"
-    name="outcome" value="<%#= event.outcome %>">
-</div>
-</div>
-
-
+<h3>Conditions</h3>
 <div class="form-group">
 <div>
     <label for="conditionName" class="form-label">Medical Condition </label>
@@ -83,29 +7,114 @@
 <div>
     <label for="conditionType" class="form-label">Condition Type</label>
     <input type="text" class="form-control" id="conditionType" name="conditionType" value="<%#= condition.type %>">
-</div>
-<div>
+</div> <div>
     <label for="conditionNote" class="form-label">Note for Condition</label>
     <input type="text" class="form-control" id="conditionNote" name="conditionNote" value="<%#= condition.note %>">
 </div>
 </div>
 
-<div class="form-group">
+<h3>Prescriptions</h3>
+<div class="col-md-8">
+    <label for="prescriptionName" class="form-label">Prescription Name</label>
+    <input type="text" class="form-control" id="prescriptionName" name="prescriptionName" value="<%#=healthInfo.prescriptionName%>">
+</div>
+
+<div class="col-md-4">
+    <label for="prescriptionDosage" class="form-label">Dose</label>
+    <input type="text" class="form-control" id="prescriptionDosage" name="prescriptionDosage" value="<%#=healthInfo.prescriptionDosage%>">
+</div>
+
+<div class="col-md-12">
+    <label for="prescriber" class="form-label">Prescriber</label>
+    <input type="text" class="form-control" id="prescriber"
+    name="prescriber" value="<%#=healthInfo.prescriber%>">
+</div>
+
+<div class="col-md-4">
+    <label for="startDate" class="form-label" >Start Date </label>
+    <input type="date" class="form-control" id="startDate" name="startDate" value="<%#=healthInfo.scripStartDate == null ? '' : healthInfo.startDate.toISOString().slice(0,10) %>">
+</div>
+
+<div class="col-md-4">
+    <label for="endDate" class="form-label" >End Date</label>
+    <input type="date" class="form-control" id="endDate" name="endDate" value="<%#=healthInfo.scripEndDate == null ? '' : healthInfo.endDate.toISOString().slice(0,10) %>">
+</div>
+
+<h3>Vaccinations</h3>
+<div class="col-md-8">
+    <label for="vaxName" class="form-label">Vaccination Name</label>
+    <input type="text" class="form-control" id="vaxName" name="vaxName" value="<%#=healthInfo.vaxName%>">
+</div>
+
+<div class="col-md-4">
+    <label for="vaxDosage" class="form-label">Dose</label>
+    <input type="text" class="form-control" id="vaxDosage" name="vaxDosage" value="<%#=healthInfo.vaxDosage%>">
+</div>
+
+<div class="col-md-12">
+    <label for="vaxPrescriber" class="form-label">Prescriber</label>
+    <input type="text" class="form-control" id="vaxPrescriber"
+    name="vaxPrescriber" value="<%#=healthInfo.vaxPrescriber%>">
+</div>
+
+<div class="col-md-4">
+    <label for="vaxDate" class="form-label" >Vaccination Date </label>
+    <input type="date" class="form-control" id="vaxDate" name="vaxDate" value="<%#=healthInfo.vaxDate == null ? '' : healthInfo.vaxDate.toISOString().slice(0,10) %>">
+</div>
+
+<h3>Allergies</h3>
 <div>
-    <label for="allergyName" class="form-label"> Allergies </label>
-    <input type="text" class="form-control" id="allergyName" name="allergy" 
-    value="<%#= allergies.trigger %>">
-</div> <div>
+    <label for="allergyTrigger" class="form-label"> Allergy Trigger</label>
+    <input type="text" class="form-control" id="allergyTrigger" name="allergyTrigger" 
+    value="<%#= healthInfo.allergyTrigger %>">
+</div> 
+<div>
     <label for="allergyType" class="form-label">Type of Allergy </label>
-    <input type="text" class="form-control" id="allergyType" name="type" value="<%#= allergies.type %>">
+    <input type="text" class="form-control" id="allergyType" name="allergyType" value="<%#= healthInfo.allergiesType %>">
 </div>
 <div>
     <label for="allergyReaction" class="form-label">Allergy Reaction </label>
-    <input type="text" class="form-control" id="allergyReaction" name="reaction" value="<%#= allergies.value %>">
+    <input type="text" class="form-control" id="allergyReaction" name="reaction" value="<%#= healthInfo.allergyValue %>">
 </div>
 <div>
     <label for="allergyNote" class="form-label">Note for Allergy</label>
-    <input type="text" class="form-control" id="allergyNote" name="allergyNote" value="<%#= allergies.note %>">
+    <input type="text" class="form-control" id="allergyNote" name="allergyNote" value="<%#= healthInfo.allergyNote %>"> </div>
+
+<h3> Recommendations for Care </h3>
+<div class="col-md-12">
+    <label for="recommendation" class="form-label">Recommendation</label>
+    <textarea row="3" class="form-control" id="recommendation" name="recommendation" value="<%#= healthInfo.recName %>"></textarea>
 </div>
+<div class="col-md-6">
+    <label for="recDescription" class="form-label">Recommendation Description</label>
+    <textarea row="3" class="form-control" id="recDescription"
+    name="recDescription" value="<%#=healthInfo.recDescription %>"></textarea>
 </div>
+<div class="col-md-4">
+    <label for="status" class="form-label">Status</label>
+    <input type="text" class="form-control" id="status"
+    name="healthInfo.recStatus" value="<%#=healthInfo.recStatus %>">
+</div>
+
+<h3>Medical Event</h3>
+<div class="col-md-8">
+    <label for="eventTitle" class="form-label">Medical Event </label>
+    <input type="eventTitle" class="form-control" id="eventTitle" name="eventTitle" 
+    value="<%#= healthInfo.eventTitle%>">
+</div>
+
+<div class="col-md-4">
+    <label for="eventDate" class="form-label">Event Date</label>
+    <input type="eventDate" class="form-control" id="eventDate" 
+    name="eventDate" value="<%#= healthInfo.eventDate == null ? '' : healthInfo.eventDate.toISOString().slice(0,10) %>">
+</div>
+
+<div>
+    <label for="eventDescription" class="form-label">Event Description </label>
+    <textarea class="form-control" id="eventDescription" name="eventDescription" value="<%#= healthInfo.eventDescription %>"></textarea>
+</div>
+<div>
+    <label for="outcome" class="form-label">Event Outcome</label>
+    <input type="text" class="form-control" id="eventOutcome"
+    name="eventOutcome" value="<%#= healthInfo.eventOutcome %>">
 </div>
