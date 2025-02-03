@@ -10,20 +10,17 @@ const ProfileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    /*
     fullName: {
-      fName,
-      lName,
-    }, 
-    contact: {
+      type: String,
+    },
+    contact: [{
       phone: String,
       email: String
-    },
-      address: {
+    }],
+      address: [{
         street: String,
         city: String
-    },
-    */
+    }],
     birthDate: {
       type: Date,
       required: false,
@@ -38,7 +35,6 @@ const ProfileSchema = new mongoose.Schema(
     },
     insurance: {
       type: String,
-      required: false,
     },
     inCaseOfEmergency: {
       type: String,

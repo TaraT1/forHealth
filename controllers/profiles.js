@@ -77,7 +77,7 @@ module.exports = {
       console.log(">>> Whomp! Updated profile: ", profile)
       res.redirect("/profiles");
       } catch (err){
-        console.log(profile, err)
+        // console.log(profile, err)
         res.send("Something went wrong")
       }},
     
