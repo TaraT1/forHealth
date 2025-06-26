@@ -5,7 +5,8 @@ const mongoose = require("mongoose"); //db
 const connectDB = require("./config/database");
 const passport = require("passport"); //auth
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+// const MongoStore = require("connect-mongo");//orig
+const MongoStore = require("connect-mongo").default;
 const flash = require("express-flash");
 const logger = require("morgan");
 const cors = require('cors')
@@ -21,14 +22,15 @@ const PORT = process.env.PORT;
 require('./config/passport')(passport)
 
 //Connect db - Setup Sessions (stored in MongoDB)
-app.use(
-  session({
+app.use(session({
     secret: "upright bass",
     // secret: "keyboard cat",
     resave: false, //session not saved if session is not modified
     saveUninitialized: false, //don't create session until something is stored
-    store: MongoStore.create({ 
+    store: MongoStore.create({ //not a function
+    // store: new MongoStore({ //not a constructor
       mongoUrl: process.env.DB_STRING,
+      // mongooseConnection: mongoose.connection,//new
     }),
       //cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
   // Date.now() - 30 * 24 * 60 * 60 * 1000
@@ -92,7 +94,8 @@ app.use("/profiles", profileRoutes);
 app.use("/providers", providerRoutes);
 
 //Handle 404
-app.get('*', function(req, res) {
+// app.get('*', function(req, res) {//orig; change with express v5: * is invalid
+app.get('/*splat', function(req, res) {
   res.status(404).send('Error 404: Page not found')
 })
 
