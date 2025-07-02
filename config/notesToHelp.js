@@ -1,26 +1,26 @@
-//Query Mybrary
-router.get('/', async (req, res) => {
-    let query = Book.find()
-    if (req.query.title != null && req.query.title != '') {
-        query = query.regex('title', new RegExp(req.query.title, 'i'))
-    }
-    //if published before or after
-    if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
-        query = query.lte('publishDate', req.query.publishedBefore)
-    }
-    // query if published after
+// //Query Mybrary
+// router.get('/', async (req, res) => {
+//     let query = Book.find()
+//     if (req.query.title != null && req.query.title != '') {
+//         query = query.regex('title', new RegExp(req.query.title, 'i'))
+//     }
+//     //if published before or after
+//     if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
+//         query = query.lte('publishDate', req.query.publishedBefore)
+//     }
+//     // query if published after
 
-    try {
-        const books = await 
-        query.exec()
-        res.render('books/index', {
-            books: books,
-            searchOptions: req.query
-        })
-    } catch {
-        res.redirect('/')
-    }
-})
+//     try {
+//         const books = await 
+//         query.exec()
+//         res.render('books/index', {
+//             books: books,
+//             searchOptions: req.query
+//         })
+//     } catch {
+//         res.redirect('/')
+//     }
+// })
 
 
 /* //date ejs
@@ -101,27 +101,27 @@ Link provider(s) to profile; err: providers is not defined
 
 */
 
-Happens on latest as well. Just need to add new in front of the ObjectId creation.
+// Happens on latest as well. Just need to add new in front of the ObjectId creation.
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const testSchema = new mongoose.Schema({
-  user: mongoose.Schema.Types.ObjectId,
-  address: mongoose.Schema.Types.ObjectId
-});
+// const testSchema = new mongoose.Schema({
+//   user: mongoose.Schema.Types.ObjectId,
+//   address: mongoose.Schema.Types.ObjectId
+// });
 
-const Test = mongoose.model('Test', testSchema);
+// const Test = mongoose.model('Test', testSchema);
 
-async function run() {
-  await mongoose.connect('mongodb://localhost:27017');
-  await mongoose.connection.dropDatabase();
-  await Test.create({
-    user: mongoose.Types.ObjectId(),
-    address: mongoose.Types.ObjectId()
-  })
+// async function run() {
+//   await mongoose.connect('mongodb://localhost:27017');
+//   await mongoose.connection.dropDatabase();
+//   await Test.create({
+//     user: mongoose.Types.ObjectId(),
+//     address: mongoose.Types.ObjectId()
+//   })
 
-  await Test.find().populate("user  address");
-  console.log('done');
-}
+//   await Test.find().populate("user  address");
+//   console.log('done');
+// }
 
-run();
+// run();

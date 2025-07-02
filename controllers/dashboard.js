@@ -35,7 +35,7 @@ module.exports = {
       .exec();
 
     // const count = await Note.count();
-    const count = await Profile.count();
+    const count = await Profile.countDocuments();
 
     res.render('dashboard/index', {
     // res.render('profiles/profiles', {
