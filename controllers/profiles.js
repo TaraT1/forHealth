@@ -102,7 +102,8 @@ module.exports = {
     
      try { 
       const profile  = await Profile.findOneAndUpdate({ _id: req.params.id, user: req.user.id }, req.body, {
-        new: true,
+        // new: true,
+        returnDocument: 'after',
         runValidators: true,
         })
       

@@ -6,17 +6,18 @@ const ProfileSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    name: {
+    name: { //profile name
       type: String,
       required: true,
     },
-    fullName: {
+    firstName: {
       type: String,
+      required: true,
     },
-    // contact: [{
-    //   phone: String,
-    //   email: String,
-    // }],
+    lastName: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
     },
