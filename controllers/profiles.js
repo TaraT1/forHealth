@@ -41,7 +41,7 @@ module.exports = {
 
       // const user = await User.findById(req.params.id)
 
-      // const addContact = profiles.map(async (contact) => {
+      // const addContact = profiles.map(async (contact) => {//arrow function in async functions causes problems
         // const newProfile = new Profile({
         //   user: req.user.id,
         //   // user,

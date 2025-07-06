@@ -9,6 +9,7 @@ const ProfileSchema = new mongoose.Schema(
     name: { //profile name
       type: String,
       required: true,
+      unique: true,
     },
     firstName: {
       type: String,
@@ -23,6 +24,7 @@ const ProfileSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      lowercase: true,
     },
     address: {
       type: String,
@@ -40,6 +42,9 @@ const ProfileSchema = new mongoose.Schema(
       required: false,
     },
     insurance: {
+      type: String,
+    },
+    insuranceNotes: {
       type: String,
     },
     inCaseOfEmergency: {

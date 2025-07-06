@@ -19,11 +19,6 @@
     <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().slice(0,10) %>">
  </div> 
 
- <div class="col-md-6"> 
-    <label for="bloodType" class="form-label">Blood type</label>
-    <input type="text" class="form-control" id="bloodType" name="bloodType" value="<%= profile.bloodType %>">
- </div>
-
 <div class="col-md-6">
   <label for="phone" class="form-label">Phone</label>
   <input type="text" class="form-control" id="phone"
@@ -38,99 +33,34 @@
 
 <div class="col-md-12">
   <label for="address" class="form-label">Address</label>
-  <input type="text" class="form-control" id="address"
-  name="address" value="<%=profile.address%>">
+  <textarea id="address" name="address" value="<%=profile.address%>">
+  </textarea>
 </div>
 
-<!-- <div class="col-md-6">
-  <label for="city" class="form-label">City</label>
-  <input type="text" class="form-control" id="city"
-  name="city" value="<%#=profile.city%>">
-</div>
-
-<div class="col-md-4">
-  <label for="state" class="form-label">State</label>
-  <input type="text" class="form-control" id="state"
-  name="state" value="<%#=profile.state%>">
-</div>
-
-<div class="col-md-2">
-  <label for="zip" class="form-label">Zip</label>
-  <input type="text" class="form-control" id="zip"
-  name="zip" value="<%#=profile.zip%>">
-</div> -->
-
-  <!-- <div>
-    <label for="inCaseOfEmergency" class="form-label">In Case of Emergency</label>
-    <input type="text" class="form-control" id="inCaseOfEmergency" name="inCaseOfEmergency" value="<%#= profile.inCaseOfEmergency %>"> 
-  </div>-->
+ <div class="col-md-6"> 
+    <label for="bloodType" class="form-label">Blood type</label>
+    <input type="text" class="form-control" id="bloodType" name="bloodType" value="<%= profile.bloodType %>">
+ </div>
 
   <h3>In Case of Emergency</h3>
   <div class="col-md-6">
-    <label for="iceFName" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="iceFName"
-    name="iceFName" value="<%#=profile.iceFirstName%>">
+    <label for="inCaseOfEmergency" class="form-label">Emergency Contact Info</label>
+    <textarea class="form-control" id="inCaseOfEmergency" rows="2"
+    name="inCaseOfEmergency" value="<%=profile.inCaseOfEmergency%>">
+    </textarea>
   </div>
-
-  <div class="col-md-6">
-    <label for="iceLastName" class="form-label">Last Name</label>
-    <input type="text" class="form-control" id="iceLastName"
-    name="iceLastName" value="<%#=profile.iceLastName%>">
-  </div>
-  
-<div class="col-md-6">
-  <label for="icePhone" class="form-label">Phone</label>
-  <input type="text" class="form-control" id="icePhone"
-  name="icePhone" value="<%#=profile.icePhone%>">
-</div>
-
-<div class="col-md-6">
-  <label for="iceEmail" class="form-label">Email</label>
-  <input type="text" class="form-control" id="email"
-  name="iceEmail" value="<%#=profile.iceEmail%>">
-</div>
-
-<div class="col-12">
-  <label for="iceAddress" class="form-label">Address</label>
-  <input type="text" class="form-control" id="iceAddress"
-  name="iceAddress" vlaue="<%=profile.iceAddress%>">
-</div>
-
-<div class="col-md-6">
-  <label for="iceCity" class="form-label">City</label>
-  <input type="text" class="form-control" id="iceCity"
-  name="iceCity" vlaue="<%#=profile.iceCity%>">
-</div>
-
-<div class="col-md-4">
-  <label for="iceState" class="form-label">State</label>
-  <input type="text" class="form-control" id="iceState"
-  name="iceState" vlaue="<%#=profile.iceState%>">
-</div>
-
-<div class="col-md-2">
-  <label for="iceZip" class="form-label">Zip</label>
-  <input type="text" class="form-control" id="iceZip"
-  name="iceZip" vlaue="<%#=profile.iceZip%>">
-</div>
-
 
   <h3>Insurance Information</h3>
   <div class="col-md-12">
-    <label for="insCo" class="form-label">Insurance Company</label>
-    <input type="text" class="form-control" id="insCo" name="insCo" value="<%#= profile.insCo %>">
+    <label for="insurance" class="form-label">Insurance Information</label>
+    <textarea class="form-control" id="insurance" name="insurance" value="<%= profile.insurance %>">
   </div>
 
-  <div class="col-md-6">
-    <label for="insId" class="form-label">Insurance ID</label>
-    <input type="text" class="form-control" id="insId" name="insId" value="<%#= profile.insId %>">
+  <div class="col-md-12">
+    <label for="insuranceNotes" class="form-label">Insurance Information</label>
+    <textarea class="form-control" id="insuranceNotes" name="insuranceNotes" value="<%= profile.insuranceNotes %>">
   </div>
 
-  <div class="col-md-2">
-    <label for="insExp" class="form-label">Expires</label>
-    <input type="text" class="form-control" id="insExp" name="insExp" value="<%#= profile.insExp %>">
-  </div>
-  
   <div>
     <label for="eHealthRecords" class="form-label"><h3>eHealth Records</h3></label>
     <textarea class="form-control" id="eHealthRecords" rows="2" name="eHealthRecords" value="<%= profile.eHealthRecords %>">
