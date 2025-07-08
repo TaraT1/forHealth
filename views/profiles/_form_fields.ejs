@@ -1,69 +1,79 @@
-  <div class="col-md-10">
-    <label for="name" class="form-label">Name for Profile</label>
-    <input type="text" class="form-control" id="name" name="name" required value="<%= profile.name %>">
-  </div>
-
-  <div class="col-md-6">
-    <label for="firstName" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="firstName"
-    name="firstName" value="<%=profile.firstName %>"> 
-  </div>
   
-  <div class="col-md-6">
-    <label for="lastName" class="form-label">Last Name</label> <input type="text" class="form-control" id="lastName"
-    name="lastName" value="<%=profile.lastName %>"> 
+  <div class="row mt-3">
+    <div class="col col-md-6">
+      <label for="name" class="form-label">Name for Profile</label>
+      <input type="text" class="form-control" id="name" name="name" required value="<%= profile.name %>">
+    </div>
   </div>
 
- <div class="col-md-6">
-    <label for="birthDate" class="form-label">Birthdate</label>
-    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().slice(0,10) %>">
- </div> 
+  <div class="row">
+      <div class="col col-md-6">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="firstName"
+        name="firstName" value="<%=profile.firstName %>"> 
+      </div>
+      
+      <div class="col col-md-6">
+        <label for="lastName" class="form-label">Last Name</label> <input type="text" class="form-control" id="lastName"
+        name="lastName" value="<%=profile.lastName %>"> 
+      </div>
+  </div>
 
-<div class="col-md-6">
-  <label for="phone" class="form-label">Phone</label>
-  <input type="text" class="form-control" id="phone"
-  name="phone" value="<%=profile.phone%>">
-</div>
+  <div class="row">
+      <div class="col col-md-6">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" class="form-control" id="phone"
+        name="phone" value="<%=profile.phone%>">
+      </div>
 
-<div class="col-md-6">
-  <label for="email" class="form-label">Email</label>
-  <input type="text" class="form-control" id="email"
-  name="email" value="<%=profile.email%>">
-</div>
+      <div class="col col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email"
+        name="email" value="<%=profile.email%>">
+      </div>
+  </div>
 
-<div class="col-md-12">
-  <label for="address" class="form-label">Address</label>
-  <textarea id="address" name="address" value="<%=profile.address%>">
-  </textarea>
-</div>
+    <div class="col-md-12">
+      <label for="address" class="form-label">Address</label>
+      <textarea class="form-control" id="address" name="address" rows="3" value="<%=profile.address%>">
+      </textarea>
+    </div>
 
- <div class="col-md-6"> 
-    <label for="bloodType" class="form-label">Blood type</label>
-    <input type="text" class="form-control" id="bloodType" name="bloodType" value="<%= profile.bloodType %>">
- </div>
+  <div class="row">
+    <div class="col col-md-6">
+        <label for="birthDate" class="form-label">Birthdate</label>
+        <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= profile.birthDate == null ? '' : profile.birthDate.toISOString().slice(0,10) %>">
+    </div> 
 
-  <h3>In Case of Emergency</h3>
-  <div class="col-md-6">
-    <label for="inCaseOfEmergency" class="form-label">Emergency Contact Info</label>
-    <textarea class="form-control" id="inCaseOfEmergency" rows="2"
+    <div class="col col-md-6"> 
+        <label for="bloodType" class="form-label">Blood type</label>
+        <input type="text" class="form-control" id="bloodType" name="bloodType" value="<%= profile.bloodType %>">
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <label for="inCaseOfEmergency" class="form-label"><h3>Emergency Contact Info</h3></label>
+    <textarea class="form-control" id="inCaseOfEmergency" rows="3"
     name="inCaseOfEmergency" value="<%=profile.inCaseOfEmergency%>">
     </textarea>
   </div>
 
-  <h3>Insurance Information</h3>
   <div class="col-md-12">
-    <label for="insurance" class="form-label">Insurance Information</label>
+  
+    <label for="insurance" class="form-label"><h3>Insurance</h3></label>
     <textarea class="form-control" id="insurance" name="insurance" value="<%= profile.insurance %>">
+    </textarea>
   </div>
 
   <div class="col-md-12">
-    <label for="insuranceNotes" class="form-label">Insurance Information</label>
+    <label for="insuranceNotes" class="form-label">Insurance Notes</label>
     <textarea class="form-control" id="insuranceNotes" name="insuranceNotes" value="<%= profile.insuranceNotes %>">
+    </textarea>
   </div>
 
   <div>
     <label for="eHealthRecords" class="form-label"><h3>eHealth Records</h3></label>
-    <textarea class="form-control" id="eHealthRecords" rows="2" name="eHealthRecords" value="<%= profile.eHealthRecords %>">
+    <textarea class="form-control" id="eHealthRecords" rows="4" name="eHealthRecords" value="<%= profile.eHealthRecords %>">
     </textarea>
   </div>
 
