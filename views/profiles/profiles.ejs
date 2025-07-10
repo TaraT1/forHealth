@@ -4,28 +4,36 @@
       <h1>Health Profiles</h1>
     </div>
 
-    <%- include('../partials/_navbar') %>
+      <%- include('../partials/_navbar') %>
 
+    </div>
     <div class="col text-end">
       <a href="/profiles/new" class="btn btn-primary">Add New Profile</a>
     </div>
-  </div>
 
-  <div class="container container-fluid container-fluid-custom">
-    <div class="row">
-      <% if(profiles.length > 0) { for(let i = 0; i < profiles.length; i++ ) {
-      %>
-      <div class="col-sm-4 mb-4">
-        <div class="card border-primary" style="min-height: 60px">
-          <a
-            href="/profiles/<%= profiles[i]._id %>"
-            class="card-body text-decoration-none"
-          >
-            <h5 class="card-title"><%= profiles[i].name %></h5>
-          </a>
+    <div class="container container-fluid container-fluid-custom">
+      <div class="row">
+        <% if(profiles.length > 0) { for(let i = 0; i < profiles.length; i++ ) {
+        %>
+        <div class="col-sm-4 mb-4">
+          <div class="card border-primary" style="min-height: 60px">
+            <a href="/profiles/<%= profiles[i]._id %>"
+              class="card-body text-decoration-none"
+            >
+              <h5 class="card-title"><%= profiles[i].name %></h5>
+            </a>
+          </div>
         </div>
+        <% }} else { %>
+          <h4> Create your profile </h4>
+
+            <%- include ('../partials/profiles/_myProfile') %>
+
+
       </div>
-      <% }} %>
+
+      <% } %>
     </div>
   </div>
+</div>
 </div>
