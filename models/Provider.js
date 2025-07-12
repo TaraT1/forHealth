@@ -4,7 +4,16 @@ const ProviderSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+    },
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    title: {
+      type: String,
+      required: false,
     },
     specialization: {
       type: String,

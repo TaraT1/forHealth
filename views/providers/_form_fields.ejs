@@ -1,6 +1,8 @@
-<div class="col-md-6">
-    <label for="name" class="form-label">Name for provider profile</label>
-    <input type="text" class="form-control" id="name" name="name" value="<%= provider.name %>">
+<div class="row mt-3">
+  <div class="col col-md-6">
+      <label for="name" class="form-label">Name for provider</label>
+      <input type="text" class="form-control" id="name" name="name" value="<%= provider.name %>">
+  </div>
 </div>
 
 <div class="col-md-6">
@@ -17,77 +19,64 @@
     </select>
 </div>
 
+<div class="row mt-3">
   <div class="col-md-6">
     <label for="firstName" class="form-label">First Name</label>
     <input type="text" class="form-control" id="firstName"
-    name="firstName" value="<%#=provider.firstName%>">
+    name="firstName" value="<%=provider.firstName%>">
   </div>
 
   <div class="col-md-6">
     <label for="lastName" class="form-label">Last Name</label> <input type="text" class="form-control" id="lastName"
-    name="lastName" value="<%#=provider.lastName%>">
+    name="lastName" value="<%=provider.lastName%>">
   </div>
 
-<div class="col-md-6">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="<%#=provider.title%>">
+  <div class="col-md-6">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title" value="<%=provider.title%>">
+  </div>
+
+  <div class="col-md-6">
+      <label for="specialization" class="form-label">Specialization</label>
+      <input type="text" class="form-control" id="specialization" name="specialization" value="<%= provider.specialization %>">
+  </div>
 </div>
 
-<div class="col-md-6">
-    <label for="specialization" class="form-label">Specialization</label>
-    <input type="text" class="form-control" id="specialization" name="specialization" value="<%= provider.specialization %>">
-</div>
+<div class="row">
+  <div class="col-md-6">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="phone" name="phone" value="<%= provider.phone %>">
+  </div>
 
-<div class="col-md-6">
-    <label for="phone" class="form-label">Phone</label>
-    <input type="text" class="form-control" id="phone" name="phone" value="<%= provider.phone %>">
-</div>
+  <div class="col-md-6">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email"
+    name="email" value="<%=provider.email%>">
+  </div>
 
-<div class="col-md-6">
-  <label for="email" class="form-label">Email</label>
-  <input type="text" class="form-control" id="email"
-  name="email" value="<%=provider.email%>">
-</div>
+  <div class="col-12">
+    <label for="address" class="form-label">Address</label>
+    <textarea class="form-control" id="address"
+    name="address" rows="3"><%=provider.address%>
+    </textarea>
+  </div>
 
-<div class="col-12">
-  <label for="address" class="form-label">Address</label>
-  <input type="text" class="form-control" id="address"
-  name="address" vlaue="<%=provider.address%>">
-</div>
+  <div> 
+    <label for="website" class="form-label">Website</label> <input type="text" class="form-control" id="website" name="website" value="<%= provider.website %>">
+  </div>
 
-<div class="col-md-6">
-  <label for="city" class="form-label">City</label>
-  <input type="text" class="form-control" id="city"
-  name="city" vlaue="<%#=provider.city%>">
-</div>
+  <div>
+      <label for="socials" class="form-label">Socials</label>
+      <textarea class="form-control" id="socials" name="socials" rows="3"><%=provider.socials %> </textarea>
+  </div>
 
-<div class="col-md-4">
-  <label for="state" class="form-label">State</label>
-  <input type="text" class="form-control" id="state"
-  name="state" vlaue="<%#=provider.state%>">
-</div>
+  <div>
+      <label for="notes" class="form-label">Notes</label>
+      <textarea class="form-control" id="notes" name="notes" rows="3"> <%= provider.notes %> </textarea>
+  </div>
 
-<div class="col-md-2">
-  <label for="zip" class="form-label">Zip</label>
-  <input type="text" class="form-control" id="zip"
-  name="zip" vlaue="<%#=provider.zip%>">
-</div>
-
-<div> 
-  <label for="website" class="form-label">Website</label> <input type="text" class="form-control" id="website" name="website" value="<%= provider.website %>">
-</div>
-
-<div>
-    <label for="socials" class="form-label">Socials</label>
-    <textarea class="form-control" id="socials" name="socials" rows="3" value="<%=provider.socials %>"> </textarea>
-</div>
-
-<div>
-    <label for="notes" class="form-label">Notes</label>
-    <textarea class="form-control" id="notes" name="notes" rows="3" value="<%= provider.notes %>"> </textarea>
-</div>
-
-<div>
-    <label for="media" class="form-label">Media</label>
-    <input type="file" class="form-control" id="media" name="media" value="<%= provider.media %>">
+  <div>
+      <label for="media" class="form-label">Media</label>
+      <input type="file" class="form-control" id="media" name="media" value="<%= provider.media %>">
+  </div>
 </div>
