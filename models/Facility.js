@@ -5,7 +5,7 @@ const FacilitySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    specialty: {
+    type: {
         type: String,
     },
     address: {
@@ -23,20 +23,6 @@ const FacilitySchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    media: {
-        type: String,
-        required: false,
-    },
-    notes: {
-        type: String,
-        required: false,
-    },
-    pharmacy: [{
-        name: String,
-        address: String,
-        phone: String,
-        website: String,
-    }],
     providers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Provider',
