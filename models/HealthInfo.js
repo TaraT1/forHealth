@@ -86,6 +86,13 @@ const HealthInfoSchema = new mongoose.Schema(
         note: String,
       },
     ],
+    recommendation: [
+      {
+        name: String,
+        type: String,
+        note: String,
+      },
+    ],
   },
   { timestamps: true }
 );

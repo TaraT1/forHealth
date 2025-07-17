@@ -14,6 +14,7 @@ module.exports = {
     try {
       const profiles = await Profile.find( {user: req.user.id} )
       // !profile add profile
+      const providers = await Provider.find( {user: req.user.id} )
       const healthInfoRecords = await HealthInfo.find({ user: req.user.id })
         .populate('profile', 'name')
         // .populate({path: 'profile', select: 'name - _id'})

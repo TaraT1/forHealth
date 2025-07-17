@@ -1,14 +1,14 @@
 <div class="row mt-3">
     <h3>Conditions</h3>
     <div> <label for="conditionName" class="form-label">Medical Condition </label>
-        <input type="text" class="form-control" id="conditionName" name="conditionName" value="<%#= condition.name%>">
+        <input type="text" class="form-control" id="conditionName" name="conditionName" value="<%= healthInfo.conditions.name%>">
     </div>
     <div>
         <label for="conditionType" class="form-label">Condition Type</label>
-        <input type="text" class="form-control" id="conditionType" name="conditionType" value="<%#= condition.type %>">
+        <input type="text" class="form-control" id="conditionType" name="conditionType" value="<%= healthInfo.conditions.type %>">
     </div> <div>
         <label for="conditionNote" class="form-label">Note for Condition</label>
-        <input type="text" class="form-control" id="conditionNote" name="conditionNote" value="<%#= condition.note %>">
+        <input type="text" class="form-control" id="conditionNote" name="conditionNote" value="<%= healthInfo.conditions.note %>">
     </div>
 </div>
 
