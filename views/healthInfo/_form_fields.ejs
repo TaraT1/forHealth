@@ -1,19 +1,39 @@
 <div class="row mt-3">
-    <h3>Conditions</h3>
+    <div class="col">
+        <h3>Conditions</h3>
+    </div>
+    <div class="col text-end">
+        <a href="healthInfo.conditions/new" class="btn btn-primary">Add new condition</a>
+    </div>
     <div> <label for="conditionName" class="form-label">Medical Condition </label>
-        <input type="text" class="form-control" id="conditionName" name="conditionName" value="<%= healthInfo.conditions.name%>">
+        <input type="text" class="form-control" id="conditionName" name="conditionName" value="<%= healthInfo.conditionName%>">
     </div>
     <div>
         <label for="conditionType" class="form-label">Condition Type</label>
-        <input type="text" class="form-control" id="conditionType" name="conditionType" value="<%= healthInfo.conditions.type %>">
+        <input type="text" class="form-control" id="conditionType" name="conditionType" value="<%= healthInfo.conditionType %>">
     </div> <div>
         <label for="conditionNote" class="form-label">Note for Condition</label>
-        <input type="text" class="form-control" id="conditionNote" name="conditionNote" value="<%= healthInfo.conditions.note %>">
+        <input type="text" class="form-control" id="conditionNote" name="conditionNote" value="<%= healthInfo.conditionNote %>">
     </div>
+    <div class="d-flex btn-row justify-content-between pt-3">
+        <a type="text" class="btn btn-secondary btn-lg" href="/healthInfo.conditions">Cancel</a>
+
+        <button type="submit" class="btn btn-primary btn-lg">
+            Update
+        </button>
+    </div>
+
 </div>
 
 <div class="row mt-3"> 
-    <h3>Prescriptions</h3>
+    <div class="col">
+        <h3>Prescriptions</h3>
+    </div>
+
+    <div class="col text-end">
+        <a href="healthInfo/prescriptions/new" class="btn btn-primary">Add new prescription</a>
+    </div>
+
     <div class="col col-md-8">
         <label for="prescriptionName" class="form-label">Prescription Name</label>
         <input type="text" class="form-control" id="prescriptionName" name="prescriptionName" value="<%#=healthInfo.prescriptionName%>">
@@ -22,6 +42,11 @@
     <div class="col col-md-4">
         <label for="prescriptionDosage" class="form-label">Dose</label>
         <input type="text" class="form-control" id="prescriptionDosage" name="prescriptionDosage" value="<%#=healthInfo.prescriptionDosage%>">
+    </div>
+
+    <div class="col col-md-12">
+        <label for="prescriptionDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="prescriptionDescription" name="prescriptDescription" value="<%#=healthInfo.prescriptionDescription%>">
     </div>
 
     <div class="col col-md-12">
@@ -38,6 +63,14 @@
     <div class="col col-md-4">
         <label for="endDate" class="form-label" >End Date</label>
         <input type="date" class="form-control" id="endDate" name="endDate" value="<%#=healthInfo.scripEndDate == null ? '' : healthInfo.endDate.toISOString().slice(0,10) %>">
+    </div>
+
+    <div class="d-flex btn-row justify-content-between pt-3">
+        <a type="text" class="btn btn-secondary btn-lg" href="/healthInfo/prescriptions">Cancel</a>
+
+        <button type="submit" class="btn btn-primary btn-lg">
+            Update
+        </button>
     </div>
 </div>
 

@@ -26,29 +26,29 @@ const HealthInfoSchema = new mongoose.Schema(
     ],
     tasks: [
       {
-        name: String,
-        description: String,
-        status: String,
+        taskName: String,
+        taskDescription: String,
+        taskStatus: String,
       },
     ],
-    medicine: [
+    prescriptions: [
       {
-        name: String,
-        description: String,
-        dosage: String,
+        prescriptionName: String,
+        prescriptionDescription: String,
+        prescriptionDosage: String,
         provider: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Provider",
         },
-        dateStart: Date,
-        dateEnd: Date,
+        prescriptionDateStart: Date,
+        prescriptionDateEnd: Date,
       },
     ],
     vaccinations: [
       {
-        name: String,
-        description: String,
-        date: Date,
+        vaxName: String,
+        vaxDescription: String,
+        vaxDate: Date,
         provider: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Provider",
@@ -57,40 +57,40 @@ const HealthInfoSchema = new mongoose.Schema(
     ],
     supplements: [
       {
-        name: String,
-        note: String,
-        dateStart: Date,
-        dateEnd: Date,
+        supplementName: String,
+        supplementNote: String,
+        supplementDateStart: Date,
+        supplementDateEnd: Date,
       },
     ],
     events: [
       {
-        title: String,
-        description: String,
-        date: Date,
-        outcome: String,
+        eventTitle: String,
+        eventDescription: String,
+        eventDate: Date,
+        eventOutcome: String,
       },
     ],
     allergies: [
       {
-        trigger: String,
-        type: String, //food, drug, latex, insect, airborne, skin
-        reaction: String, //mild, moderate, severe
-        note: String,
+        allergyTrigger: String,
+        allergyType: String, //food, drug, latex, insect, airborne, skin
+        allergyReaction: String, //mild, moderate, severe
+        allergyNote: String,
       },
     ],
     conditions: [
       {
-        name: String,
-        type: String,
-        note: String,
+        conditionName: String,
+        conditionType: String,
+        conditionNote: String,
       },
     ],
-    recommendation: [
+    recommendations: [
       {
-        name: String,
-        type: String,
-        note: String,
+        recName: String,
+        recType: String,
+        recNote: String,
       },
     ],
   },
