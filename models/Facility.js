@@ -5,7 +5,7 @@ const FacilitySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    specialization: {
+    specialty: {
         type: String,
     },
     address: {
